@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="" />
+    <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +68,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GrailsSDKManager">
     <option name="grailsSDKs">
       <map>
@@ -74,6 +79,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1bFaZGBddlvfGKZ2u4UY8QrOQzK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -152,7 +158,7 @@
       <workItem from="1588965534391" duration="14704000" />
       <workItem from="1589076149064" duration="1656000" />
       <workItem from="1589186183950" duration="10997000" />
-      <workItem from="1589203014037" duration="7002000" />
+      <workItem from="1589203014037" duration="7207000" />
     </task>
     <servers />
   </component>

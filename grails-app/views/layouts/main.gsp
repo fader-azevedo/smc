@@ -1,9 +1,6 @@
 <%@ page import="auth.User" %>
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- Mirrored from www.wrappixel.com/demos/admin-templates/material-pro/material/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Apr 2020 11:51:01 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
