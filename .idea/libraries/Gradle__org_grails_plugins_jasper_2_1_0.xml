@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.grails.plugins:jasper:2.1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/jasper/2.1.0/620131c50a1ee3ddb137c4698f362b07f187aede/jasper-2.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/jasper/2.1.0/e7dc57b2f806f855c4468df437575adacca0c0d6/jasper-2.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

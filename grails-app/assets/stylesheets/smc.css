@@ -1,0 +1,454 @@
+.container-image {
+    position: relative;
+    width: 100%;
+}
+
+/* Make the image responsive */
+.container-image img {
+    /*width: 100%;*/
+    height: auto;
+}
+
+/* Style the button and place it in the middle of the container-image/image */
+.container-image .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.container-image .btn:hover {
+    background-color: white;
+    color: #1b232b;
+}
+
+
+
+.br-r{
+    /*border-radius: 0 4px 4px 0;*/
+    /*border: 3px red;*/
+}
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    /*border: 1px solid #aaa;*/
+    border-radius:  4px 0 0 4px
+}
+#form-group-interestRate span.input-group-text{
+    /*background: red;*/
+    margin-right: 25px;
+    border-left: none;
+    border-right: none;
+}
+.btn-appended{
+    border-radius: 0 4px 4px 0;
+    margin-left: -1px;
+    border: 1px solid #d9d9d9;
+}
+
+.wizard-steps {
+    overflow: hidden;
+    position: relative;
+    /*margin-top: 20px;*/
+    padding-top: 15px;
+}
+
+.wizard-progress {
+    position: absolute;
+    top: 34px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+}
+.wizard-progress-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    background: #52bdff;
+    width: 50%
+}
+/*.wizard-step { position: relative; float: left; width: 25%; padding: 0 5px; }*/
+.wizard-step {
+    position: relative;
+    float: left;
+    /*width: 50%;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.wizard-step-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    background: white;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid #dddddd;
+    color: #dddddd;
+    -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;
+}
+/*f35b3f*/
+.wizard-step.activated .wizard-step-icon {
+    background: #52bdff;
+    border: #52bdff;
+    color: #fff;
+    font-size: 22px;
+    box-shadow: 0 1px 1px whitesmoke inset, 0 0 2px #52bdff;
+}
+.wizard-step.active .wizard-step-icon {
+    background: white;
+    border: 1px solid #52bdff;
+    font-size: 20px;
+    line-height: 40px;
+    color: #52bdff;
+}
+
+.wizard-step p {
+    color: #ccc;
+    width: 100%;
+    text-align: center;
+}
+.wizard-step.activated p {
+    color: #366fbd;
+}
+.wizard-step.active p {
+    color: #52bdff;
+}
+
+.wizard fieldset {
+    display: none;
+    min-height: 300px;
+}
+
+.wizard .input-error {
+    border-color: #f35b3f;
+}
+
+
+
+
+.f-s-8 {
+    font-size: .5rem !important
+}
+
+.f-s-9 {
+    font-size: .5625rem !important
+}
+
+.f-s-10 {
+    font-size: .625rem !important
+}
+
+.f-s-11 {
+    font-size: .6875rem !important
+}
+
+.f-s-12 {
+    font-size: .75rem !important
+}
+
+.f-s-13 {
+    font-size: .8125rem !important
+}
+
+.f-s-14 {
+    font-size: .875rem !important
+}
+
+.f-s-15 {
+    font-size: .9375rem !important
+}
+
+.f-s-16 {
+    font-size: 1rem !important
+}
+
+.f-s-17 {
+    font-size: 1.0625rem !important
+}
+
+.f-s-18 {
+    font-size: 1.125rem !important
+}
+
+.f-s-19 {
+    font-size: 1.1875rem !important
+}
+
+.f-s-20 {
+    font-size: 1.25rem !important
+}
+
+.f-s-21 {
+    font-size: 1.3125rem !important
+}
+
+.f-s-22 {
+    font-size: 1.375rem !important
+}
+
+.f-s-23 {
+    font-size: 1.4375rem !important
+}
+
+.f-s-24 {
+    font-size: 1.5rem !important
+}
+
+.f-s-25 {
+    font-size: 1.5625rem !important
+}
+
+.f-s-26 {
+    font-size: 1.625rem !important
+}
+
+.f-s-27 {
+    font-size: 1.6875rem !important
+}
+
+.f-s-28 {
+    font-size: 1.75rem !important
+}
+
+.f-s-29 {
+    font-size: 1.8125rem !important
+}
+
+.f-s-30 {
+    font-size: 1.875rem !important
+}
+
+.f-s-31 {
+    font-size: 1.9375rem !important
+}
+
+.f-s-32 {
+    font-size: 2rem !important
+}
+
+.f-s-33 {
+    font-size: 2.0625rem !important
+}
+
+.f-s-34 {
+    font-size: 2.125rem !important
+}
+
+.f-s-35 {
+    font-size: 2.1875rem !important
+}
+
+.f-s-36 {
+    font-size: 2.25rem !important
+}
+
+.f-s-37 {
+    font-size: 2.3125rem !important
+}
+
+.f-s-38 {
+    font-size: 2.375rem !important
+}
+
+.f-s-39 {
+    font-size: 2.4375rem !important
+}
+
+.f-s-40 {
+    font-size: 2.5rem !important
+}
+
+.f-s-41 {
+    font-size: 2.5625rem !important
+}
+
+.f-s-42 {
+    font-size: 2.625rem !important
+}
+
+.f-s-43 {
+    font-size: 2.6875rem !important
+}
+
+.f-s-44 {
+    font-size: 2.75rem !important
+}
+
+.f-s-45 {
+    font-size: 2.8125rem !important
+}
+
+.f-s-46 {
+    font-size: 2.875rem !important
+}
+
+.f-s-47 {
+    font-size: 2.9375rem !important
+}
+
+.f-s-48 {
+    font-size: 3rem !important
+}
+
+.f-s-49 {
+    font-size: 3.0625rem !important
+}
+
+.f-s-50 {
+    font-size: 3.125rem !important
+}
+
+.f-s-51 {
+    font-size: 3.1875rem !important
+}
+
+.f-s-52 {
+    font-size: 3.25rem !important
+}
+
+.f-s-53 {
+    font-size: 3.3125rem !important
+}
+
+.f-s-54 {
+    font-size: 3.375rem !important
+}
+
+.f-s-55 {
+    font-size: 3.4375rem !important
+}
+
+.f-s-56 {
+    font-size: 3.5rem !important
+}
+
+.f-s-57 {
+    font-size: 3.5625rem !important
+}
+
+.f-s-58 {
+    font-size: 3.625rem !important
+}
+
+.f-s-59 {
+    font-size: 3.6875rem !important
+}
+
+.f-s-60 {
+    font-size: 3.75rem !important
+}
+
+.f-s-61 {
+    font-size: 3.8125rem !important
+}
+
+.f-s-62 {
+    font-size: 3.875rem !important
+}
+
+.f-s-63 {
+    font-size: 3.9375rem !important
+}
+
+.f-s-64 {
+    font-size: 4rem !important
+}
+
+.f-s-65 {
+    font-size: 4.0625rem !important
+}
+
+.f-s-66 {
+    font-size: 4.125rem !important
+}
+
+.f-s-67 {
+    font-size: 4.1875rem !important
+}
+
+.f-s-68 {
+    font-size: 4.25rem !important
+}
+
+.f-s-69 {
+    font-size: 4.3125rem !important
+}
+
+.f-s-70 {
+    font-size: 4.375rem !important
+}
+
+.f-s-71 {
+    font-size: 4.4375rem !important
+}
+
+.f-s-72 {
+    font-size: 4.5rem !important
+}
+
+.f-s-73 {
+    font-size: 4.5625rem !important
+}
+
+.f-s-74 {
+    font-size: 4.625rem !important
+}
+
+.f-s-75 {
+    font-size: 4.6875rem !important
+}
+
+.f-s-76 {
+    font-size: 4.75rem !important
+}
+
+.f-s-77 {
+    font-size: 4.8125rem !important
+}
+
+.f-s-78 {
+    font-size: 4.875rem !important
+}
+
+.f-s-79 {
+    font-size: 4.9375rem !important
+}
+
+.f-s-80 {
+    font-size: 5rem !important
+}
+
+.f-w-100 {
+    font-weight: 100 !important
+}
+
+.f-w-200 {
+    font-weight: 200 !important
+}
+
+.f-w-300 {
+    font-weight: 300 !important
+}
+
+.f-w-400 {
+    font-weight: 400 !important
+}
+
+.f-w-500 {
+    font-weight: 500 !important
+}
+
+.f-w-600 {
+    font-weight: 600 !important
+}
+
+.f-w-700 {
+    font-weight: 700 !important
+}
+
+.f-w-800 {
+    font-weight: 800 !important
+}

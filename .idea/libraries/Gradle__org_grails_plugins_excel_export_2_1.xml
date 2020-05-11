@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.grails.plugins:excel-export:2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/excel-export/2.1/a808c1d4b512134a3e0eda3ff0c69b7c32ec55ef/excel-export-2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/excel-export/2.1/62e28559e80ac8b17a8fd34b22b30c12befc776b/excel-export-2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
