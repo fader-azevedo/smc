@@ -34,31 +34,28 @@
             </div>
         </g:hasErrors>
 
-        <div class="card card-outline-success wizard-content shadow">
+        <div class="card card-outline-success shadow">
             <div class="card-header pb-0 pb-lg-0">
                 <h5 class="card-title text-white"><i class="fa fa-pencil-alt"></i>&nbsp;Registar Empréstimo</h5>
             </div>
 
             <g:form resource="${this.loan}" method="POST" class="wizard" autocomplete="off">
-                <div class="card-body">
+                <div class="card-body" id="div-form-loan">
                     <div class="wizard-steps bg-white mb-lg-4 mb-4">
                         <div class="wizard-progress mt-1">
                             <div class="wizard-progress-line" data-now-value="50" data-number-of-steps="2"></div>
                         </div>
 
-                        <div class="wizard-step active col-12 col-sm-4">
+                        <div class="wizard-step active col-12 col-sm-6">
                             <div class="wizard-step-icon d-block mx-auto pt-1"><i class="mdi mdi-credit-card-plus"></i></div>
                             <p class="text-nowrap ">Dados do Emprestimo</p>
                         </div>
 
-                        <div class="wizard-step col-12 col-sm-4">
-                            <div class="wizard-step-icon d-block mx-auto pt-1"><i class="mdi mdi-television-guide"></i></div>
-                            <p class="text-nowrap">Garantias</p>
-                        </div>
-
-                        <div class="wizard-step col-12 col-sm-4">
-                            <div class="wizard-step-icon d-block mx-auto pt-1"><i class="mdi mdi-account-multiple"></i></div>
-                            <p class="text-nowrap">Testemunhas</p>
+                        <div class="wizard-step col-12 col-sm-6">
+                            <div class="wizard-step-icon d-block mx-auto pt-1">
+                                <i class="mdi mdi-folder-account"></i>
+                            </div>
+                            <p class="text-nowrap">Garantias & Testemunhas</p>
                         </div>
                     </div>
 
@@ -153,24 +150,69 @@
                         </button>
                     </fieldset>
                     <fieldset>
-                        <div class="row">
-                            <div class="col-6 mb-2">
-                                <div class="form-group">
-                                    <input name="guaranteeType" id="guaranteeType" type="text"  class="form-control mb-2 text-left">
-                                    <div class="input-group pl-0">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text bg-white w-100 py-2 d-flex flex-column">
-                                                <div class="container-image border w-100 h-100">
-                                                    <asset:image src="avatar.png"/>
-                                                    <label class="btn btn-xs btn-success" type="button">Carregar foto</label>
+
+                        <div class="accordion mb-3" id="accordion">
+                            <div class="card mb-2">
+                                <div data-toggle="collapse" style="cursor: pointer"  data-target="#collapseGuarantee" class="card-header bg-white" id="headingGuarantee">
+                                    <button type="button" class="btn btn-link text-muted bg-light" ><i class="mdi mdi-television-guide text-red"></i><strong> Garantias</strong></button>
+                                </div>
+                                <hr class="mt-0 pt-0 mb-0">
+                                <div id="collapseGuarantee" class="collapse show" aria-labelledby="headingGuarantee" data-parent="#accordion">
+                                    <div class="card-body pb-0">
+                                        <div class="row">
+                                            <div class="col-6" id="dynamic-form-guarantee">
+                                                <div class="form-group">
+                                                    <input placeholder="Tipo de garantia" name="guaranteeType" id="guaranteeType" type="text"  class="form-control form-control-sm mb-2 text-left">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text bg-white w-100 p-0">
+                                                                <div class="container-image py-1 px-1 mt-0">
+                                                                    <asset:image src="guarantee.jpg"/>
+                                                                    <label class="btn btn-xs btn-success" type="button"><i class="fa fa-upload"></i></label>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                        <textarea placeholder="descrição" class="form-control text-dark f-s-12" id="description" name="description"></textarea>
+
+                                                        <div class="input-append">
+                                                            <span class="input-group-text none-border h-100 d-flex flex-column justify-content-between" style="border-radius: 0 3px 3px 0; border-left: none">
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm waves-effect waves-purple" id="plus-guarantee"><i class="fa fa-plus"></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-red" id="minus-guarantee"><i class="fa fa-minus"></i></a>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </span>
+                                            </div>
                                         </div>
-                                        <textarea  class="form-control text-dark" id="description" name="description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div data-toggle="collapse" style="cursor: pointer"  data-target="#collapseWitness" class="card-header bg-white" id="headingWitness">
+                                    <button type="button" class="btn btn-link text-muted bg-light" ><i class="mdi mdi-account-multiple text-red"></i><strong> Testemunhas</strong></button>
+                                </div>
+                                <div id="collapseWitness" class="collapse" aria-labelledby="headingWitness" data-parent="#accordion">
+                                    <div class="card-body px-0 pt-0">
+                                        <div class="row line py-2 px-3" id="dynamic-form-witness">
+                                            <div class="col-sm-4 pr-lg-0 form-group-sm">
+                                                <input type="text" class="form-control form-control-sm" name="witnessName" placeholder="Name">
+                                            </div>
+                                            <div class="col-sm-3 pr-lg-0 form-group-sm">
+                                                <input type="text" class="form-control form-control-sm" name="witnessAddress" placeholder="Endereço">
+                                            </div>
+                                            <div class="col-sm-3 pr-lg-0 form-group-sm">
+                                                <input type="text" class="form-control form-control-sm" name="witnessContact" placeholder="Contacto">
+                                            </div>
+                                            <div class="col-sm-2 form-group-sm d-flex justify-content-between">
+                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm waves-effect waves-purple" id="plus-witness"><i class="fa fa-plus"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-red" id="minus-witness"><i class="fa fa-minus"></i></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <button type="button" class="btn btn-sm btn-outline-secondary btn-previous">
                             <i class="mdi mdi-arrow-left"></i>&nbsp;Anterior
                         </button>
@@ -178,15 +220,6 @@
                             <i class="fa fa-save"></i>&nbsp;Salvar
                         </button>
                     </fieldset>
-                </div>
-
-                <div class="card-footer d-none">
-                    <g:link action="index" class="btn btn-sm btn-outline-secondary waves-effect waves-light"><i
-                            class="fa fa-times"></i>&nbsp;Cancelar
-                    </g:link>
-                    <button type="submit" class="btn btn-sm btn-outline-success float-right waves-effect waves-light">
-                        <i class="fa fa-save"></i>&nbsp;Salvar
-                    </button>
                 </div>
             </g:form>
         </div>
@@ -346,11 +379,6 @@
 
         $(document).ready(function () {
 
-            %{--$('#paymentMode').on('change',function () {--}%
-            %{--    const id=$(this).val();--}%
-            %{--    <g:remoteFunction action="codeGenerate" params="{'id':id}" update="code"/>--}%
-            %{--});--}%
-
             $(".select2").select2();
             $('.select2').addClass('w-100');
 
@@ -449,6 +477,26 @@
             name: 'guaranteeType',
             source: substringMatcher(guaranteeType)
         });
+
+        $("#dynamic-form-guarantee").dynamicForm("#dynamic-form-guarantee", "#plus-guarantee", "#minus-guarantee", {
+            limit: 3,
+            formPrefix: "dynamic-form-guarantee",
+            normalizeFullForm: false
+        });
+
+        $("#dynamic-form-witness").dynamicForm("#dynamic-form-witness", "#plus-witness", "#minus-witness", {
+            limit: 3,
+            formPrefix: "dynamic-form-witness",
+            normalizeFullForm: false
+        });
+
+        // $("#dynamic-form-witness #minus").on('click', function(){
+        //     const initDynamicId = $(this).closest('#dynamic-form-witness').parent().find("[id^='dynamic-form-witness']").length;
+        //     if (initDynamicId === 2) {
+        //         $(this).closest('#dynamic-form-witness').next().find('#minus').hide();
+        //     }
+        //     $(this).closest('#dynamic-form-witness').remove();
+        // });
     </script>
     </body>
 </html>

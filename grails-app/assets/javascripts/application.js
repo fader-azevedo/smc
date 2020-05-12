@@ -24,3 +24,4 @@
 //= require plugins/select2/dist/js/select2.full.min.js
 //= require plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js
 //= require script.js
+//= require dynamic-form.js
