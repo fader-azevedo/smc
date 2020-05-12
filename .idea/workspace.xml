@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="" />
+    <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Gradle___smc___smc_0_1_war__exploded_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Gradle___smc___smc_0_1_war__exploded_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_integrationTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_integrationTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,15 +102,15 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="true" />
     <property name="grails.last.selected.app.url" value="file://$PROJECT_DIR$" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../INVEEX/INVEEX" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/grails-app/assets/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\stylesheets\select" />
-      <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\javascripts" />
-      <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\views" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\images" />
+      <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\javascripts" />
+      <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\stylesheets\select" />
+      <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\views" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\javascripts\plugins" />
     </key>
   </component>
@@ -158,6 +169,7 @@
       <workItem from="1589076149064" duration="1656000" />
       <workItem from="1589186183950" duration="10997000" />
       <workItem from="1589203014037" duration="7853000" />
+      <workItem from="1589251554853" duration="17443000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1589225490496</created>
@@ -166,7 +178,21 @@
       <option name="project" value="LOCAL" />
       <updated>1589225490496</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add dynamic forms&#10;guarantee form and witness form">
+      <created>1589263223116</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1589263223116</updated>
+    </task>
+    <task id="LOCAL-00003" summary="reedit dynamic-form.js">
+      <created>1589268906006</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1589268906006</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TraitInjectorService">
@@ -420,7 +446,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="add dynamic js" />
+    <MESSAGE value="add dynamic forms&#10;guarantee form and witness form" />
+    <MESSAGE value="reedit dynamic-form.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="reedit dynamic-form.js" />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588774503846">
@@ -439,10 +468,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="115" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1588252341401" />
-    <state x="304" y="0" key="CommitChangelistDialog2" timestamp="1589225489046">
+    <state x="304" y="0" key="CommitChangelistDialog2" timestamp="1589268904025">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="304" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1589225489046" />
+    <state x="304" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1589268904025" />
     <state x="92" y="92" width="1182" height="554" key="DiffContextDialog" timestamp="1588318164292">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -451,22 +480,22 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1588778142748" />
-    <state width="1323" height="201" key="GridCell.Tab.0.bottom" timestamp="1589207385822">
+    <state width="1323" height="400" key="GridCell.Tab.0.bottom" timestamp="1589268026492">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="201" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1589207385822" />
-    <state width="1323" height="201" key="GridCell.Tab.0.center" timestamp="1589207385821">
+    <state width="1323" height="400" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1589268026492" />
+    <state width="1323" height="400" key="GridCell.Tab.0.center" timestamp="1589268026492">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="201" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1589207385821" />
-    <state width="1323" height="201" key="GridCell.Tab.0.left" timestamp="1589207385821">
+    <state width="1323" height="400" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1589268026492" />
+    <state width="1323" height="400" key="GridCell.Tab.0.left" timestamp="1589268026492">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="201" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1589207385821" />
-    <state width="1323" height="201" key="GridCell.Tab.0.right" timestamp="1589207385822">
+    <state width="1323" height="400" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1589268026492" />
+    <state width="1323" height="400" key="GridCell.Tab.0.right" timestamp="1589268026492">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="201" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1589207385822" />
+    <state width="1323" height="400" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1589268026492" />
     <state width="1323" height="227" key="GridCell.Tab.1.bottom" timestamp="1588325884581">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -491,10 +520,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="92" y="92" width="1182" height="554" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.738@0.0.1366.738" timestamp="1588600042453" />
-    <state x="45" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1589203084485">
+    <state x="45" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1589251664700">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="45" y="192" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1589203084485" />
+    <state x="45" y="192" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1589251664700" />
     <state x="324" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588642655208">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -503,13 +532,24 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="65" y="93" key="new project wizard/0.0.1366.738@0.0.1366.738" timestamp="1588594877753" />
-    <state x="339" y="165" width="672" height="677" key="run.anything.popup" timestamp="1589191441864">
+    <state x="339" y="165" width="672" height="677" key="run.anything.popup" timestamp="1589257283815">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="339" y="165" width="672" height="677" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1589191441864" />
+    <state x="339" y="165" width="672" height="677" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1589257283815" />
     <state x="346" y="59" key="search.everywhere.popup" timestamp="1588655025106">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="346" y="59" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1588655025106" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/grails-app/views/loan/create.gsp</url>
+          <line>227</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
