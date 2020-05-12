@@ -3,7 +3,7 @@
     <head>
         <meta name="layout" content="main" />
         <title>
-            Lista de loans
+            Lista de Empréstimos
         </title>
     </head>
     <body>
@@ -13,7 +13,7 @@
         </g:if>
         <div class="card card-outline-success">
             <div class="card-header pb-0 pb-lg-0">
-                <h5 class="card-title text-white"><i class="fa fa-list"></i>&nbsp;Lista de loans
+                <h5 class="card-title text-white"><i class="fa fa-list"></i>&nbsp;Lista de Empréstimos
                     <g:link class="btn btn-xs btn-outline-light float-right waves-effect waves-light" action="create"><i class="fa fa-plus"></i>&nbsp;loan</g:link>
                 </h5>
             </div>
@@ -21,6 +21,8 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <f:table collection="${loanList}"/>
+
+
                 </div>
             </div>
         </div>

@@ -95,7 +95,7 @@
                                         <label for="paymentMode">Modo de pagamento</label>
                                         <select name="paymentMode" id="paymentMode" class="form-control">
                                             <option value="">Selecione</option>
-                                            <g:each in="${PaymentMode.all}">
+                                            <g:each in="${PaymentMode.all.sort{it.id}}">
                                                 <option value="${it.id}">${it.name}</option>
                                             </g:each>
                                         </select>
@@ -150,19 +150,32 @@
                         </button>
                     </fieldset>
                     <fieldset>
-
                         <div class="accordion mb-3" id="accordion">
                             <div class="card mb-2">
-                                <div data-toggle="collapse" style="cursor: pointer"  data-target="#collapseGuarantee" class="card-header bg-white" id="headingGuarantee">
-                                    <button type="button" class="btn btn-link text-muted bg-light" ><i class="mdi mdi-television-guide text-red"></i><strong> Garantias</strong></button>
+                                <div class="card-header bg-white" id="headingGuarantee">
+                                    <button  data-toggle="collapse" data-target="#collapseGuarantee" type="button"
+                                             class="btn btn-link text-muted bg-light">
+                                        <i class="mdi mdi-television-guide text-red"></i>
+                                        <strong> Garantias</strong>
+                                    </button>
+
+                                    <div class="float-right mt-2 p-0">
+                                        <input type="checkbox" id="guarantee-check" name="guarantee_check" class="filled-in m-0" checked/>
+                                        <label for="guarantee-check" class="m-0">Registar garantias</label>
+                                    </div>
                                 </div>
                                 <hr class="mt-0 pt-0 mb-0">
                                 <div id="collapseGuarantee" class="collapse show" aria-labelledby="headingGuarantee" data-parent="#accordion">
                                     <div class="card-body pb-0">
-                                        <div class="row">
-                                            <div class="col-12 col-md-6" id="dynamic-form-guarantee">
+                                        <datalist id="guaranteeTypeList">
+                                            <g:each in="${GuaranteeType.all}">
+                                                <option value="${it.name}"></option>
+                                            </g:each>
+                                        </datalist>
+                                        <div class="row" id="div-form-guarantee">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-6" id="dynamic-form-guarantee">
                                                 <div class="form-group">
-                                                    <input placeholder="Tipo de garantia" name="guaranteeType" id="guaranteeType" type="text"  class="form-control form-control-sm mb-2 text-left">
+                                                    <input list="guaranteeTypeList" required="required" placeholder="Tipo de garantia" name="guaranteeType" id="guaranteeType" type="text"  class="form-control form-control-sm mb-2 guaranteeType">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text bg-white w-100 p-0">
@@ -172,12 +185,12 @@
                                                                 </div>
                                                             </span>
                                                         </div>
-                                                        <textarea placeholder="descrição" class="form-control text-dark f-s-12" id="description" name="description"></textarea>
+                                                        <textarea required="required" placeholder="descrição" class="form-control text-dark f-s-12" id="description" name="description"></textarea>
 
                                                         <div class="input-append">
                                                             <span class="input-group-text none-border h-100 d-flex flex-column justify-content-between" style="border-radius: 0 3px 3px 0; border-left: none">
-                                                                <a href="javascript:void(0)" class="btn btn-primary btn-xs waves-effect waves-purple" id="plus-guarantee"><i class="fa fa-plus"></i></a>
-                                                                <a href="javascript:void(0)" class="btn btn-danger btn-xs waves-effect waves-red" id="minus-guarantee"><i class="fa fa-minus"></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-xs waves-effect waves-purple btn-plus-guarantee" id="plus-guarantee"><i class="fa fa-plus"></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-danger btn-xs waves-effect waves-red btn-minus-guarantee" id="minus-guarantee"><i class="fa fa-minus"></i></a>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -188,11 +201,20 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div data-toggle="collapse" style="cursor: pointer"  data-target="#collapseWitness" class="card-header bg-white" id="headingWitness">
-                                    <button type="button" class="btn btn-link text-muted bg-light" ><i class="mdi mdi-account-multiple text-red"></i><strong> Testemunhas</strong></button>
+                                <div class="card-header bg-white" id="headingWitness">
+                                    <button data-toggle="collapse" data-target="#collapseWitness" type="button"
+                                             class="btn btn-link text-muted bg-light" >
+                                        <i class="mdi mdi-account-multiple text-red"></i>
+                                        <strong> Testemunhas</strong>
+                                    </button>
+
+                                    <div class="float-right mt-2 p-0">
+                                        <input type="checkbox" id="witness-check" class="filled-in m-0" checked />
+                                        <label for="witness-check" class="m-0">Registar testemunhas</label>
+                                    </div>
                                 </div>
                                 <div id="collapseWitness" class="collapse" aria-labelledby="headingWitness" data-parent="#accordion">
-                                    <div class="card-body px-0 pt-0">
+                                    <div class="card-body px-0 pt-0" id="div-form-witness">
                                         <div class="row line py-2 px-3" id="dynamic-form-witness">
                                             <div class="col-12 col-sm-4 pr-lg-0 form-group-sm">
                                                 <input type="text" class="form-control form-control-sm" name="witnessName" placeholder="Nome">
@@ -373,7 +395,6 @@
         }
 
         function formatValue(value){
-            // return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
             return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace(/.([^.]*)$/, ',$1')
         }
 
@@ -426,7 +447,43 @@
                 title: 'Prazo de pagamento'
             });
 
+            $("#dynamic-form-guarantee").dynamicForm("#dynamic-form-guarantee", "#plus-guarantee", "#minus-guarantee", {
+                limit: 3,
+                formPrefix: "dynamic-form-guarantee",
+                normalizeFullForm: false
+            });
+
+            $("#dynamic-form-witness").dynamicForm("#dynamic-form-witness", "#plus-witness", "#minus-witness", {
+                limit: 3,
+                formPrefix: "dynamic-form-witness",
+                normalizeFullForm: false
+            });
+
             // resizeInputs()
+
+            const guaranteeCheck = $('#guarantee-check');
+            guaranteeCheck.on('change',function () {
+                $(this).val($(this).prop("checked"));
+                if($(this).prop("checked")){
+                    $('input[name="guaranteeType"]').each(function () {
+                        $(this).attr('required', true).prop('readonly',false).val('');
+                    });
+                    $('textarea[name="description"]').each(function () {
+                        $(this).attr('required',  true).prop('readonly',false);
+                    });
+                    $('.btn-plus-guarantee').removeClass('disabled')
+                }else {
+                    $('input[name="guaranteeType"]').each(function () {
+                        $(this).attr('required', false).prop('readonly', true).val('');
+                    });
+                    $('textarea[name="description"]').each(function () {
+                        $(this).attr('required',  false).prop('readonly',  true);
+                    });
+                    $('.btn-plus-guarantee').addClass('disabled');
+                    $('.btn-minus-guarantee').trigger('click') //remove all(except first) guarantee cards
+                }
+            });
+            guaranteeCheck.trigger('change');
         });
 
         $('.input-number').each(function () {
@@ -457,55 +514,6 @@
                 });
             });
         }
-
-        // garantia
-        const substringMatcher = function (strs) {
-            return function findMatches(q, cb) {
-                let matches, substringRegex;
-                matches = [];
-                const substrRegex = new RegExp(q, 'i');
-                $.each(strs, function (i, str) {
-                    if (substrRegex.test(str)) {
-                        matches.push(str);
-                    }
-                });
-                cb(matches);
-            };
-        };
-        const input = $('#guaranteeType');
-        const guaranteeType = [];
-        <g:each in="${GuaranteeType.all}">
-        guaranteeType.push('${it.name.trim()}');
-        </g:each>
-
-        input.typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 1
-        }, {
-            name: 'guaranteeType',
-            source: substringMatcher(guaranteeType)
-        });
-
-        $("#dynamic-form-guarantee").dynamicForm("#dynamic-form-guarantee", "#plus-guarantee", "#minus-guarantee", {
-            limit: 3,
-            formPrefix: "dynamic-form-guarantee",
-            normalizeFullForm: false
-        });
-
-        $("#dynamic-form-witness").dynamicForm("#dynamic-form-witness", "#plus-witness", "#minus-witness", {
-            limit: 3,
-            formPrefix: "dynamic-form-witness",
-            normalizeFullForm: false
-        });
-
-        // $("#dynamic-form-witness #minus").on('click', function(){
-        //     const initDynamicId = $(this).closest('#dynamic-form-witness').parent().find("[id^='dynamic-form-witness']").length;
-        //     if (initDynamicId === 2) {
-        //         $(this).closest('#dynamic-form-witness').next().find('#minus').hide();
-        //     }
-        //     $(this).closest('#dynamic-form-witness').remove();
-        // });
     </script>
     </body>
 </html>

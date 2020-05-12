@@ -221,10 +221,14 @@
                         </g:link>
                     </li>
                     <li id="li-loan">
-                        <g:link controller="loan" class="waves-effect waves-dark">
+                        <a class="has-arrow waves-effect waves-dark">
                             <i class="mdi mdi-bank"></i>
                             <span>Emprestimos</span>
-                        </g:link>
+                        </a>
+                        <ul aria-expanded="false" class="collapse pl-3">
+                            <li><g:link controller="loan" action="index" class="index"><i class="mdi mdi-view-list"></i>&nbsp;Lista</g:link></li>
+                            <li><g:link controller="loan" action="create" class="create"><i class="mdi mdi-plus"></i>&nbsp;Novo</g:link></li>
+                        </ul>
                     </li>
                     <li id="li-payment">
                         <g:link controller="payment" class="waves-effect waves-dark">

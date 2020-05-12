@@ -26,6 +26,7 @@ class LoanController {
     }
 
     def save(Loan loan) {
+        println('guarantee_check: '+params.guarantee_check)
         if (loan == null) {
             notFound()
             return
