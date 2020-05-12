@@ -40,7 +40,7 @@ class LoanController {
 
         def dateDif = 1
 
-        switch (loan.paymentMode.name) {
+        switch (loan.paymentMode.name.toLowerCase().trim()) {
             case 'semanal': dateDif = 7
                 break
             case 'quinzenal': dateDif = 15

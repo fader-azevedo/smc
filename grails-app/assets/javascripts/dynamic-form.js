@@ -278,13 +278,13 @@ $.fn.dynamicForm = function (selectedTarget, plusSelector, minusSelector, option
 			
 			if(origNameAttr){
 				//This is a subform (thus prefix is not the same as below)
-				that.attr("name", prefix+"["+index+"]"+"["+origNameAttr+"]");
+				// that.attr("name", prefix+"["+index+"]"+"["+origNameAttr+"]");
 			}else{
 				//This is the main form
-				that.attr("origname", nameAttr);
+				// that.attr("origname", nameAttr);
 				
 				//This is the main normalization
-				that.attr("name", prefix+"["+index+"]"+"["+nameAttr+"]");
+				// that.attr("name", prefix+"["+index+"]"+"["+nameAttr+"]");
 			}
 			
 			/* Normalize field id attributes */
@@ -307,17 +307,17 @@ $.fn.dynamicForm = function (selectedTarget, plusSelector, minusSelector, option
 			nameAttr = that.attr("name"), 
 			origNameAttr = that.attr("origname"),
 			idAttr = that.attr("id"),
-			newIdAttr = idAttr.slice(0,-1) + index,
+			// newIdAttr = idAttr.slice(0,-1) + index,
 			match = matchRegEx.exec(nameAttr);
-			that.attr("name", match[1]+index+match[3]);
+			// that.attr("name", match[1]+index+match[3]);
 			
 			if (idAttr) {
 				that.attr("origid", idAttr);
 				
 				elmnt.find("label[for='"+idAttr+"']").each(function(){
-					$(this).attr("for", newIdAttr);
+					$(this).attr("for", idAttr);
 				});
-				that.attr("id", newIdAttr);
+				that.attr("id", idAttr);
 			}
 		});
 	}
@@ -330,7 +330,7 @@ $.fn.dynamicForm = function (selectedTarget, plusSelector, minusSelector, option
 			idAttr = that.attr("id"),
 			newIdAttr = idAttr + index,
 			match = matchRegEx.exec(nameAttr);
-			that.attr("name", match[1]+"["+formPrefix+"]"+"["+index+"]"+"["+match[2]+"]");
+			// that.attr("name", match[1]+"["+formPrefix+"]"+"["+index+"]"+"["+match[2]+"]");
 			
 			if (idAttr) {
 				that.attr("origid", idAttr);

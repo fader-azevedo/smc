@@ -63,7 +63,7 @@
                         <div class="row">
                             <g:hiddenField name="code"/>
                             <div class="col-12 col-sm-12 col-lg-12">
-                                <div class="form-group">
+                                <div class="form-group ">
                                     <label for="client">Cliente</label>
                                     <div class="d-flex">
                                         <g:select class="select2" name="client"
@@ -160,7 +160,7 @@
                                 <div id="collapseGuarantee" class="collapse show" aria-labelledby="headingGuarantee" data-parent="#accordion">
                                     <div class="card-body pb-0">
                                         <div class="row">
-                                            <div class="col-6" id="dynamic-form-guarantee">
+                                            <div class="col-12 col-md-6" id="dynamic-form-guarantee">
                                                 <div class="form-group">
                                                     <input placeholder="Tipo de garantia" name="guaranteeType" id="guaranteeType" type="text"  class="form-control form-control-sm mb-2 text-left">
                                                     <div class="input-group">
@@ -176,8 +176,8 @@
 
                                                         <div class="input-append">
                                                             <span class="input-group-text none-border h-100 d-flex flex-column justify-content-between" style="border-radius: 0 3px 3px 0; border-left: none">
-                                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm waves-effect waves-purple" id="plus-guarantee"><i class="fa fa-plus"></i></a>
-                                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm waves-effect waves-red" id="minus-guarantee"><i class="fa fa-minus"></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-xs waves-effect waves-purple" id="plus-guarantee"><i class="fa fa-plus"></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-danger btn-xs waves-effect waves-red" id="minus-guarantee"><i class="fa fa-minus"></i></a>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -194,13 +194,13 @@
                                 <div id="collapseWitness" class="collapse" aria-labelledby="headingWitness" data-parent="#accordion">
                                     <div class="card-body px-0 pt-0">
                                         <div class="row line py-2 px-3" id="dynamic-form-witness">
-                                            <div class="col-sm-4 pr-lg-0 form-group-sm">
-                                                <input type="text" class="form-control form-control-sm" name="witnessName" placeholder="Name">
+                                            <div class="col-12 col-sm-4 pr-lg-0 form-group-sm">
+                                                <input type="text" class="form-control form-control-sm" name="witnessName" placeholder="Nome">
                                             </div>
-                                            <div class="col-sm-3 pr-lg-0 form-group-sm">
+                                            <div class="col-12 col-sm-3 pr-lg-0 form-group-sm">
                                                 <input type="text" class="form-control form-control-sm" name="witnessAddress" placeholder="Endereço">
                                             </div>
-                                            <div class="col-sm-3 pr-lg-0 form-group-sm">
+                                            <div class="col-12 col-sm-3 pr-lg-0 form-group-sm">
                                                 <input type="text" class="form-control form-control-sm" name="witnessContact" placeholder="Contacto">
                                             </div>
                                             <div class="col-sm-2 form-group-sm d-flex justify-content-between">
@@ -368,13 +368,20 @@
 
                 const newDueDate = dueDate.getDate() + '/' + dueDate.getMonth() + '/' + dueDate.getFullYear();
 
-                $('#dueDate').val(newDueDate);
+                $('#dueDate').datepicker('update',newDueDate)
             }
         }
 
         function formatValue(value){
             // return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
             return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace(/.([^.]*)$/, ',$1')
+        }
+
+        function resizeInputs(){
+            $('#div-form-loan label').addClass('f-s-12');
+            $('#div-form-loan input,select').addClass('form-control-sm');
+            $('#div-form-loan .form-group').addClass('form-group-sm mb-3');
+            $('#div-form-loan .input-group').addClass('input-group-sm');
         }
 
         $(document).ready(function () {
@@ -418,6 +425,8 @@
                 weekStart: 1,
                 title: 'Prazo de pagamento'
             });
+
+            // resizeInputs()
         });
 
         $('.input-number').each(function () {

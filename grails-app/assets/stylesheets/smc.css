@@ -7,7 +7,7 @@
 /* Make the image responsive */
 .container-image img {
     height: 60px;
-    width: 90px;
+    width: 65px;
     border-radius: 3px 0 0 3px;
 }
 
@@ -121,12 +121,13 @@
     color: #ccc;
     width: 100%;
     text-align: center;
+    margin-top: 5px;
 }
 .wizard-step.activated p {
     color: #366fbd;
 }
 .wizard-step.active p {
-    color: #52bdff;
+    /*color: #52bdff;*/
 }
 
 .wizard fieldset {
