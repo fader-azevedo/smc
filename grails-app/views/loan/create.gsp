@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm-12 col-md-7">
+    <div class="col-12 col-sm-12 col-md-8">
         <g:if test="${flash.message}">
             <div class="alert alert-success" role="status">${flash.message}</div>
         </g:if>
@@ -133,14 +133,19 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group col-lg-6 pr-lg-2">
+                                    <div class="form-group col-lg-4 pr-lg-2">
                                         <label for="payDate">Data de pagamento</label>
                                         <input type='text' class="form-control date" name="payDate_" id="payDate"/>
                                     </div>
 
-                                    <div class="form-group col-lg-6 pl-lg-2">
+                                    <div class="form-group col-lg-4 pl-lg-2">
                                         <label for="dueDate">Prazo de pagamento</label>
                                         <input type='text' class="form-control date" name="dueDate_" id="dueDate"/>
+                                    </div>
+
+                                    <div class="form-group col-lg-4 pl-lg-2">
+                                        <label for="dueDate">Data de assinatura</label>
+                                        <input type='text' class="form-control date" name="signatureDate_" id="signatureDate"/>
                                     </div>
                                 </div>
                             </div>
@@ -436,6 +441,7 @@
                 title: 'Data de pagamento',
             });
 
+
             payDate.datepicker().on('changeDate',function () {
                 returnDueDate();
             });
@@ -444,8 +450,17 @@
                 language:'pt',
                 autoclose: true,
                 weekStart: 1,
-                title: 'Prazo de pagamento'
+                title: 'Prazo de pagamento',
             });
+
+            const signatureDate = $('#signatureDate');
+            signatureDate.datepicker({
+                language:'pt',
+                autoclose: true,
+                weekStart: 1,
+                title: 'Data de assinatura',
+            });
+           signatureDate.datepicker('setDate',new Date());
 
             $("#dynamic-form-guarantee").dynamicForm("#dynamic-form-guarantee", "#plus-guarantee", "#minus-guarantee", {
                 limit: 3,

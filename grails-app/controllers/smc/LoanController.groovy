@@ -34,11 +34,12 @@ class LoanController {
         loan.setCreatedBy((User) springSecurityService.currentUser)
         loan.setUpdatedBy((User) springSecurityService.currentUser)
         loan.setCode(codeGenerator(loan.getPaymentMode().id))
+        def signatureDate = new Date().parse("dd/MM/yyy",params.signatureDate_.toString())
         def payDate = new Date().parse("dd/MM/yyy",params.payDate_.toString())
         def dueDate = new Date().parse("dd/MM/yyy",params.dueDate_.toString())
+        loan.setSignatureDate(signatureDate)
         loan.setPayDate(payDate)
         loan.setDueDate(dueDate)
-
 
 
         loan.setInstalments(generateInstalments(loan) as Set<Instalment>)

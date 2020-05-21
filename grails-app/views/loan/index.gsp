@@ -13,9 +13,9 @@
             <div class="message" role="status">${flash.message}</div>
         </g:if>
         <div class="card card-outline-success">
-            <div class="card-header pb-0 pb-lg-0">
+            <div class="card-header pb-0 pb-lg-2">
                 <h5 class="card-title text-white"><i class="fa fa-list"></i>&nbsp;Lista de Empréstimos
-                    <g:link class="btn btn-xs btn-outline-light float-right waves-effect waves-light" action="create"><i class="fa fa-plus"></i>&nbsp;Registar empréstimo</g:link>
+                    <g:link class="btn btn-sm btn-light float-right waves-effect waves-light" action="create"><i class="fa fa-plus"></i>&nbsp;Registar empréstimo</g:link>
                 </h5>
             </div>
 
@@ -43,7 +43,13 @@
                             <td class="text-right number-format"><g:formatNumber number="${it.amountPayable}"/></td>
                             <td>
                                 <g:if test="${it.status.equalsIgnoreCase('aberto')}">
-                                    <span class="badge badge-inverse">Pendente</span>
+                                    <span class="badge badge-info w-75">Aberto</span>
+                                </g:if>
+                                <g:if test="${it.status.equalsIgnoreCase('vencido')}">
+                                    <span class="badge badge-warning w-75">Vencido</span>
+                                </g:if>
+                                <g:if test="${it.status.equalsIgnoreCase('fechado')}">
+                                    <span class="badge badge-megna w-75">Fechado</span>
                                 </g:if>
                             </td>
                             <td class="text-center"><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
