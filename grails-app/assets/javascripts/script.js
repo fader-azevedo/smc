@@ -70,7 +70,6 @@ jQuery(document).ready(function() {
 			}
 		});
 
-
 		parent_fieldset.find('select').each(function() {
 			if($(this).val() == "" && $(this).prop('required')) {
 				id = $(this).attr('id');

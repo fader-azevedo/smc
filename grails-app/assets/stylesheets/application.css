@@ -9,6 +9,8 @@
 *
 *= require plugins/select2/dist/css/select2.min.css
 *= require plugins/typeahead.js-master/dist/typehead-min.css
+*= require plugins/datatables.net-bs4/css/dataTables.bootstrap4.css
+*= require plugins/datatables.net-bs4/css/responsive.dataTables.min.css
 *= require style.css
 *= require plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css
 *= require colors/blue.css
@@ -16,6 +18,7 @@
 *= require plugins/timepicker/bootstrap-timepicker.min.css
 *= require plugins/daterangepicker/daterangepicker.css
 *= require plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css
+*= require plugins/morrisjs/morris.css
 *= require smc.css
 *= require_self
 */

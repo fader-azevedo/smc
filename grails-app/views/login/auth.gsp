@@ -33,18 +33,18 @@
                     <div class="form-group mb-5 focused">
                         <input type="text" class="form-control" id="username" name="username">
                         <span class="bar"></span>
-                        <label for="username">username</label>
+                        <label for="username">Utilizador</label>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password" name="password">
                         <span class="bar"></span>
-                        <label for="password">password</label>
+                        <label for="password">Senha</label>
 %{--                        <i id="passwordToggler" title="toggle password display" onclick="passwordDisplayToggle()">&#128065;</i>--}%
                     </div>
                     <div class="form-group">
                         <div class="checkbox checkbox-primary pt-0">
                             <input type="checkbox" class="chk" name="remember-me" id="remember_me" />
-                            <label for="remember_me">Remember me</label>
+                            <label for="remember_me">lembrar-me</label>
                         </div>
                     </div>
 

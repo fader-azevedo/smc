@@ -11,6 +11,7 @@ class LoanGuarantee extends Parameter{
     static constraints = {
         status inList: ['Activo','Inactivo','Penhorado']
         observation nullable: true
+        code nullable: true
     }
 
     static mapping = {

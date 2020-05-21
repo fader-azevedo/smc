@@ -23,5 +23,9 @@
 //= require plugins/typeahead.js-master/dist/typeahead.bundle.min.js
 //= require plugins/select2/dist/js/select2.full.min.js
 //= require plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js
+//= require plugins/datatables.net/js/jquery.dataTables.min.js
+//= require plugins/datatables.net-bs4/js/dataTables.responsive.min.js
+//= require plugins/raphael/raphael.min.js
+//= require plugins/morrisjs/morris.js
 //= require script.js
 //= require dynamic-form.js

@@ -1,3 +1,58 @@
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007aff;
+    background-color: #fff;
+    border: 1px solid #ccc
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: #0055b3;
+    text-decoration: none;
+    background-color: #f2f2f2;
+    border-color: #ccc
+}
+
+.page-link:focus {
+    z-index: 2;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 122, 255, .25)
+}
+
+.page-link:not(:disabled):not(.disabled) {
+    cursor: pointer
+}
+
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #007aff;
+    border-color: #007aff
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #d9d9d9
+}
+
 .container-image {
     position: relative;
     width: 100%;

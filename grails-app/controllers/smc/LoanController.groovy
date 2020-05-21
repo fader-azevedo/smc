@@ -26,7 +26,7 @@ class LoanController {
     }
 
     def save(Loan loan) {
-        println('guarantee_check: '+params.guarantee_check)
+
         if (loan == null) {
             notFound()
             return
@@ -39,8 +39,36 @@ class LoanController {
         loan.setPayDate(payDate)
         loan.setDueDate(dueDate)
 
-        def dateDif = 1
 
+
+        loan.setInstalments(generateInstalments(loan) as Set<Instalment>)
+
+        try {
+            if(loanService.save(loan)){
+                generateGuarantees().each {
+                    it.save()
+                    new LoanGuarantee(code: '000',loan: loan,guarantee: it,latitude: 0,longitude: 0,observation: '',
+                            updatedBy: loan.updatedBy,createdBy: loan.createdBy
+                    ).save()
+                }
+            }
+        } catch (ValidationException e) {
+            respond loan.errors, view:'create'
+            return
+        }
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'loan.label', default: 'Loan'), loan.id])
+                redirect loan
+            }
+            '*' { respond loan, [status: CREATED] }
+        }
+    }
+
+
+    def generateInstalments(loan){
+        def dateDif = 1
         switch (loan.paymentMode.name.toLowerCase().trim()) {
             case 'semanal': dateDif = 7
                 break
@@ -56,7 +84,6 @@ class LoanController {
 
         def installments = new ArrayList<Instalment>()
         for(def i=1; i <= loan.getInstalmentsNumber(); i++){
-
             def installment = new Instalment()
             installment.setLoan(loan)
             installment.setType(InstalmentType.findByName('Renda Normal'))
@@ -82,22 +109,31 @@ class LoanController {
             }
             installments.add(installment)
         }
-        loan.setInstalments(installments as Set<Instalment>)
+        return installments
+    }
 
-        try {
-            loanService.save(loan)
-        } catch (ValidationException e) {
-            respond loan.errors, view:'create'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'loan.label', default: 'Loan'), loan.id])
-                redirect loan
+    def generateGuarantees(){
+        def check = params.guarantee_check
+        def guaranteeList = new ArrayList<Guarantee>()
+        if(check){
+            def guaranteeType = params.guaranteeType
+            def description = params.description
+            if(description instanceof String){
+                guaranteeList.add(createGuarantee(guaranteeType,description))
+            }else {
+                def counter = 0
+                description.each {
+                    guaranteeList.add(createGuarantee(guaranteeType[counter],it))
+                    counter+=1
+                }
             }
-            '*' { respond loan, [status: CREATED] }
         }
+        return guaranteeList
+    }
+
+    def createGuarantee(type,description){
+        def guaranteeType = GuaranteeType.findOrSaveWhere(name: type)
+        return new Guarantee(type: guaranteeType,description: description,image: 'image')
     }
 
     def edit(Long id) {
