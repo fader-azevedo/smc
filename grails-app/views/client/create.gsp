@@ -1,3 +1,4 @@
+<%@ page import="smc.Client" %>
 <!DOCTYPE html>
 <html>
     <head>

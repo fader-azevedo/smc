@@ -107,15 +107,15 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Empréstimo por meses</h4>
+                    <h4 class="card-title"><i class="fa fa-chart-area">&nbsp;</i>Empréstimo por meses</h4>
                     <div id="morris-line-chart"></div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-circle"></i>Estados</h4>
@@ -139,8 +139,8 @@
 <script>
 
     function initCharts(ano){
-        <g:remoteFunction action="barChart" params="{'ano':ano}" onSuccess="barChart(data)"/>
         <g:remoteFunction action="lineChart" params="{'ano':ano}" onSuccess="lineChart(data)"/>
+        <g:remoteFunction action="barChart" params="{'ano':ano}" onSuccess="barChart(data)"/>
     }
 
     // bar chart

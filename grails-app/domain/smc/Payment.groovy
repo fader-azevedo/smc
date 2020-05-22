@@ -4,7 +4,6 @@ class Payment extends Parameter{
 
     String receipt
     double totalPaid
-    static belongsTo = [paymentMothod:PaymentMethod]
     static hasMany = [instalmentPayments:InstalmentPayment]
 
     static constraints = {

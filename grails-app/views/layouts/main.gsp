@@ -359,7 +359,8 @@
 
     <script>
     $(document).ready(function () {
-        $('table').addClass('table')
+        $('table').addClass('table');
+        $('table tbody td').addClass('align-middle');
     })
 </script>
 </div>
