@@ -568,3 +568,10 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
 .f-w-800 {
     font-weight: 800 !important
 }
+
+
+.right-sidebar {
+    /*position: fixed;*/
+    /*right: -340px;*/
+    /*width: 340px;*/
+}

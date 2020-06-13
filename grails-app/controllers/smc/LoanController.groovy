@@ -1,6 +1,7 @@
 package smc
 
 import auth.User
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
@@ -215,5 +216,30 @@ class LoanController {
         Calendar calendar = Calendar.getInstance()
         calendar.setTime(date)
         (calendar.get(Calendar.DAY_OF_WEEK) == 1)?Date.parse("yyyy-MM-dd", (date + 1).format("yyyy-MM-dd")):date
+    }
+
+    def getDetails(){
+        def loan = Loan.get(new Long(params.id))
+        def instPayed = Instalment.findAllByLoanAndStatus(loan,'Pago').size()
+        def instPend = Instalment.findAllByLoanAndStatus(loan,'Pendente').size()
+        def instAll = Instalment.findAllByLoan(loan).size()
+
+        def valuePaid = getValuePaid(Instalment.findAllByLoanAndStatus(loan,'Pago'))
+
+        def debit = loan.amountPayable - valuePaid
+        render([
+                loan:loan, client:loan.client,instPayed:instPayed,
+                instPend:instPend,instAll:instAll,valuePaid:valuePaid, debit:debit
+        ] as JSON)
+    }
+
+    def getValuePaid(paidLoans){
+        def amountPaid = 0.0
+        paidLoans.instalments.each {installment->
+            installment.instalmentPayments.each {installmentPay->
+                amountPaid+=installmentPay.amountPaid
+            }
+        }
+        return amountPaid
     }
 }

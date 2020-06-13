@@ -137,26 +137,13 @@
 </div>
 
 <script>
+    initCharts(2020);
 
     function initCharts(ano){
         <g:remoteFunction action="lineChart" params="{'ano':ano}" onSuccess="lineChart(data)"/>
         <g:remoteFunction action="barChart" params="{'ano':ano}" onSuccess="barChart(data)"/>
     }
 
-    // bar chart
-    function barChart(data){
-        Morris.Bar({
-            element: 'morris-bar-chart',
-            data: data,
-            xkey: 'm',
-            ykeys: ['a', 'b', 'c'],
-            labels: ['Aberto', 'Vencidos', 'Fechados'],
-            barColors:['#1e88e5', '#ffb22b', '#00897b'],
-            hideHover: 'auto',
-            gridLineColor: '#eef0f2',
-            resize: true
-        });
-    }
 
     // LINE CHART
     function lineChart(data){
@@ -176,7 +163,6 @@
     }
     // Dashboard 1 Morris-chart
     $(function () {
-        initCharts(2020);
 
         "use strict";
         // Morris donut chart
@@ -197,6 +183,21 @@
             colors:['#1e88e5', '#ffb22b', '#00897b']
         });
     });
+    // bar chart
+    function barChart(data){
+        Morris.Bar({
+            element: 'morris-bar-chart',
+            data: data,
+            xkey: 'm',
+            ykeys: ['a', 'b', 'c'],
+            labels: ['Abertos', 'Vencidos', 'Fechados'],
+            barColors:['#1e88e5', '#ffb22b', '#00897b'],
+            hideHover: 'auto',
+            gridLineColor: '#eef0f2',
+            resize: true
+        });
+    }
+
 </script>
 </body>
 </html>

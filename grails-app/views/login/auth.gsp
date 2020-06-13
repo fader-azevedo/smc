@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Fader Macuvele
-  Date: 5/5/2020
-  Time: 5:55 AM
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -22,7 +15,7 @@
 <!-- ============================================================== -->
 <section id="wrapper">
     <div class="login-register">
-        <div class="login-box card">
+        <div class="login-box card shadow">
             <div class="card-body">
                 <form class="floating-labels" action="/login/authenticate" method="POST" id="loginForm" autocomplete="off">
 
@@ -83,29 +76,14 @@
 </script>
 
 <asset:javascript src="plugins/jquery/jquery.min.js"/>
-<!-- Bootstrap tether Core JavaScript -->
 <asset:javascript src="plugins/popper/popper.min.js"/>
 <asset:javascript src="plugins/bootstrap/js/bootstrap.min.js"/>
-<!-- slimscrollbar scrollbar JavaScript -->
 <asset:javascript src="jquery.slimscroll.js"/>
-<!--Wave Effects -->
 <asset:javascript src="waves.js"/>
-<!--Menu sidebar -->
 <asset:javascript src="sidebarmenu.js"/>
-<!--stickey kit -->
 <asset:javascript src="plugins/sticky-kit-master/dist/sticky-kit.min.js"/>
 <asset:javascript src="plugins/sparkline/jquery.sparkline.min.js"/>
-<!--Custom JavaScript -->
 <asset:javascript src="custom.min.js"/>
-<!-- ============================================================== -->
-<!-- This page plugins -->
-<!-- ============================================================== -->
-<!-- chartist chart -->
-<!-- Chart JS -->
-%{--<asset:javascript src="dashboard1.js"/>--}%
-<!-- ============================================================== -->
-<!-- Style switcher -->
-<!-- ============================================================== -->
 <asset:javascript src="plugins/styleswitcher/jQuery.style.switcher.js"/>
 
 </body>

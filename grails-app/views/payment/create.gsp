@@ -1,4 +1,4 @@
-<%@ page import="smc.Instalment; smc.Loan" %>
+<%@ page import="org.springframework.validation.FieldError; smc.Instalment; smc.Loan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +10,14 @@
 
 <g:if test="${params.loanID}">
 
-    <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+    <div class="col-12">
         <g:if test="${flash.message}">
             <div class="alert alert-success" role="status">${flash.message}</div>
         </g:if>
         <g:hasErrors bean="${this.payment}">
             <div class="alert alert-danger" role="alert">
                 <g:eachError bean="${this.payment}" var="error">
-                    <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
+                    <li <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message
                             error="${error}"/></li>
                 </g:eachError>
             </div>
@@ -28,132 +28,134 @@
         def installments = Instalment.findAllByStatusAndLoan('pendente', loan)
         %>
 
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4 d-flex">
-                        <div class="d-flex flex-column justify-content-center">
-                            <i class="fa fa-user fa-3x"></i>
-                        </div>
-
-                        <div class="pt-2">
-                            <br>
-
-                            <p class="text-muted pl-2">${client.fullName}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-8 border-left py-0 pl-0">
-                        <p class="pl-3 pt-2 pb-2 my-0 text-muted text-nowrap border-bottom"><i
-                                class="fa fa-phone f-w-800"></i>&nbsp;${client.contact}</p>
-
-                        <p class="pl-3 my-0 pt-3 text-muted text-nowrap"><i
-                                class="fa fa-at f-w-800"></i>&nbsp;${client.email}</p>
-                    </div>
-                </div>
-                <hr>
-
-                <div class="row">
-                    <div class="col-md-3 col-xs-6 border-right"><strong>Valor pedido</strong>
-                        <br>
-
-                        <p class="text-muted number-format">${loan.borrowedAmount}</p>
-                    </div>
-
-                    <div class="col-md-3 col-xs-6 border-right"><strong>Taxa de juros</strong>
-                        <br>
-
-                        <p class="text-muted number-format">${loan.interestRate}</p>
-                    </div>
-
-                    <div class="col-md-3 col-xs-6 border-right"><strong>Valor a pagar</strong>
-                        <br>
-
-                        <p class="text-muted number-format">${loan.amountPayable}</p>
-                        <input type="hidden" id="loan-amountPayable" value="${loan.amountPayable}">
-                    </div>
-
-                    <div class="col-md-3 col-xs-6"><strong>D. empréstimo</strong>
-                        <br>
-
-                        <p class="text-muted"><g:formatDate format="dd/MM/yyyy" date="${loan.signatureDate}"/></p>
-                    </div>
-                </div>
-                <hr>
-                <g:if test="${installments.size() > 0}">
-                    <div class="row">
-                        <div class="col-6 pt-3">
-                            <h5 class="card-title"><i class="fa fa-list"></i>&nbsp;Pestações</h5>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="input-icons pt-1 pr-0">
-                                <i class="fa fa-money-bill-alt"></i>
-                                <input id="input-value-to" class="form-control input-super-entities pl-5 pl-sm-5"
-                                       type="text" placeholder="introduza o valor a pagar">
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-
-                    <div class="month-table">
-                        <div class="table-responsive mt-3">
-                            <table class="table stylish-table mb-0">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Tipo</th>
-                                    <th>Prazo</th>
-                                    <th>Valor</th>
-                                    <th class="pb-1">
-                                        <input type="checkbox" id="check-all" class="filled-in"/>
-                                        <label for="check-all" class="mb-0">Todas</label>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <g:each in="${installments}" var="it" status="i">
-                                    <tr id="tr-${i}" class="tr">
-                                        <td>${i + 1}</td>
-                                        <td>${it.type.name}</td>
-                                        <td><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
-                                        <td class="number-format">${it.amountPayable}</td>
-                                        <input type="hidden" class="current" data-id="${i}" id="line-value-${i}"
-                                               value="${it.amountPayable}">
-                                        <td>
-                                            <input type="checkbox" id="check-${i}" class="filled-in input-check"
-                                                   data-id="${i}"/>
-                                            <label for="check-${i}" class="mb-0"></label>
-                                        </td>
-                                    </tr>
-                                </g:each>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Valor a pagar</span>
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="w-100 d-flex">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <i class="fa fa-user fa-3x"></i>
                                 </div>
-                                <input type="text" class="form-control" id="total" readonly>
-                                %{--                            <input type="hidden" class="form-control" id="totalHidden" readonly>--}%
-                                <div class="input-group-append">
-                                    <button class="btn btn-success" type="button"><i
-                                            class="fa fa-money-bill-alt">&nbsp;</i>Pagar</button>
+                                <div class="pt-2">
+%{--                                    <br>--}%
+                                    <p class="text-muted pl-2 pt-3 mb-0" id="detail-client-name">name</p>
                                 </div>
                             </div>
+                            <hr>
+
+                            <h6 class="card-title">Empréstimo</h6>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Valor pedido
+                                    <span class="badge badge-pill" id="detail-borrowedAmount">${loan.borrowedAmount}
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Valor a pagar
+                                    <span class="badge badge-pill" id="detail-amountPayable">${loan.amountPayable}</span>
+                                </li>
+                                <li class="list-group-item list-group-item-megna d-flex justify-content-between align-items-center">
+                                    Valor pago
+                                    <span class="badge badge-pill" id="detail-amountPaid">2</span>
+                                </li>
+                                <li class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center">
+                                    Dívida
+                                    <span class="badge  badge-pill" id="detail-debit">1</span>
+                                </li>
+                            </ul>
+                            <hr>
+
+                            <h6 class="card-title">Prestações</h6>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Todas
+                                    <span class="" id="detail-installment-all"></span>
+
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Pagas
+                                    <span class="text-megna" id="detail-installment-payed">2</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Pendentes
+                                    <span class="text-danger" id="detail-installment-pend">1</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </g:if>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <g:if test="${installments.size() > 0}">
+                            <div class="row">
+                                <div class="col-6 pt-3">
+                                    <h5 class="card-title"><i class="fa fa-list"></i>&nbsp;Pestações a pagar</h5>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-white">Valor a pagar:</span>
+                                        </div>
+                                        <input type="text" class="form-control bg-white" id="input-value-to" placeholder="introduza o valor">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Mt</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="month-table">
+                                <div class="table-responsive mt-3">
+                                    <table class="table stylish-table mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Prazo</th>
+                                            <th>Valor</th>
+                                            <th class="pb-1">
+                                                <input type="checkbox" id="check-all" class="filled-in"/>
+                                                <label for="check-all" class="mb-0">Todas</label>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <g:each in="${installments}" var="it" status="i">
+                                            <tr id="tr-${i}" class="tr">
+                                                <td>${it.type.name}</td>
+                                                <td><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
+                                                <td class="number-format">${it.amountPayable}</td>
+                                                <input type="hidden" class="current" data-id="${i}" id="line-value-${i}"
+                                                       value="${it.amountPayable}">
+                                                <td>
+                                                    <input type="checkbox" id="check-${i}" class="filled-in input-check"
+                                                           data-id="${i}"/>
+                                                    <label for="check-${i}" class="mb-0"></label>
+                                                </td>
+                                            </tr>
+                                        </g:each>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <button class="btn btn-megna waves-effect waves-green float-right" type="button">
+                                <i class="fa fa-save">&nbsp;</i>Salvar</button>
+                        </g:if>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        const loanId = ${loan.id}
+
         $(document).ready(function () {
 
             $('#li-payment').addClass('active');
@@ -165,16 +167,16 @@
 
             calculateByCheck();
             calculateInstalments();
-            const amountPayable = parseFloat($('#loan-amountPayable').val());
+            const amountPayable = parseFloat(${loan.amountPayable});
 
             setInputFilter(document.getElementById('input-value-to'), function(value) {
-                return /^\d*\.?\d*$/.test(value);
+                return /^\d*\.?\d*$/.test(value) && (value === "" || parseFloat(value) <= amountPayable);
             });
+
+            <g:remoteFunction controller="loan" action="getDetails" params="{'id':loanId}" onSuccess="updateDetails(data)"/>
         });
 
-
         function calculateInstalments() {
-            let cuu = parseFloat($('#input-value-to').val());
             let value = parseFloat($('#input-value-to').val());
             let change = 0;
             $('.current').each(function () {
@@ -182,26 +184,23 @@
                 const id = $(this).attr('data-id');
 
                 if (value >= currentValue) {
-                    $('#check-' + id).prop('checked', true).trigger('change');
+                    $('#check-' + id).prop('checked', true);
                     value -= currentValue;
                     change = value;
                 } else {
-                    $('#check-' + id).prop('checked', false).trigger('change');
+                    $('#check-' + id).prop('checked', false);
                 }
             });
-            const i = $('.input-check:checked').length;
+            const i = $('.input-check:checked').length; //input checked
+            $('.change').remove();
             if (change > 0) {
-                $('#tr-' + i).addClass('bg-light');
-                const newTotal = parseFloat($('#total').val()) + change;
-                console.log('new total: ' + newTotal + ' change: ' + change+' value: '+cuu);
-            } else if (change === 0) {
-                $('.tr').removeClass('bg-light');
-                if(value > 0){
-                    $('#tr-' + 0).addClass('bg-info');
-                }
+                const lineParceled = $('#tr-'+i);
+                lineParceled.before('<tr class="change bg-light f-w-700"><td>Parcela</td><td>--------------</td>' +
+                    '<td><span">'+formatValue(change)+'</span></td><td></td></tr>')
+
+                // $('#parcelledValue').val(change)
             }
         }
-
 
         function calculateByCheck() {
             $('#check-all').on('change', function () {
@@ -218,7 +217,14 @@
                     total += value;
                 });
 
-                $('#total').val(total);
+                $('.change').remove();
+                // $('#parcelledValue').val('');
+
+                if(total !==0 ){
+                    $('#input-value-to').val(total)
+                }else{
+                    $('#input-value-to').val('');
+                }
 
                 if (!$(this).prop("checked")) {
                     $('#check-all').prop('checked', false)
@@ -254,7 +260,26 @@
                 });
             });
         }
+
+
+        function updateDetails(data) {
+            const loan = data.loan;
+            const client = data.client;
+
+            $('#detail-client-name').text(client.fullName);
+            $('#detail-installment-all').text(data.instAll);
+            $('#detail-installment-payed').text(data.instPayed);
+            $('#detail-installment-pend').text(data.instPend);
+
+            // payment
+
+            $('#detail-borrowedAmount').text(formatValue(loan.borrowedAmount));
+            $('#detail-amountPayable').text(formatValue(loan.amountPayable));
+            $('#detail-amountPaid').text(formatValue(data.valuePaid));
+            $('#detail-debit').text(formatValue(data.debit))
+        }
     </script>
+
 </g:if>
 <g:else>
     <script>

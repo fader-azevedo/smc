@@ -412,6 +412,10 @@
 
         $(document).ready(function () {
 
+            $('#li-loan').addClass('active');
+            $('#li-loan .create').addClass('active');
+
+
             $(".select2").select2();
             $('.select2').addClass('w-100');
 

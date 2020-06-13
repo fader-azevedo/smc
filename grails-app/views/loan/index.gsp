@@ -53,7 +53,7 @@
 
                                     <g:form controller="payment" action="create">
                                         <button name="loanID" value="${it.id}" type="submit" class="btn btn-sm btn-megna" data-id="${it.id}">
-                                            <i class="fa fa-money-bill-alt">&nbsp;</i>Pagamento
+                                            <i class="fa fa-money-bill-alt">&nbsp;</i>Fazer pagamento
                                         </button>
                                     </g:form>
                                 </div>
@@ -151,6 +151,66 @@
             </div>
         </div>
     </div>
+
+    <div class="right-sidebar">
+        <div class="slimscrollright">
+            <div class="rpanel-title"> Detalhes<span><i class="ti-close right-side-toggle"></i></span>
+            </div>
+            <div class="panel-body p-2">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="w-100 d-flex">
+                            <div class="d-flex flex-column justify-content-center">
+                                <i class="fa fa-user fa-3x"></i>
+                            </div>
+                            <div class="pt-2">
+                                <br>
+                                <p class="text-muted pl-2" id="detail-client-name">name</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <h6 class="card-title">Prestações</h6>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Todas
+                                <span class="" id="detail-installment-all">14</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Pagas
+                                <span class="text-megna" id="detail-installment-payed">2</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Pendentes
+                                <span class="text-danger" id="detail-installment-pend">1</span>
+                            </li>
+                        </ul>
+                        <hr>
+
+                        <h6 class="card-title"><i class="fa fa-money-bill-alt">&nbsp;</i>Pagamento</h6>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Valor pedido
+                                <span class="badge badge-pill" id="detail-borrowedAmount">14</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Valor a pagar
+                                <span class="badge badge-pill" id="detail-amountPayable">14</span>
+                            </li>
+                            <li class="list-group-item list-group-item-megna d-flex justify-content-between align-items-center">
+                                Valor pago
+                                <span class="badge badge-pill" id="detail-amountPaid">2</span>
+                            </li>
+                            <li class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center">
+                                Dívida
+                                <span class="badge  badge-pill" id="detail-debit">1</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function formatValue(value){
             return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace(/.([^.]*)$/, ',$1')
@@ -165,6 +225,9 @@
             // responsive: true
         };
         $(document).ready(function () {
+            $('#li-loan').addClass('active');
+            $('#li-loan .index').addClass('active');
+
             $('.number-format').each(function () {
                 const value = parseFloat($(this).text());
                 $(this).text(formatValue(value))
@@ -177,9 +240,35 @@
             $('#loan-table_paginate li').removeClass('paginate_button');
 
             $(document).on('click','.btn-details',function () {
-                $('#right-modal').modal('toggle')
+                const id = $(this).attr('data-id');
+                <g:remoteFunction controller="loan" action="getDetails" params="{'id':id}" onSuccess="updateDetails(data)"/>
+                const isOpen = $('.shw-rside').length;
+                if(isOpen === 1){
+                    console.log('update');
+                }else{
+                    console.log('first');
+                    $(".right-sidebar").slideDown(50).toggleClass("shw-rside");
+                }
             });
-        })
+            $('table tbody td').addClass('align-middle');
+        });
+
+        function updateDetails(data) {
+            const loan = data.loan;
+            const client = data.client;
+
+            $('#detail-client-name').text(client.fullName);
+            $('#detail-installment-all').text(data.instAll);
+            $('#detail-installment-payed').text(data.instPayed);
+            $('#detail-installment-pend').text(data.instPend);
+
+            // payment
+
+            $('#detail-borrowedAmount').text(formatValue(loan.borrowedAmount));
+            $('#detail-amountPayable').text(formatValue(loan.amountPayable));
+            $('#detail-amountPaid').text(formatValue(data.valuePaid));
+            $('#detail-debit').text(formatValue(data.debit))
+        }
     </script>
     </body>
 </html>
