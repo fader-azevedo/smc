@@ -233,7 +233,8 @@ class LoanController {
         def debit = loan.amountPayable - valuePaid
         render([
                 loan:loan, client:loan.client,instPayed:instPayed,
-                instPend:instPend,instAll:instAll,valuePaid:valuePaid, debit:debit
+                instPend:instPend,instAll:instAll,valuePaid:valuePaid, debit:debit,createdBy: loan.createdBy.fullName,
+                updatedBy: loan.updatedBy.fullName,instalmentType:loan.paymentMode.name
         ] as JSON)
     }
 

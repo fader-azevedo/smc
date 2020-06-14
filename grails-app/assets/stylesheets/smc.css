@@ -13,6 +13,7 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
     justify-content: space-between !important;
 }
 
+
 /*----------------------------*\
 	input icon
 \*----------------------------*/
@@ -136,11 +137,11 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
     /*border-radius: 0 4px 4px 0;*/
     /*border: 3px red;*/
 }
-.select2-container--default .select2-selection--single {
-    background-color: #fff;
-    /*border: 1px solid #aaa;*/
-    border-radius:  4px 0 0 4px
-}
+/*.select2-container--default .select2-selection--single {*/
+/*    background-color: #fff;*/
+/*    !*border: 1px solid #aaa;*!*/
+/*    border-radius:  4px 0 0 4px*/
+/*}*/
 #form-group-interestRate span.input-group-text{
     /*background: red;*/
     margin-right: 25px;

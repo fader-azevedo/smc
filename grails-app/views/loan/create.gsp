@@ -6,6 +6,13 @@
         <title>Registar Emprestimo</title>
     </head>
     <body>
+    <style>
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        /*border: 1px solid #aaa;*/
+        border-radius:  4px 0 0 4px
+    }
+    </style>
     <div class="card shadow-sm d-none">
         <label for="mdate" class="mt-3">Default Material Date Picker</label>
         <input type="text" class="form-control" placeholder="2020-06-04" id="mdate">
@@ -114,7 +121,7 @@
                                         <label for="amountPerInstalmentInput">Valor por prestação</label>
                                         <div class="input-group">
                                             <input value="0" readonly type="text" class="form-control text-dark" id="amountPerInstalmentInput">
-                                            <input type="hidden"  id="amountPerInstalment" name="amountPerInstalment">
+                                            <input type="hidden" id="amountPerInstalment" name="amountPerInstalment">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">MT</span>
                                             </div>
@@ -144,7 +151,7 @@
                                     </div>
 
                                     <div class="form-group col-lg-4 pl-lg-2">
-                                        <label for="dueDate">Data de assinatura</label>
+                                        <label for="signatureDate">Data de assinatura</label>
                                         <input type='text' class="form-control date" name="signatureDate_" id="signatureDate"/>
                                     </div>
                                 </div>

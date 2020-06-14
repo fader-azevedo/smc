@@ -14,6 +14,12 @@
 
 <body>
 
+<%
+    def loansOpen = Loan.findAllByStatus('aberto').size()
+    def loansExpired = Loan.findAllByStatus('vencido').size()
+    def loansClosed = Loan.findAllByStatus('fechado').size()
+%>
+
 <div class="col-12">
 %{--    ${barchartData}--}%
     <div class="row">
@@ -64,7 +70,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
-                            <div class="round round-lg text-white d-inline-block text-center rounded-circle bg-warning">
+                            <div class="round round-lg text-white d-inline-block text-center rounded-circle bg-danger">
                                 <i class="mdi mdi-wallet"></i>
                             </div>
 
@@ -106,8 +112,10 @@
         </div>
     </div>
 
+
+
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-chart-area">&nbsp;</i>Empréstimo por meses</h4>
@@ -115,7 +123,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 d-none">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-circle"></i>Estados</h4>
@@ -161,27 +169,24 @@
             parseTime:false
         });
     }
-    // Dashboard 1 Morris-chart
+
     $(function () {
+        %{--Morris.Donut({--}%
+        %{--    element: 'morris-donut-chart',--}%
+        %{--    data: [{--}%
+        %{--        label: "Abertos",--}%
+        %{--        value: ${loansOpen},--}%
 
-        "use strict";
-        // Morris donut chart
-        Morris.Donut({
-            element: 'morris-donut-chart',
-            data: [{
-                label: "Abertos",
-                value: ${loansOpen},
-
-            }, {
-                label: "Vencidos",
-                value: ${loansExpired}
-            }, {
-                label: "Fechados",
-                value: ${loansClosed}
-            }],
-            resize: true,
-            colors:['#1e88e5', '#ffb22b', '#00897b']
-        });
+        %{--    }, {--}%
+        %{--        label: "Vencidos",--}%
+        %{--        value: ${loansExpired}--}%
+        %{--    }, {--}%
+        %{--        label: "Fechados",--}%
+        %{--        value: ${loansClosed}--}%
+        %{--    }],--}%
+        %{--    resize: true,--}%
+        %{--    colors:['#1e88e5', '#fc4b6c', '#00897b']--}%
+        %{--});--}%
     });
     // bar chart
     function barChart(data){
@@ -191,13 +196,12 @@
             xkey: 'm',
             ykeys: ['a', 'b', 'c'],
             labels: ['Abertos', 'Vencidos', 'Fechados'],
-            barColors:['#1e88e5', '#ffb22b', '#00897b'],
+            barColors:['#1e88e5', '#fc4b6c', '#00897b'],
             hideHover: 'auto',
             gridLineColor: '#eef0f2',
             resize: true
         });
     }
-
 </script>
 </body>
 </html>

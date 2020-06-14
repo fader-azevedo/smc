@@ -91,15 +91,12 @@
                     <div class="card-body">
                         <g:if test="${installments.size() > 0}">
                             <div class="row">
-                                <div class="col-12 col-md-6 pt-3">
+                                <div class="col-12 col-md-7 pt-md-3 pt-sm-0">
                                     <h5 class="card-title"><i class="fa fa-list"></i>&nbsp;Pestações a pagar</h5>
                                 </div>
 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-5">
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text bg-white">Valor a pagar:</span>
-                                        </div>
                                         <input type="text" class="form-control bg-white" id="input-value-to" placeholder="introduza o valor">
                                         <div class="input-group-append">
                                             <span class="input-group-text">Mt</span>
@@ -125,7 +122,7 @@
                                         </thead>
                                         <tbody>
                                         <g:each in="${installments}" var="it" status="i">
-                                            <tr id="tr-${i}" class="tr" data-id="${it.id}">
+                                            <tr id="tr-${i}" class="tr text-nowrap" data-id="${it.id}">
                                                 <td>${it.type.name}</td>
                                                 <td><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
                                                 <% def installmentDebit = new DecimalFormat('#.00').format(include(controller:'loan',action: 'getInstallDebit',params: [id:it.id]) as double) %>

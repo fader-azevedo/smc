@@ -1,6 +1,6 @@
 <%@ page import="smc.Loan" %>
 <g:each in="${(List<Loan>) loanList}">
-    <tr>
+    <tr id="tr-${it.id}">
         <td>
             <div class="d-flex justify-content-center">
                 <button class="btn btn-sm btn-secondary btn-details mr-3" data-id="${it.id}">
@@ -20,7 +20,7 @@
                     <g:form controller="payment" action="create">
                         <button name="loanID" value="${it.id}" type="submit"
                                 class="btn btn-sm btn-megna" data-id="${it.id}">
-                            <i class="fa fa-money-bill-alt">&nbsp;</i>Fazer pagamento
+                            <i class="fa fa-money-bill-alt">&nbsp;</i>Efectuar pagamento
                         </button>
                     </g:form>
                 </g:else>
@@ -29,7 +29,7 @@
         <td>
 
             <g:link controller="client" action="show" id="${it.client.id}">
-                <span class="round text-white d-inline-block text-center rounded-circle bg-light-extra text-muted">
+                <span class="round rounded-circle d-inline-block text-center bg-light-extra" style="border: 3px solid #84dbe2">
                     ${it.client.fullName[0]}
                 </span>
                 ${it.client.fullName}
@@ -41,6 +41,13 @@
         <td><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
     </tr>
 </g:each>
+
+<script>
+    $('.number-format').each(function () {
+        const value = parseFloat($(this).text());
+        $(this).text(formatValue(value))
+    });
+</script>
 
 %{--<td class="d-none">--}%
 %{--    <g:if test="${it.status.equalsIgnoreCase('aberto')}">--}%

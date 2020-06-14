@@ -36,7 +36,7 @@
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <header class="topbar">
-        <nav class="navbar top-navbar navbar-expand-md navbar-light bg-lightl">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
