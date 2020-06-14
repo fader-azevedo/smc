@@ -67,15 +67,16 @@
                                 <h4 class="card-title mt-2">Todos pagamentos </h4>
                             </div>
 
-                            <div class="col-6">
-                                <div class="btn-group  w-50" role="group" aria-label="Basic example">
+                            <div class="col-6 dialogFooter d-flex justify-content-end">
+                                <div class="btn-group  w-75" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-outline-light text-danger">
-                                        <i class="fa fa-file-pdf"></i>
+                                        <i class="fa fa-file-pdf"></i>&nbsp;pdf
                                     </button>
-                                    <button type="button" class="btn btn-outline-light text-info"><i
-                                            class="fa fa-file-word"></i></button>
-                                    <button type="button" class="btn btn-outline-light text-megna"><i
-                                            class="fa fa-file-excel"></i>
+                                    <button type="button" class="btn btn-outline-light text-info">
+                                        <i class="fa fa-file-word"></i>&nbsp;word
+                                    </button>
+                                    <button type="button" class="btn btn-outline-light text-megna">
+                                        <i class="fa fa-file-excel"></i>&nbsp;excel
                                     </button>
                                 </div>
                             </div>
@@ -88,8 +89,8 @@
                             <thead>
                             <tr class="border f-w-700">
                                 <th class="border">Total pago</th>
-                                <th class="border px-3">Prestação</th>
                                 <th class="border">Valor pago</th>
+                                <th class="border px-3">Prestação</th>
                                 <th class="border">F.Pagamento</th>
                                 <th class="border">Recibo</th>
                             </tr>
@@ -101,13 +102,13 @@
                                         <% def ip = payment.getInstalmentPayments(); def ipSize = ip.size()%>
                                         <td class="px-0">
                                             <g:each in="${ip}" var="inp">
-                                                <p class="my-1 py-1 px-3">${inp.instalment.type.name}</p>
+                                                <p class="number-format my-2 py-1 px-3">${inp.amountPaid}</p>
                                                 <hr>
                                             </g:each>
                                         </td>
                                         <td class="px-0">
                                             <g:each in="${ip}" var="inp">
-                                                <p class="number-format my-2 py-1 px-3">${inp.amountPaid}</p>
+                                                <p class="my-1 py-1 px-3">${inp.instalment.type.name}</p>
                                                 <hr>
                                             </g:each>
                                         </td>
