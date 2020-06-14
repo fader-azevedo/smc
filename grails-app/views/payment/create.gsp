@@ -1,4 +1,4 @@
-<%@ page import="org.springframework.validation.FieldError; smc.Instalment; smc.Loan" %>
+<%@ page import="java.text.DecimalFormat; org.springframework.validation.FieldError; smc.Instalment; smc.Loan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,11 +128,12 @@
                                             <tr id="tr-${i}" class="tr" data-id="${it.id}">
                                                 <td>${it.type.name}</td>
                                                 <td><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
-                                                <% def installmentDebit = include(controller:'loan',action: 'getInstallDebit',params: [id:it.id]) as Object %>
+                                                <% def installmentDebit = new DecimalFormat('#.00').format(include(controller:'loan',action: 'getInstallDebit',params: [id:it.id]) as double) %>
 
                                                 <td class="number-format">${installmentDebit}</td>
                                                 <input type="hidden" class="current" data-id="${it.id}" id="line-value-${it.id}"
                                                        value="${installmentDebit}">
+%{--                                                       value="<g:formatNumber number="${installmentDebit}" format="#,##0.00"/>">--}%
                                                 <td>
                                                     <input type="checkbox" id="check-${it.id}" class="filled-in input-check"
                                                            data-id="${it.id}"/>
@@ -173,7 +174,8 @@
             const amountPayable = parseFloat(${loan.amountPayable});
 
             setInputFilter(document.getElementById('input-value-to'), function(value) {
-                return /^\d*\.?\d*$/.test(value) && (value === "" || parseFloat(value) <= amountPayable);
+                // return /^\d*\.?\d*$/.test(value) && (value === "" || parseFloat(value) <= amountPayable);
+                return /^\d*\.?\d*$/.test(value);
             });
 
             <g:remoteFunction controller="loan" action="getDetails" params="{'id':loanId}" onSuccess="updateDetails(data)"/>

@@ -361,7 +361,7 @@
 
                 const amountPerInstalment = amountPayable / instalmentsNumber;
                 amountPerInstalmentINPUT.val(formatValue(amountPerInstalment));
-                amountPerInstalmentHidden.val(amountPerInstalment);
+                amountPerInstalmentHidden.val(amountPerInstalment.toFixed(2));
                 returnDueDate()
             }else{
                 amountPayableINPUT.val(0);

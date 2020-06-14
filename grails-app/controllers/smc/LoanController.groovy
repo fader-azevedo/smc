@@ -4,6 +4,9 @@ import auth.User
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
+
+import java.text.DecimalFormat
+
 import static org.springframework.http.HttpStatus.*
 
 @Secured('ROLE_ADMIN')
@@ -69,6 +72,7 @@ class LoanController {
     }
 
 
+    def deFr = new DecimalFormat('#.00')
     def generateInstalments(loan){
         def dateDif = 1
         switch (loan.paymentMode.name.toLowerCase().trim()) {
