@@ -14,12 +14,6 @@
 
 <body>
 
-<%
-    def loansOpen = Loan.findAllByStatus('aberto').size()
-    def loansExpired = Loan.findAllByStatus('vencido').size()
-    def loansClosed = Loan.findAllByStatus('fechado').size()
-%>
-
 <div class="col-12">
 %{--    ${barchartData}--}%
     <div class="row">
@@ -53,7 +47,9 @@
 
                             <div class="ml-2 align-self-center">
                                 <h3 class="mb-0 font-weight-light d-flex align-middle">
-                                    <span class="py-3 f-w-500">${loansOpen}&nbsp;</span>
+                                    <span class="py-3 f-w-500">
+                                        <g:include controller="loan" action="loans" params="[status:'aberto']"/>&nbsp;
+                                    </span>
                                     <span class="text-muted pl-2 f-s-15">Empréstimos <br>Abertos</span>
                                 </h3>
                             </div>
@@ -74,7 +70,9 @@
 
                             <div class="ml-2 align-self-center">
                                 <h3 class="mb-0 font-weight-light d-flex align-middle">
-                                    <span class="py-3 f-w-500">${loansExpired}&nbsp;</span>
+                                    <span class="py-3 f-w-500">
+                                        <g:include controller="loan" action="loans" params="[status:'vencido']"/>&nbsp;
+                                    </span>
                                     <span class="text-muted pl-2 f-s-15">Empréstimos <br>Vencidos</span>
                                 </h3>
                             </div>
@@ -95,7 +93,9 @@
 
                             <div class="ml-2 align-self-center">
                                 <h3 class="mb-0 font-weight-light d-flex align-middle">
-                                    <span class="py-3 f-w-500">${loansClosed}&nbsp;</span>
+                                    <span class="py-3 f-w-500">
+                                        <g:include controller="loan" action="loans" params="[status:'fechado']"/>&nbsp;
+                                    </span>
                                     <span class="text-muted pl-2 f-s-15">Empréstimos <br>Fechados</span>
                                 </h3>
                             </div>

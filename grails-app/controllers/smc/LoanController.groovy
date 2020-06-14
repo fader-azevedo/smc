@@ -14,8 +14,8 @@ class LoanController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        respond loanService.list(params), model:[loanCount: loanService.count()]
+    def index() {
+        model:[loanCount: loanService.count(),loanList: Loan.findAllByStatus('aberto')]
     }
 
     def show(Long id) {
@@ -191,7 +191,7 @@ class LoanController {
         }
     }
 
-    def codeGenerator(id){
+    def static codeGenerator(id){
         def paymentMode = PaymentMode.get(id)
         def regionString = paymentMode.name[0]
 
@@ -233,13 +233,34 @@ class LoanController {
         ] as JSON)
     }
 
-    def getValuePaid(paidLoans){
+    def getValuePaid(paidInstallment){
         def amountPaid = 0.0
-        paidLoans.instalments.each {installment->
+        paidInstallment.each {installment->
+            if(installment.instalments){
+                installment.instalments.each{
+                    installment.instalmentPayments.each {installmentPay->
+                        amountPaid+=installmentPay.amountPaid
+                    }
+                }
+            }
             installment.instalmentPayments.each {installmentPay->
                 amountPaid+=installmentPay.amountPaid
             }
         }
         return amountPaid
+    }
+
+    def getInstallDebit(){
+        def installment = Instalment.get(new Long(params.id))
+        render installment.amountPayable - getValuePaid(Instalment.findAllByOwnerAndStatus(installment,'Pago'))
+    }
+
+    def loans (){
+        render params.status?Loan.findAllByStatus(params.status.toString()).size():Loan.count()
+    }
+
+    def filter(){
+        def loanList = Loan.findAllByStatus(params.status.toString())
+        render(template: 'table',model: [loanList:loanList])
     }
 }

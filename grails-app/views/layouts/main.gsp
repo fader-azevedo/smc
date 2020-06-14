@@ -36,7 +36,7 @@
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <header class="topbar">
-        <nav class="navbar top-navbar navbar-expand-md navbar-light ">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light bg-lightl">
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
@@ -50,7 +50,7 @@
             <!-- ============================================================== -->
             <!-- End Logo -->
             <!-- ============================================================== -->
-            <div class="navbar-collapse">
+            <div class="navbar-collapse" id="navbarSupportedContent" data-navbarbg="skin2">
                 <!-- ============================================================== -->
                 <!-- toggle and nav items -->
                 <!-- ============================================================== -->
@@ -191,8 +191,9 @@
     <!-- ============================================================== -->
     <aside class="left-sidebar">
         <div class="scroll-sidebar">
-            <div class="user-profile" style="background: url(${resource(dir: 'images',file: 'background/user-info.jpg')}) no-repeat;">
-                <div class="profile-img"> <asset:image src="avatar_white.png" alt="user" /> </div>
+%{--            <div class="user-profile" style="background: url(${resource(dir: 'images',file: 'background/user-info.jpg')}) no-repeat;">--}%
+            <div class="user-profile bg-light">
+                <div class="profile-img"> <asset:image src="avatar.png" alt="user"/> </div>
                 <div class="profile-text">
                     <sec:ifLoggedIn>
                         <a class="dropdown-toggle u-dropdown text-capitalize" data-toggle="dropdown" role="button"

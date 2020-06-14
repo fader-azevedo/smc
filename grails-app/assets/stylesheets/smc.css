@@ -575,3 +575,28 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
     /*right: -340px;*/
     /*width: 340px;*/
 }
+
+
+.theme-color .theme-item .theme-link[data-logobg=skin1], .theme-color .theme-item .theme-link[data-navbarbg=skin1], .theme-color .theme-item .theme-link[data-sidebarbg=skin1] {
+    background: #1e88e5
+}
+
+.theme-color .theme-item .theme-link[data-logobg=skin2], .theme-color .theme-item .theme-link[data-navbarbg=skin2], .theme-color .theme-item .theme-link[data-sidebarbg=skin2] {
+    background: #00acc1
+}
+
+.theme-color .theme-item .theme-link[data-logobg=skin3], .theme-color .theme-item .theme-link[data-navbarbg=skin3], .theme-color .theme-item .theme-link[data-sidebarbg=skin3] {
+    background: #fc4b6c
+}
+
+.theme-color .theme-item .theme-link[data-logobg=skin4], .theme-color .theme-item .theme-link[data-navbarbg=skin4], .theme-color .theme-item .theme-link[data-sidebarbg=skin4] {
+    background: #7460ee
+}
+
+.theme-color .theme-item .theme-link[data-logobg=skin5], .theme-color .theme-item .theme-link[data-navbarbg=skin5], .theme-color .theme-item .theme-link[data-sidebarbg=skin5] {
+    background: #1d2126
+}
+
+.theme-color .theme-item .theme-link[data-logobg=skin6], .theme-color .theme-item .theme-link[data-navbarbg=skin6], .theme-color .theme-item .theme-link[data-sidebarbg=skin6] {
+    background: #e9ecef
+}

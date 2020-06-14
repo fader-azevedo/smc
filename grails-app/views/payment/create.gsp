@@ -29,7 +29,7 @@
         %>
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-12 col-md-4">
                 <div class="card">
                     <div class="card-body row">
                         <div class="col-lg-12 col-md-12">
@@ -86,16 +86,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-body">
                         <g:if test="${installments.size() > 0}">
                             <div class="row">
-                                <div class="col-6 pt-3">
+                                <div class="col-12 col-md-6 pt-3">
                                     <h5 class="card-title"><i class="fa fa-list"></i>&nbsp;Pestações a pagar</h5>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-12 col-md-6">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-white">Valor a pagar:</span>
@@ -125,16 +125,18 @@
                                         </thead>
                                         <tbody>
                                         <g:each in="${installments}" var="it" status="i">
-                                            <tr id="tr-${i}" class="tr">
+                                            <tr id="tr-${i}" class="tr" data-id="${it.id}">
                                                 <td>${it.type.name}</td>
                                                 <td><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
-                                                <td class="number-format">${it.amountPayable}</td>
-                                                <input type="hidden" class="current" data-id="${i}" id="line-value-${i}"
-                                                       value="${it.amountPayable}">
+                                                <% def installmentDebit = include(controller:'loan',action: 'getInstallDebit',params: [id:it.id]) as Object %>
+
+                                                <td class="number-format">${installmentDebit}</td>
+                                                <input type="hidden" class="current" data-id="${it.id}" id="line-value-${it.id}"
+                                                       value="${installmentDebit}">
                                                 <td>
-                                                    <input type="checkbox" id="check-${i}" class="filled-in input-check"
-                                                           data-id="${i}"/>
-                                                    <label for="check-${i}" class="mb-0"></label>
+                                                    <input type="checkbox" id="check-${it.id}" class="filled-in input-check"
+                                                           data-id="${it.id}"/>
+                                                    <label for="check-${it.id}" class="mb-0"></label>
                                                 </td>
                                             </tr>
                                         </g:each>
@@ -144,7 +146,7 @@
                             </div>
                             <hr>
 
-                            <button class="btn btn-megna waves-effect waves-green float-right" type="button">
+                            <button id="btn-save" class="btn btn-megna waves-effect waves-green float-right" type="button">
                                 <i class="fa fa-save">&nbsp;</i>Salvar</button>
                         </g:if>
                     </div>
@@ -157,6 +159,7 @@
         const loanId = ${loan.id}
 
         $(document).ready(function () {
+            save();
 
             $('#li-payment').addClass('active');
 
@@ -176,9 +179,13 @@
             <g:remoteFunction controller="loan" action="getDetails" params="{'id':loanId}" onSuccess="updateDetails(data)"/>
         });
 
+        let change = 0;
+        let installParceledID=0;
+
         function calculateInstalments() {
+            change = 0;
+            installParceledID = 0;
             let value = parseFloat($('#input-value-to').val());
-            let change = 0;
             $('.current').each(function () {
                 let currentValue = parseFloat($(this).val()).toFixed(2);
                 const id = $(this).attr('data-id');
@@ -195,12 +202,13 @@
             $('.change').remove();
             if (change > 0) {
                 const lineParceled = $('#tr-'+i);
+                installParceledID = lineParceled.attr('data-id');
                 lineParceled.before('<tr class="change bg-light f-w-700"><td>Parcela</td><td>--------------</td>' +
                     '<td><span">'+formatValue(change)+'</span></td><td></td></tr>')
-
-                // $('#parcelledValue').val(change)
             }
         }
+
+        let instalments = [];
 
         function calculateByCheck() {
             $('#check-all').on('change', function () {
@@ -208,17 +216,27 @@
                 $('.input-check').trigger('change')
             });
 
-            $('.input-check').on('change', function () {
-                let total = 0;
+            const checks = $('.input-check');
+            // checks.first().removeAttr('disabled');
+            // const checksLength = checks.length;
 
-                $('.input-check:checked').each(function () {
+
+            checks.on('change', function () {
+                let total = 0;
+                const checksChecked = $('.input-check:checked');
+                // const enables = checksLength-checksChecked.length;
+
+                // $('.input-check:not(:checked):first').removeAttr('disabled');
+
+                checksChecked.each(function () {
                     const id = $(this).attr('data-id');
                     const value = parseFloat($('#line-value-' + id).val());
                     total += value;
                 });
 
                 $('.change').remove();
-                // $('#parcelledValue').val('');
+                change = 0;
+                installParceledID = 0;
 
                 if(total !==0 ){
                     $('#input-value-to').val(total)
@@ -277,6 +295,29 @@
             $('#detail-amountPayable').text(formatValue(loan.amountPayable));
             $('#detail-amountPaid').text(formatValue(data.valuePaid));
             $('#detail-debit').text(formatValue(data.debit))
+        }
+
+        function save(){
+
+            $('#btn-save').on('click',function () {
+                instalments=[];
+                const totalPaid =$('#input-value-to').val();
+
+                $('.input-check:checked').each(function () {
+                    const id = $(this).attr('data-id');
+                    const value = parseFloat($('#line-value-' + id).val());
+
+                    const line = {'id': id, 'value': value,'part':false};
+                    instalments.push(line)
+                });
+                if(change !== 0){
+                    const line = {'id': installParceledID, 'value': change,'part':true};
+                    instalments.push(line)
+                }
+
+                instalments = JSON.stringify(instalments);
+                <g:remoteFunction action="save" params="{'loan':loanId,'instalments':instalments,'totalPaid':totalPaid}" onSuccess="alert(data)"/>
+            })
         }
     </script>
 

@@ -98,4 +98,8 @@ class InstalmentController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def getDebit(){
+
+    }
 }

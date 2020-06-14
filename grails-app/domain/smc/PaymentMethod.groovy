@@ -3,7 +3,7 @@ package smc
 class PaymentMethod {
     String name
 
-    static hasMany = [payments:Payment]
+    static hasMany = [instalmentPayments:InstalmentPayment]
     static constraints = {
         name unique: true
     }

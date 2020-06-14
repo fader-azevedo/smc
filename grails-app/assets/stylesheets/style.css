@@ -12312,6 +12312,7 @@ a:hover, a:focus {
 
 a.link {
     color: #455a64;
+    cursor: pointer;
 }
 
 a.link:hover, a.link:focus {

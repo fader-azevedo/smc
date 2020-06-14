@@ -16,6 +16,7 @@
 //= require custom.min.js
 //= require plugins/styleswitcher/jQuery.style.switcher.js
 //= require plugins/moment/moment.js
+//= require plugins/footable/js/footable.min.js
 //= require plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js
 //= require plugins/bootstrap-datepicker/bootstrap-datepicker.min.js
 //= require plugins/timepicker/bootstrap-timepicker.min.js
