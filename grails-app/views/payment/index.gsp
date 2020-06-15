@@ -83,7 +83,8 @@
                                 <th class="border">Total pago</th>
                                 <th class="border">Valor pago</th>
                                 <th class="border px-3">Prestação</th>
-                                <th class="border">F.Pagamento</th>
+                                <th class="border">F.pagamento</th>
+                                <th class="border">Data</th>
                                 <th class="border">Recibo</th>
                                 <th class="border">Cliente</th>
                             </tr>
@@ -131,11 +132,6 @@
                 filter()
             });
             statusSelect.val('Aberto').trigger('change');
-
-            $('.number-format').each(function () {
-                const value = parseFloat($(this).text());
-                $(this).text(formatValue(value))
-            });
 
             $('#payment-table tbody td > hr:last-child').remove();
 

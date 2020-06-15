@@ -37,7 +37,7 @@ class PaymentController {
         def loan = Loan.get(new Long(params.loan))
         payment.setCreatedBy((User) springSecurityService.currentUser)
         payment.setUpdatedBy((User) springSecurityService.currentUser)
-        payment.setCode(LoanController.codeGenerator(loan.getPaymentMode().id))
+        payment.setCode(codeGenerator(loan.payments.size()+1))
         payment.setTotalPaid(new Double(params.totalPaid))
         payment.setLoan(loan)
         paymentService.save(payment)
@@ -129,5 +129,15 @@ class PaymentController {
             }
         }as List<Payment>
         render(template: 'all',model: [paymentList: paymentList])
+    }
+
+    private static codeGenerator(size){
+
+        def length = size.toString().length()
+        def code = ''
+        for(def i=length; i<5; i++){
+            code += '0'
+        }
+        return (code).concat(size as String)
     }
 }

@@ -112,10 +112,8 @@
         </div>
     </div>
 
-
-
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-chart-area">&nbsp;</i>Empréstimo por meses</h4>
@@ -123,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 d-none">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-circle"></i>Estados</h4>
@@ -171,22 +169,22 @@
     }
 
     $(function () {
-        %{--Morris.Donut({--}%
-        %{--    element: 'morris-donut-chart',--}%
-        %{--    data: [{--}%
-        %{--        label: "Abertos",--}%
-        %{--        value: ${loansOpen},--}%
+        Morris.Donut({
+            element: 'morris-donut-chart',
+            data: [{
+                label: "Abertos",
+                value: ${loansOpen},
 
-        %{--    }, {--}%
-        %{--        label: "Vencidos",--}%
-        %{--        value: ${loansExpired}--}%
-        %{--    }, {--}%
-        %{--        label: "Fechados",--}%
-        %{--        value: ${loansClosed}--}%
-        %{--    }],--}%
-        %{--    resize: true,--}%
-        %{--    colors:['#1e88e5', '#fc4b6c', '#00897b']--}%
-        %{--});--}%
+            }, {
+                label: "Vencidos",
+                value: ${loansExpired}
+            }, {
+                label: "Fechados",
+                value: ${loansClosed}
+            }],
+            resize: true,
+            colors:['#1e88e5', '#fc4b6c', '#00897b']
+        });
     });
     // bar chart
     function barChart(data){

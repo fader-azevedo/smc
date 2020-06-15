@@ -3,9 +3,10 @@
 <g:set var="show" value="show"/>
 <g:each in="${(List<Loan>) loanList}" var="it">
     <g:if test="${it.payments.size() > 0}">
-        <tr id="tr-${it.id}" class="line-table-inside" onclick="switchBtn(${it.id})" data-toggle="collapse" href="#collapse-${it.id}">
+        <tr id="tr-${it.id}" class="line-table-inside" onclick="switchBtn(${it.id})" data-toggle="collapse"
+            href="#collapse-${it.id}">
             <td>
-                <i  class="fa fa-eye text-primary"></i>
+                <i class="fa fa-eye text-primary"></i>
             </td>
 
             <td>
@@ -16,7 +17,7 @@
             <g:set var="i" value="${new Integer('0') + 1}"/>
             <td class="number-format">${it.borrowedAmount}</td>
             <td class="number-format">${it.amountPayable}</td>
-            <td class="number-format"><g:include controller="loan" action="totalPaid" params="[id:it.id]"/></td>
+            <td class="number-format"><g:include controller="loan" action="totalPaid" params="[id: it.id]"/></td>
             <td>
                 <g:if test="${it.status.equalsIgnoreCase('aberto')}">
                     <span class="badge badge-info w-100">Aberto</span>
@@ -30,7 +31,7 @@
             </td>
         </tr>
 
-%{--        inside table--}%
+    %{--        inside table--}%
         <tr class="">
             <td colspan="6" class="py-0">
                 <div id="collapse-${it.id}" class="collapse ${show}">
@@ -46,13 +47,14 @@
                                     <th class="border">Total pago</th>
                                     <th class="border">Valor pago</th>
                                     <th class="border px-3">Prestação</th>
-                                    <th class="border">F.Pagamento</th>
+                                    <th class="border">F.pagamento</th>
+                                    <th class="border">Data</th>
                                     <th class="border">Recibo</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <g:each in="${it.payments}" var="payment">
-                                    <tr>
+                                    <tr class="tr-inside">
                                         <td class="number-format">${payment.totalPaid}</td>
                                         <% def ip = payment.getInstalmentPayments(); def ipSize = ip.size() %>
                                         <td class="px-0">
@@ -72,6 +74,9 @@
                                                 <p class="my-0  px-3">${inp.paymentMothod.name}</p>
                                                 <hr>
                                             </g:each>
+                                        </td>
+                                        <td class="text-center">
+                                            <g:formatDate format="dd/MM/yyyy HH:mm" date="${payment.dateCreated}"/>
                                         </td>
                                         <td class="">
                                             <a class="link"><i
@@ -97,19 +102,17 @@
         $('.collapse').removeClass('show');
 
         $('#table-body-client-payment tr').removeClass('bg-light-info');
-        $('#tr-'+id).addClass('bg-light-info');
+        $('#tr-' + id).addClass('bg-light-info');
     }
 
-    $(document).ready(function () {
 
-        $('.line-table-inside .number-format').each(function () {
-            const value = parseFloat($(this).text());
-            $(this).text(formatValue(value))
-        });
+    $('.tr-inside .number-format').each(function () {
+        const value = parseFloat($(this).text());
+        $(this).text(formatValue(value))
+    });
 
-        $('.table-inside tbody td > hr:last-child').remove();
-        $('.table-inside tbody td').addClass('align-middle');
-    })
+    $('.table-inside tbody td > hr:last-child').remove();
+    $('.table-inside tbody td').addClass('align-middle');
 
 </script>
 
