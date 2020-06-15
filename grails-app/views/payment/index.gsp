@@ -50,6 +50,17 @@
                                   noSelection="${['':'Todos']}"
                         />
                     </div>
+                    <div class="form-group">
+                        <label for="filter-createdDate">Data</label>
+                        <div class='input-group mb-3'>
+                            <input type='text' class="form-control shawCalRanges f-s-13 pr-0" id="filter-createdDate"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <span class="ti-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="right-aside" style="min-height: 500px">
@@ -122,6 +133,18 @@
         $(function () {
             $(".select2").select2();
             $('.select2').addClass('w-100');
+
+            $('#filter-createdDate').daterangepicker({
+                ranges: {
+                    'Hoje': [moment(), moment()],
+                    'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Últimos 7 dias': [moment().subtract(6, 'days'), moment()],
+                    'Últimos 30 dias': [moment().subtract(29, 'days'), moment()],
+                    'Este Mês': [moment().startOf('month'), moment().endOf('month')],
+                    'Último Mês': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                // alwaysShowCalendars: true,
+            });
 
             statusSelect.on('change',function () {
                 if($(this).val()){

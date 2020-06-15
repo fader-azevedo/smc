@@ -92,14 +92,6 @@
                                 </button>
                             </div>
                         </div>
-
-%{--                        <div class="col-12 col-md-6">--}%
-%{--                            <div class="input-icons pt-1 pr-0">--}%
-%{--                                <i class="fa fa-search"></i>--}%
-%{--                                <input class="form-control input-super-entities pl-5 pl-sm-5" type="text"--}%
-%{--                                       placeholder="Pesquisar por cliente">--}%
-%{--                            </div>--}%
-%{--                        </div>--}%
                     </div>
                 </div>
                 <hr>
@@ -119,6 +111,9 @@
                         <tbody>
                             <g:render template="table"/>
                         </tbody>
+                        <tfoot id="loan-footer">
+
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -219,7 +214,7 @@
         $(".select2").select2();
         $('.select2').addClass('w-100');
 
-        $('.shawCalRanges').daterangepicker({
+        $('#filter-dueDate').daterangepicker({
             ranges: {
                 'Hoje': [moment(), moment()],
                 'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -263,6 +258,7 @@
         $("#loan-table tbody").fadeOut("fast", function () {
             $('#loan-table tbody').html(data);
             $('#loan-table').footable();
+
 
             $("#loan-table tbody").fadeIn("slow");
             $('table tbody td').addClass('align-middle');
