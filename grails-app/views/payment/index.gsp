@@ -4,7 +4,7 @@
     <head>
         <meta name="layout" content="main" />
         <title>
-            Lista de payments
+            Pagamentos
         </title>
     </head>
     <body>

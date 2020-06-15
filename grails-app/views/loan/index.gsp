@@ -114,7 +114,13 @@
                 </div>
             </div>
             <hr>
-            <h6 class="card-title">Código:&nbsp;<strong id="detail-code">33301</strong></h6>
+            <h6 class="card-title d-none">Código:&nbsp;<strong id="detail-code" class="float-right">33301</strong></h6>
+            <h6 class="card-title">Contracto:&nbsp;
+                <span class="float-right">
+                    <a class="link"><i class="fa fa-file-word text-info">&nbsp;</i><strong id="detail-contract"></strong></a>
+                </span>
+            </h6>
+
             <hr>
             <h6 class="card-title">Pagamento</h6>
             <ul class="list-group">
@@ -222,6 +228,7 @@
 
         $('#detail-client-name').text(client.fullName);
         $('#detail-code').text(loan.code);
+        $('#detail-contract').text(loan.code+'.docx');
         $('#detail-installment-all').text(data.instAll);
         $('#detail-installment-payed').text(data.instPayed);
         $('#detail-installment-pend').text(data.instPend);
