@@ -107,6 +107,27 @@ class PaymentController {
     }
 
     def _byClient(){
-        model: [loans:Loan.findAllByClient(Client.get(new Long(params.id))).sort{it.dateCreated}]
+        def status = params.status.toString().trim()
+        def loanList = Loan.createCriteria().list {
+            eq('client',Client.get(new Long(params.id)))
+            if(status){
+                eq('status',status)
+            }
+            order('dateCreated')
+        }as List<Loan>
+        model: [loanList:loanList]
+    }
+
+    def _filterPaymentByLoanStatus(){
+        def status = params.status.toString().trim()
+
+        def paymentList = Payment.createCriteria().list {
+            if(status){
+                loan{
+                    eq('status',status)
+                }
+            }
+        }as List<Payment>
+        render(template: 'all',model: [paymentList: paymentList])
     }
 }

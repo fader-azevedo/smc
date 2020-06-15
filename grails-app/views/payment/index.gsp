@@ -88,7 +88,7 @@
                                 <th class="border">Cliente</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="payment-table-body">
                                <g:render template="all"/>
                             </tbody>
                         </table>
@@ -117,7 +117,7 @@
     <script>
         const clientSelect = $('#client-select');
         const statusSelect = $('#status-select');
-
+        let whoIsShow;
         $(function () {
             $(".select2").select2();
             $('.select2').addClass('w-100');
@@ -128,6 +128,7 @@
                 }else{
                     $('#text-small-loan').text('Todos')
                 }
+                filter()
             });
             statusSelect.val('Aberto').trigger('change');
 
@@ -140,23 +141,25 @@
 
             clientSelect.on('change',function () {
                 const id = $(this).val();
+                const clientName = $('#client-select option:selected').text();
+                $('#text-small-client').text(clientName);
+
                 if(id){
-                    const clientName = $('#client-select option:selected').text();
                     $('#payment-title').html('Pagamentos de <strong>'+clientName+'</strong>');
-                    $('#text-small-client').text(clientName)
                     $("#div-all-payment").fadeOut("fast", function () {
                         $("#div-client-payment").fadeIn("fast").addClass('month-table').removeClass('d-none');
+                        whoIsShow = 'client';
+                        filter();
                     });
-
-                    <g:remoteFunction action="_byClient" params="{'id':id}" update="table-body-client-payment" onSuccess="upp(data)"/>
                 }else{
                     $('#payment-title').text('Todos pagamentos');
                     $("#div-client-payment").fadeOut("fast", function () {
                         $("#div-all-payment").fadeIn("fast");
                         $('#div-client-payment').removeClass('month-table').addClass('d-none');
+                        whoIsShow = 'all';
                     });
-                    $('#text-small-client').text('Todos')
                 }
+
             });
             clientSelect.val('').trigger('change')
         });
@@ -169,7 +172,18 @@
         }
 
         function filter() {
-
+            const status_ = statusSelect.val();
+            const client_ = clientSelect.val();
+            if(whoIsShow === 'client' && client_){
+                <g:remoteFunction action="_byClient" params="{'id':client_,'status':status_}" update="table-body-client-payment" onSuccess="upp(data)"/>
+            }else{
+                <g:remoteFunction action="_filterPaymentByLoanStatus" params="{'status':status_}" update="payment-table-body" onSuccess="updateAll()"/>
+            }
+        }
+        
+        function updateAll() {
+            $('#payment-table tbody td > hr:last-child').remove();
+            $('table tbody td').addClass('align-middle');
         }
     </script>
     </body>

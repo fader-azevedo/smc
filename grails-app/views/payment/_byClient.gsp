@@ -1,7 +1,7 @@
 <%@ page import="smc.Loan" %>
 <g:set var="i" value="${new Integer('0')}"/>
 <g:set var="show" value="show"/>
-<g:each in="${(List<Loan>) loans}" var="it">
+<g:each in="${(List<Loan>) loanList}" var="it">
     <g:if test="${it.payments.size() > 0}">
         <tr id="tr-${it.id}" class="line-table-inside" onclick="switchBtn(${it.id})" data-toggle="collapse" href="#collapse-${it.id}">
             <td>
