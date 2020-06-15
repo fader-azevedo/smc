@@ -6,9 +6,11 @@ class Settings {
     String root
     String logo
     String loans
+    String sidebar
     boolean sundays = true
 
     static constraints = {
+        sidebar nullable: true
     }
 
     static mapping = {

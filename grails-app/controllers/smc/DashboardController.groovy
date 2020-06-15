@@ -7,8 +7,10 @@ import org.grails.web.json.JSONObject
 
 import java.text.SimpleDateFormat
 
-@Secured('ROLE_ADMIN')
+@Secured(['ROLE_ADMIN','ROLE_USER','ROLE_CLIENT'])
 class DashboardController {
+
+    SettingsService settingsService
     def sdfMes = new SimpleDateFormat('MM')
     def sdfAno = new SimpleDateFormat('YYYY')
     def monthsInt = ['01','02','03','04','05','06','07','08','09','10','11','12']
@@ -77,5 +79,16 @@ class DashboardController {
             values.put(line(month,value))
         }
         render values as JSON
+    }
+
+    def sidebar(){
+        def settings = Settings.all.first()
+        settings.setSidebar(params.sidebar.toString())
+        settingsService.save(settings)
+        render('updated')
+    }
+
+    def getSidebar(){
+        render(Settings.all.first().sidebar)
     }
 }

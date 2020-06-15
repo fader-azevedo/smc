@@ -1,10 +1,10 @@
-<%@ page import="smc.Loan" %>
+<%@ page import="smc.Client; smc.Loan" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main"/>
     <title>
-        Lista de Empréstimos
+        Empréstimos
     </title>
 </head>
 
@@ -17,7 +17,8 @@
 
     <div class="card">
         <div class="contact-page-aside">
-            <div class="left-aside">
+            <div class="left-aside d-flex flex-column justify-content-between h-100">
+                <div>
                 <ul class="list-style-none">
                     <li class="rounded-label f-s-17">
                         <a class="f-w-700" href="javascript:void(0)">
@@ -43,27 +44,62 @@
                             <g:include action="loans" params="[status: 'fechado']"/></span>
                         </a>
                     </li>
-                    <li class="p-2 rounded-label mt-md-5">
-                        <g:link controller="loan" action="create"
-                                class="btn btn-rounded btn-success text-white">Novo empréstimo</g:link>
-                    </li>
                 </ul>
+                <div class="line-title text-center mb-4 mb-md-4">
+                    <span class="text">Filtro</span>
+                </div>
+                <div class="d-flex flex-column justify-content-between">
+                    <div class="form-group">
+                        <label for="filter-client">Cliente</label>
+                        <g:select class="select2" name="filter-client"
+                                  from="${Client.all.sort{it.fullName.toUpperCase()}}" optionKey="id" optionValue="fullName"
+                                  noSelection="${['':'Todos']}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-dueDate">Prazo</label>
+                        <div class='input-group mb-3'>
+                            <input type='text' class="form-control shawCalRanges f-s-13 pr-0" id="filter-dueDate"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <span class="ti-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <g:link controller="loan" action="create"
+                        class="btn btn-rounded btn-success text-white mb-md-3">Novo empréstimo</g:link>
             </div>
 
             <div class="right-aside" style="min-height: 500px">
                 <div class="right-page-header">
                     <div class="row">
-                        <div class="col-12 col-md-6">
+                        <div class="col-md-6">
                             <h4 class="card-title mt-2">Empréstimos <span id="loan-title" class="f-w-600">abertos</span></h4>
                         </div>
-
-                        <div class="col-12 col-md-6">
-                            <div class="input-icons pt-1 pr-0">
-                                <i class="fa fa-search"></i>
-                                <input class="form-control input-super-entities pl-5 pl-sm-5" type="text"
-                                       placeholder="Pesquisar por cliente">
+                        <div class="col-6 dialogFooter d-flex justify-content-end">
+                            <div class="btn-group  w-75" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-light text-danger">
+                                    <i class="fa fa-file-pdf"></i>&nbsp;pdf
+                                </button>
+                                <button type="button" class="btn btn-outline-light text-info">
+                                    <i class="fa fa-file-word"></i>&nbsp;word
+                                </button>
+                                <button type="button" class="btn btn-outline-light text-megna">
+                                    <i class="fa fa-file-excel"></i>&nbsp;excel
+                                </button>
                             </div>
                         </div>
+
+%{--                        <div class="col-12 col-md-6">--}%
+%{--                            <div class="input-icons pt-1 pr-0">--}%
+%{--                                <i class="fa fa-search"></i>--}%
+%{--                                <input class="form-control input-super-entities pl-5 pl-sm-5" type="text"--}%
+%{--                                       placeholder="Pesquisar por cliente">--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
                     </div>
                 </div>
                 <hr>
@@ -118,23 +154,23 @@
             </h6>
 
             <hr>
-            <h6 class="card-title">Pagamento</h6>
+%{--            <h6 class="card-title">Pagamento</h6>--}%
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Valor pedido
-                    <span class="badge badge-pill" id="detail-borrowedAmount">14</span>
+                    <span class="badge badge-pill f-w-600" id="detail-borrowedAmount">14</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Valor a pagar
-                    <span class="badge badge-pill" id="detail-amountPayable">14</span>
+                    <span class="badge badge-pill f-w-600" id="detail-amountPayable">14</span>
                 </li>
                 <li class="list-group-item list-group-item-megna d-flex justify-content-between align-items-center">
                     Valor pago
-                    <span class="badge badge-pill" id="detail-amountPaid">2</span>
+                    <span class="badge badge-pill f-w-600" id="detail-amountPaid">2</span>
                 </li>
                 <li class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center">
                     Dívida
-                    <span class="badge  badge-pill" id="detail-debit">1</span>
+                    <span class="badge badge-pill f-w-600" id="detail-debit">1</span>
                 </li>
             </ul>
             <hr>
@@ -156,13 +192,13 @@
                     <span class="text-danger" id="detail-installment-pend">1</span>
                 </li>
             </ul>
-            <hr>
-            <small class="text-muted">Registado por </small>
-            <h6 id="detail-createdBy"></h6>
-            <small class="text-muted pt-3 d-block">Registado em</small>
-            <h6 id="detail-dateCreated">20/12/2019 13:09</h6>
+            <div id="div-auth" class="d-none">
+                <hr>
+                <small class="text-muted">Registado por</small>
+                <h6 id="detail-createdBy"></h6>
+                <small class="text-muted pt-3 d-block">Registado em</small>
+                <h6 id="detail-dateCreated">20/12/2019 13:09</h6>
 
-            <div id="div-update" class="d-none">
                 <small class="text-muted pt-4 d-block">Última alteração</small>
                 <h6 id="detail-lastUpdated">20/12/2019 13:09</h6>
                 <small class="text-muted pt-4 d-block">Alterado por</small>
@@ -179,6 +215,21 @@
         $('#li-loan').addClass('active');
         $('#li-loan .index').addClass('active');
         $('table tbody td').addClass('align-middle');
+
+        $(".select2").select2();
+        $('.select2').addClass('w-100');
+
+        $('.shawCalRanges').daterangepicker({
+            ranges: {
+                'Hoje': [moment(), moment()],
+                'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Últimos 7 dias': [moment().subtract(6, 'days'), moment()],
+                'Últimos 30 dias': [moment().subtract(29, 'days'), moment()],
+                'Este Mês': [moment().startOf('month'), moment().endOf('month')],
+                'Último Mês': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            // alwaysShowCalendars: true,
+        });
 
 
         $(document).on('click', '.btn-details', function () {

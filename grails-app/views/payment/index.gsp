@@ -1,4 +1,4 @@
-<%@ page import="smc.Payment; smc.Client" %>
+<%@ page import="smc.Loan; smc.Payment; smc.Client" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,27 +32,23 @@
                                 <span>${Payment.count}</span>
                             </a>
                         </li>
-                        <li class="divider mt-3"></li>
-
                     </ul>
+                    <div class="line-title text-center mb-4 mb-md-4">
+                        <span class="text">Filtro</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-select">Estado do Emprestimo</label>
+                        <g:select class="select2" name="status-select"
+                                  from="${Loan.constrainedProperties.status.inList}"
+                                  noSelection="${['':'Todos']}"
+                        />
+                    </div>
                     <div class="form-group">
                         <label for="client-select">Cliente</label>
                         <g:select class="select2" name="client-select"
                                   from="${Client.all.sort{it.fullName.toUpperCase()}}" optionKey="id" optionValue="fullName"
                                   noSelection="${['':'Todos']}"
                         />
-                    </div>
-
-                    <div id="client-loans-div" class="d-none">
-                        <h6 class="card-title">Empréstimos</h6>
-                        <ul class="list-group" id="client-loans-list">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a class="link"><span class="f-w-800">1º</span> Empréstimo</a>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a class="link"><span class="f-w-800">2º</span> Empréstimo</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
 
@@ -121,6 +117,8 @@
         $(function () {
             $(".select2").select2();
             $('.select2').addClass('w-100');
+
+            $('#status-select').val('Aberto').trigger('change');
 
             $('.number-format').each(function () {
                 const value = parseFloat($(this).text());

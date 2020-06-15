@@ -18,6 +18,18 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
 .line-table-inside:hover{
     background-color: #cfecfe !important;
 }
+.line-title{
+    height: 20px;
+    border-bottom: 0.1em solid #dedede;
+}
+
+.line-title > .text{
+    position: relative;
+    top: 5px;
+    font-size: 16px;
+    background-color: white;
+    padding: 0 10px;
+}
 
 /*----------------------------*\
 	input icon
