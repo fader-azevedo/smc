@@ -56,7 +56,7 @@
                     <div class="right-page-header">
                         <div class="row">
                             <div class="col-6">
-                                <h4 class="card-title mt-2" id="payment-title">Todos pagamentos </h4>
+                                <h4 class="card-title mt-2" id="payment-title">Todos pagamentos</h4>
                             </div>
 
                             <div class="col-6 dialogFooter d-flex justify-content-end">
@@ -75,7 +75,8 @@
                         </div>
                     </div>
                     <hr>
-                    <div id="div-all-payment" class="table-responsive">
+                    <small>Emprestimos: <strong id="text-small-loan"></strong></small>
+                    <div id="div-all-payment" class="table-responsive mt-2">
                         <table id="payment-table" class="table table-hover table-bordered no-wrap" data-paging="true" data-paging-size="6">
                             <thead>
                             <tr class="border f-w-700">
@@ -118,7 +119,15 @@
             $(".select2").select2();
             $('.select2').addClass('w-100');
 
-            $('#status-select').val('Aberto').trigger('change');
+            const statusSelect = $('#status-select');
+            statusSelect.on('change',function () {
+                if($(this).val()){
+                    $('#text-small-loan').text($(this).val())
+                }else{
+                    $('#text-small-loan').text('Todos')
+                }
+            });
+            statusSelect.val('Aberto').trigger('change');
 
             $('.number-format').each(function () {
                 const value = parseFloat($(this).text());

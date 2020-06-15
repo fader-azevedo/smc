@@ -239,11 +239,9 @@ class LoanController {
 
     def totalPaid(){
         def loan = Loan.get(params.id)
-        def value = getValuePaid(Instalment.findAllByLoanAndStatus(loan,'Pago'))
         def valuePaid = getValuePaid(Instalment.findAllByLoanAndStatus(loan,'Pago'))
 
-        println(value)
-        render(value)
+        render(valuePaid)
     }
 
     def getValuePaid(paidInstallment){

@@ -16,8 +16,13 @@ class PaymentController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        respond paymentService.list(params), model:[paymentCount: paymentService.count()]
+    def index() {
+        def paymentList = Payment.createCriteria().list {
+            loan{
+                eq('status','aberto')
+            }
+        }
+        model:[paymentList: paymentList]
     }
 
     def show(Long id) {
