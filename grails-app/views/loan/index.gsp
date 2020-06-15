@@ -9,11 +9,7 @@
 </head>
 
 <body>
-<script>
-    function formatValue(value) {
-        return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace(/.([^.]*)$/, ',$1')
-    }
-</script>
+
 <div class="col-12">
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>

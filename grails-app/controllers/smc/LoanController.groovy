@@ -4,7 +4,6 @@ import auth.User
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
-
 import java.text.DecimalFormat
 
 import static org.springframework.http.HttpStatus.*
@@ -236,6 +235,15 @@ class LoanController {
                 instPend:instPend,instAll:instAll,valuePaid:valuePaid, debit:debit,createdBy: loan.createdBy.fullName,
                 updatedBy: loan.updatedBy.fullName,instalmentType:loan.paymentMode.name
         ] as JSON)
+    }
+
+    def totalPaid(){
+        def loan = Loan.get(params.id)
+        def value = getValuePaid(Instalment.findAllByLoanAndStatus(loan,'Pago'))
+        def valuePaid = getValuePaid(Instalment.findAllByLoanAndStatus(loan,'Pago'))
+
+        println(value)
+        render(value)
     }
 
     def getValuePaid(paidInstallment){

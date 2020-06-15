@@ -5,6 +5,7 @@ class Payment extends Parameter{
     String receipt
     double totalPaid
     static hasMany = [instalmentPayments:InstalmentPayment]
+    static belongsTo = [loan:Loan]
 
     static constraints = {
         receipt nullable: true

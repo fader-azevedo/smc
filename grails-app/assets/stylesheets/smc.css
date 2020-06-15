@@ -12,7 +12,12 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
     display: flex;
     justify-content: space-between !important;
 }
-
+.line-table-inside{
+    cursor: pointer;
+}
+.line-table-inside:hover{
+    background-color: #cfecfe !important;
+}
 
 /*----------------------------*\
 	input icon

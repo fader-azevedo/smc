@@ -13,7 +13,7 @@ class Loan extends Parameter{
     String witnesses
 
     static belongsTo = [client:Client,paymentMode:PaymentMode]
-    static hasMany = [loanGuarantees:LoanGuarantee, instalments:Instalment, guarantors:Guarantor]
+    static hasMany = [loanGuarantees:LoanGuarantee, instalments:Instalment, guarantors:Guarantor,payments: Payment]
     static constraints = {
         status inList: ['Aberto','Vencido','Fechado']
         amountPayable min:  new Double(0)

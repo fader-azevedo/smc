@@ -149,3 +149,7 @@ $.fn.datepicker.dates['pt'] = {
 	clear: "Limpar",
 	format: "dd/mm/yyyy"
 };
+
+function formatValue(value) {
+	return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace(/.([^.]*)$/, ',$1')
+}

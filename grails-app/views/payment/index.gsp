@@ -8,11 +8,7 @@
         </title>
     </head>
     <body>
-    <script>
-        function formatValue(value) {
-            return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace(/.([^.]*)$/, ',$1')
-        }
-    </script>
+
     <div class="col-12">
         <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
@@ -40,16 +36,16 @@
 
                     </ul>
                     <div class="form-group">
-                        <label for="client">Cliente</label>
-                        <g:select class="select2" name="client"
+                        <label for="client-select">Cliente</label>
+                        <g:select class="select2" name="client-select"
                                   from="${Client.all.sort{it.fullName.toUpperCase()}}" optionKey="id" optionValue="fullName"
                                   noSelection="${['':'Todos']}"
                         />
                     </div>
 
-                    <div id="client-loans" class="d-none">
+                    <div id="client-loans-div" class="d-none">
                         <h6 class="card-title">Empréstimos</h6>
-                        <ul class="list-group">
+                        <ul class="list-group" id="client-loans-list">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <a class="link"><span class="f-w-800">1º</span> Empréstimo</a>
                             </li>
@@ -64,7 +60,7 @@
                     <div class="right-page-header">
                         <div class="row">
                             <div class="col-6">
-                                <h4 class="card-title mt-2">Todos pagamentos </h4>
+                                <h4 class="card-title mt-2" id="payment-title">Todos pagamentos </h4>
                             </div>
 
                             <div class="col-6 dialogFooter d-flex justify-content-end">
@@ -83,8 +79,7 @@
                         </div>
                     </div>
                     <hr>
-
-                    <div class="table-responsive">
+                    <div id="div-all-payment" class="table-responsive">
                         <table id="payment-table" class="table table-hover table-bordered no-wrap" data-paging="true" data-paging-size="6">
                             <thead>
                             <tr class="border f-w-700">
@@ -93,36 +88,27 @@
                                 <th class="border px-3">Prestação</th>
                                 <th class="border">F.Pagamento</th>
                                 <th class="border">Recibo</th>
+                                <th class="border">Cliente</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <g:each in="${(List<Payment>)paymentList}" var="payment">
-                                    <tr>
-                                        <td class="number-format">${payment.totalPaid}</td>
-                                        <% def ip = payment.getInstalmentPayments(); def ipSize = ip.size()%>
-                                        <td class="px-0">
-                                            <g:each in="${ip}" var="inp">
-                                                <p class="number-format my-2 py-1 px-3">${inp.amountPaid}</p>
-                                                <hr>
-                                            </g:each>
-                                        </td>
-                                        <td class="px-0">
-                                            <g:each in="${ip}" var="inp">
-                                                <p class="my-1 py-1 px-3">${inp.instalment.type.name}</p>
-                                                <hr>
-                                            </g:each>
-                                        </td>
-                                        <td class="px-0">
-                                            <g:each in="${ip}" var="inp">
-                                                <p class="my-2 py-1 px-3">${inp.paymentMothod.name}</p>
-                                                <hr>
-                                            </g:each>
-                                        </td>
-                                        <td class="">
-                                            <a class="link"><i class="fa fa-file-pdf text-danger">&nbsp;</i>Recibo-${payment.code.concat('.pdf')}</a>
-                                        </td>
-                                    </tr>
-                                </g:each>
+                               <g:render template="all"/>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="div-client-payment" class="d-none">
+                        <table id="table-client-payment" class="table table-bordered no-wrap">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>C.inicial</th>
+                                <th>Totl a pagar</th>
+                                <th>Total pago</th>
+                                <th>Estado</th>
+                            </tr>
+                            </thead>
+                            <tbody id="table-body-client-payment">
                             </tbody>
                         </table>
                     </div>
@@ -141,10 +127,33 @@
                 $(this).text(formatValue(value))
             });
 
-            // $('#payment-table tbody td > p:last-child').removeClass('border-bottom')
-            $('#payment-table tbody td > hr:last-child').remove()
+            $('#payment-table tbody td > hr:last-child').remove();
 
-        })
+            $('#client-select').on('change',function () {
+                const id = $(this).val();
+                if(id){
+                    $('#payment-title').html('Pagamentos de <strong>'+$('#client-select option:selected').text()+'</strong>');
+                    $("#div-all-payment").fadeOut("fast", function () {
+                        $("#div-client-payment").fadeIn("fast").addClass('month-table').removeClass('d-none');
+                    });
+
+                    <g:remoteFunction action="_byClient" params="{'id':id}" update="table-body-client-payment" onSuccess="upp(data)"/>
+                }else{
+                    $('#payment-title').text('Todos pagamentos');
+                    $("#div-client-payment").fadeOut("fast", function () {
+                        $("#div-all-payment").fadeIn("fast");
+                        $('#div-client-payment').removeClass('month-table').addClass('d-none');
+                    });
+                }
+            });
+        });
+        function upp() {
+            if($('#table-body-client-payment tr').length === 0){
+                $('#table-body-client-payment').html(
+                    '<tr><td colspan="6" class="text-center">Sem pagamento registado</td></tr>'
+                )
+            }
+        }
     </script>
     </body>
 </html>

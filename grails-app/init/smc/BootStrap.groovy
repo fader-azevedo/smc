@@ -16,6 +16,7 @@ class BootStrap {
 
         def adminRole = Role.findOrSaveWhere(authority: 'ROLE_ADMIN')
         def userRole = Role.findOrSaveWhere(authority: 'ROLE_USER')
+        def clientRole = Role.findOrSaveWhere(authority: 'ROLE_CLIENT')
 
         if(User.count == 0) {
             def admin = User.findByUsername('admin')

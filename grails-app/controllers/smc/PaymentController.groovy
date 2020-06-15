@@ -34,6 +34,7 @@ class PaymentController {
         payment.setUpdatedBy((User) springSecurityService.currentUser)
         payment.setCode(LoanController.codeGenerator(loan.getPaymentMode().id))
         payment.setTotalPaid(new Double(params.totalPaid))
+        payment.setLoan(loan)
         paymentService.save(payment)
 
         def instalmentsJson = new JsonSlurper().parseText(params.instalments.toString())
@@ -98,5 +99,9 @@ class PaymentController {
             }
             '*'{ respond payment, [status: OK] }
         }
+    }
+
+    def _byClient(){
+        model: [loans:Loan.findAllByClient(Client.get(new Long(params.id))).sort{it.dateCreated}]
     }
 }
