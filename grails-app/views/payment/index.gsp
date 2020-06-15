@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <hr>
-                    <small>Emprestimos: <strong id="text-small-loan"></strong></small>
+                    <small>Emprestimos: <strong id="text-small-loan"></strong>&nbsp;|&nbsp;Cliente: <strong id="text-small-client"></strong></small>
                     <div id="div-all-payment" class="table-responsive mt-2">
                         <table id="payment-table" class="table table-hover table-bordered no-wrap" data-paging="true" data-paging-size="6">
                             <thead>
@@ -93,7 +93,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="div-client-payment" class="d-none">
+                    <div id="div-client-payment" class="d-none mt-2">
                         <table id="table-client-payment" class="table table-bordered no-wrap">
                             <thead>
                             <tr>
@@ -115,11 +115,13 @@
     </div>
 
     <script>
+        const clientSelect = $('#client-select');
+        const statusSelect = $('#status-select');
+
         $(function () {
             $(".select2").select2();
             $('.select2').addClass('w-100');
 
-            const statusSelect = $('#status-select');
             statusSelect.on('change',function () {
                 if($(this).val()){
                     $('#text-small-loan').text($(this).val())
@@ -136,10 +138,12 @@
 
             $('#payment-table tbody td > hr:last-child').remove();
 
-            $('#client-select').on('change',function () {
+            clientSelect.on('change',function () {
                 const id = $(this).val();
                 if(id){
-                    $('#payment-title').html('Pagamentos de <strong>'+$('#client-select option:selected').text()+'</strong>');
+                    const clientName = $('#client-select option:selected').text();
+                    $('#payment-title').html('Pagamentos de <strong>'+clientName+'</strong>');
+                    $('#text-small-client').text(clientName)
                     $("#div-all-payment").fadeOut("fast", function () {
                         $("#div-client-payment").fadeIn("fast").addClass('month-table').removeClass('d-none');
                     });
@@ -151,8 +155,10 @@
                         $("#div-all-payment").fadeIn("fast");
                         $('#div-client-payment').removeClass('month-table').addClass('d-none');
                     });
+                    $('#text-small-client').text('Todos')
                 }
             });
+            clientSelect.val('').trigger('change')
         });
         function upp() {
             if($('#table-body-client-payment tr').length === 0){
@@ -160,6 +166,10 @@
                     '<tr><td colspan="6" class="text-center">Sem pagamento registado</td></tr>'
                 )
             }
+        }
+
+        function filter() {
+
         }
     </script>
     </body>
