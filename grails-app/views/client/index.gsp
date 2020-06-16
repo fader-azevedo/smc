@@ -1,4 +1,4 @@
-<%@ page import="smc.Client" %>
+<%@ page import="smc.Loan; smc.Client" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,46 +12,201 @@
         <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
         </g:if>
-        <div class="card card-outline-success">
-            <div class="card-header pb-0 pb-lg-2">
-                <h5 class="card-title text-white"><i class="fa fa-list"></i>&nbsp;Lista de clientes
-                    <g:link class="btn btn-sm btn-light float-right waves-effect waves-light" action="create"><i class="fa fa-plus"></i>&nbsp;Registar cliente</g:link>
-                </h5>
-            </div>
+        <div class="card">
+            <div class="contact-page-aside">
+                <div class="left-aside d-flex flex-column justify-content-between h-100">
+                    <div>
+                        <ul class="list-style-none mb-3">
+                            <li class="rounded-label f-s-17">
+                                <a class="f-w-700" href="javascript:void(0)">
+                                    Clientes
+                                    <span>${Client.count}</span>
+                                </a>
+                            </li>
+                            <div class="line-title text-center mt-2 mb-3 mb-md-3">
+                                <span class="text">Filtro</span>
+                            </div>
+                            <li>
+                                <a class="filter link btn btn btn-light d-flex justify-content-between px-3"
+                                   data-status="aberto">
+                                    <span>Activos</span>
+                                    <span><g:include action="clients" params="[status: 'true']"/></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"
+                                   data-status="aberto">
+                                    <span>Inactivos</span>
+                                    <span><g:include action="clients" params="[status: 'false']"/></span>
+                                </a>
+                            </li>
+                        </ul>
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="loan-table" class="table-bordered table-hover">
-                        <thead>
-                        <tr class="text-nowrap">
-                            <th><i class="fa fa-code-branch">&nbsp;</i>Codigo</th>
-                            <th><i class="fa fa-image">&nbsp;</i>Image</th>
-                            <th style="width: 25%"><i class="fa fa-user">&nbsp;</i>Nome</th>
-                            <th style="width: 25%"><i class="fa fa-circle">&nbsp;</i>Estado cívil</th>
-                            <th style="width: 25%"><i class="fa fa-phone">&nbsp;&nbsp;</i>Contacto</th>
-                            <th style="width: 25%"><i class="fa fa-at">&nbsp;</i>Email</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <g:each in="${(List<Client>)clientList}">
-                            <tr class="" data-id="${it.id}">
-                                <td>${it.code}</td>
-                                <td>
-                                    <span class="round text-white d-inline-block text-center rounded-circle bg-info">
-                                        ${it.fullName[0]}
-                                    </span>
-                                </td>
-                                <td>${it.fullName}</td>
-                                <td>${it.maritalStatus}</td>
-                                <td>${it.contact}</td>
-                                <td>${it.email}</td>
+                        <div class="d-flex flex-column justify-content-between">
+                            <div class="form-group">
+                                <label for="filter-dueDate">Data do registo</label>
+                                <div class='input-group mb-3'>
+                                    <input type='text' class="form-control shawCalRanges f-s-13 pr-0" id="filter-dueDate"/>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <span class="ti-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <g:link controller="client" action="create" class="btn btn-rounded btn-success text-white mb-md-3">
+                        Novo cliente
+                    </g:link>
+                </div>
+
+                <div class="right-aside" style="min-height: 500px">
+                    <div class="right-page-header">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="card-title mt-2" id="payment-title">Todos clientes</h4>
+                            </div>
+
+                            <div class="col-6 d-flex py-2 justify-content-end">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-outline-light text-danger">
+                                        <i class="fa fa-file-pdf"></i>&nbsp;pdf
+                                    </button>
+                                    <button type="button" class="btn btn-outline-light text-info">
+                                        <i class="fa fa-file-word"></i>&nbsp;word
+                                    </button>
+                                    <button type="button" class="btn btn-outline-light text-megna">
+                                        <i class="fa fa-file-excel"></i>&nbsp;excel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+%{--                    <small>Cliente: <strong id="text-small-loan"></strong>&nbsp;|&nbsp;Cliente: <strong id="text-small-client"></strong></small>--}%
+                    <div class="table-responsive mt-2">
+                        <table id="client-table" class="table table-hover table-bordered no-wrap" data-paging="true" data-paging-size="6">
+                            <thead>
+                            <tr class="text-nowrap">
+                                <th class="border"></th>
+                                <th class="border">Nome</th>
+                                <th class="border">Estado cívil</th>
+                                <th class="border">Contacto</th>
+                                <th class="border">Email</th>
                             </tr>
-                        </g:each>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody id="client-table-body">
+                                <g:render template="table"/>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="right-sidebar">
+        <div class="slimscrollright">
+            <div class="rpanel-title">Detalhes
+                <span><i class="ti-close right-side-toggle"></i></span>
+            </div>
+            <div class="panel-body p-2">
+                <div class="w-100 d-flex">
+                    <div class="d-flex flex-column justify-content-center">
+                        <i class="fa fa-user fa-3x"></i>
+                    </div>
+
+                    <div class="pt-2">
+                        <br>
+
+                        <p class="text-muted pl-2" id="detail-client-name">name</p>
+                    </div>
+                </div>
+                <hr>
+                <h6 class="card-title">Código:&nbsp;<strong id="detail-code" class="float-right">33301</strong></h6>
+
+                <hr>
+                %{--            <h6 class="card-title">Pagamento</h6>--}%
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-megna">
+                        Emprestimos
+                        <span class="badge badge-pill f-w-600" id="detail-loans">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total pedido
+                        <span class="badge badge-pill f-w-600" id="detail-loans-total">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total pago
+                        <span class="badge badge-pill f-w-600" id="detail-loans-paid">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Dívida
+                        <span class="badge badge-pill f-w-600" id="detail-loans-not-paid">2</span>
+                    </li>
+                </ul>
+
+                <div id="div-auth" class="d-">
+                    <hr>
+                    <small class="text-muted">Registado por</small>
+                    <h6 id="detail-createdBy">Fader</h6>
+                    <small class="text-muted pt-2 d-block">Registado em</small>
+                    <h6 id="detail-dateCreated">20/12/2019 13:09</h6>
+
+                    <small class="text-muted pt-2 d-block">Última alteração</small>
+                    <h6 id="detail-lastUpdated">20/12/2019 13:09</h6>
+                    <small class="text-muted pt-2 d-block">Alterado por</small>
+                    <h6 id="detail-updatedBy">20/12/2019 13:09</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#li-clients').addClass('active');
+            $('table tbody td').addClass('align-middle');
+
+            $('#client-table').footable();
+
+            $(".select2").select2();
+            $('.select2').addClass('w-100');
+
+            $(document).on('click', '.btn-details', function () {
+                const id = $(this).attr('data-id');
+                <g:remoteFunction controller="client" action="getDetails" params="{'id':id}" onSuccess="updateDetails(data)"/>
+                const isOpen = $('.shw-rside').length;
+
+                if (isOpen === 1) {
+                    console.log('update');
+                } else {
+                    console.log('first');
+                    $(".right-sidebar").slideDown(50).toggleClass("shw-rside");
+                }
+                $('#client-table tbody tr').removeClass('bg-light-info');
+                $('#tr-'+id).addClass('bg-light-info');
+            });
+        })
+
+
+        function updateDetails(data) {
+            const client = data.client;
+
+            $('#detail-client-name').text(client.fullName);
+            $('#detail-code').text(client.code);
+
+            // payment
+            $('#detail-loans').text(data.loans);
+            $('#detail-loans-total').text(formatValue(data.totalBorrowed));
+            $('#detail-loans-paid').text(formatValue(data.totalPaid));
+
+            $('#detail-createdBy').text(data.createdBy);
+            $('#detail-updatedBy').text(data.updatedBy);
+            $('#detail-dateCreated').text(formatDate(client.dateCreated));
+            $('#detail-lastUpdated').text(formatDate(client.lastUpdated));
+
+        }
+
+    </script>
     </body>
 </html>

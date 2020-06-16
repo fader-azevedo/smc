@@ -19,55 +19,64 @@
         <div class="contact-page-aside">
             <div class="left-aside d-flex flex-column justify-content-between h-100">
                 <div>
-                <ul class="list-style-none">
-                    <li class="rounded-label f-s-17">
-                        <a class="f-w-700" href="javascript:void(0)">
-                            Empréstimos
-                            <span>
-                                <g:include action="loans"/>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="divider mt-3"></li>
-                    <li>
-                        <a class="filter link" data-status="aberto">Abertos <span>
-                            <g:include action="loans" params="[status: 'aberto']"/></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="filter link" data-status="vencido">Vencidos <span>
-                            <g:include action="loans" params="[status: 'vencido']"/></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="filter link" data-status="fechado">Fechados <span>
-                            <g:include action="loans" params="[status: 'fechado']"/></span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="line-title text-center mb-4 mb-md-4">
-                    <span class="text">Filtro</span>
-                </div>
-                <div class="d-flex flex-column justify-content-between">
-                    <div class="form-group">
-                        <label for="filter-client">Cliente</label>
-                        <g:select class="select2" name="filter-client"
-                                  from="${Client.all.sort{it.fullName.toUpperCase()}}" optionKey="id" optionValue="fullName"
-                                  noSelection="${['':'Todos']}"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="filter-dueDate">Prazo</label>
-                        <div class='input-group mb-3'>
-                            <input type='text' class="form-control shawCalRanges f-s-13 pr-0" id="filter-dueDate"/>
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <span class="ti-calendar"></span>
+                    <ul class="list-style-none mb-3">
+                        <li class="rounded-label f-s-17">
+                            <a class="f-w-700" href="javascript:void(0)">
+                                Empréstimos
+                                <span>
+                                    <g:include action="loans"/>
                                 </span>
+                            </a>
+                        </li>
+                        <div class="line-title text-center mt-2 mb-3 mb-md-3">
+                            <span class="text">Filtro</span>
+                        </div>
+                        <li>
+                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3"
+                               data-status="aberto">
+                                <span>Abertos</span>
+                                <span><g:include action="loans" params="[status: 'aberto']"/></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"
+                               data-status="vencido">
+                                <span>Vencidos</span>
+                                <span><g:include action="loans" params="[status: 'vencido']"/></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"
+                               data-status="fechado">
+                                <span>Fechados</span>
+                                <span><g:include action="loans" params="[status: 'fechado']"/></span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex flex-column justify-content-between">
+                        <div class="form-group">
+                            <label for="filter-client">Cliente</label>
+                            <g:select class="select2" name="filter-client"
+                                      from="${Client.all.sort { it.fullName.toUpperCase() }}" optionKey="id"
+                                      optionValue="fullName"
+                                      noSelection="${['': 'Todos']}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="filter-dueDate">Prazo</label>
+
+                            <div class='input-group mb-3'>
+                                <input type='text' class="form-control shawCalRanges f-s-13 pr-0" id="filter-dueDate"/>
+
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <span class="ti-calendar"></span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <g:link controller="loan" action="create"
                         class="btn btn-rounded btn-success text-white mb-md-3">Novo empréstimo</g:link>
@@ -77,10 +86,12 @@
                 <div class="right-page-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="card-title mt-2">Empréstimos <span id="loan-title" class="f-w-600">abertos</span></h4>
+                            <h4 class="card-title mt-2">Empréstimos <span id="loan-title" class="f-w-600">abertos</span>
+                            </h4>
                         </div>
-                        <div class="col-6 dialogFooter d-flex justify-content-end">
-                            <div class="btn-group  w-75" role="group" aria-label="Basic example">
+
+                        <div class="col-6 d-flex py-2 justify-content-end">
+                            <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-outline-light text-danger">
                                     <i class="fa fa-file-pdf"></i>&nbsp;pdf
                                 </button>
@@ -97,19 +108,20 @@
                 <hr>
 
                 <div class="table-responsive">
-                    <table id="loan-table" class="table table-hover table-bordered no-wrap" data-paging="true" data-paging-size="6">
+                    <table id="loan-table" class="table table-hover table-bordered no-wrap" data-paging="true"
+                           data-paging-size="6">
                         <thead>
                         <tr class="border f-w-700">
-                            <th class="border">Accoes</th>
+                            <th class="border"></th>
                             <th class="border">Cliente</th>
                             <th class="border">C.Inicial</th>
-                            <th class="border">Juros</th>
+                            <th class="border">Juros(%)</th>
                             <th class="border">V. pagar</th>
                             <th class="border">Prazo</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <g:render template="table"/>
+                        <g:render template="table"/>
                         </tbody>
                         <tfoot id="loan-footer">
 
@@ -124,11 +136,11 @@
 
 <div class="right-sidebar">
     <div class="slimscrollright">
-        <div class="rpanel-title">Detalhes<span><i class="ti-close right-side-toggle"></i></span>
+        <div class="rpanel-title">Detalhes
+            <span><i class="ti-close right-side-toggle"></i></span>
         </div>
 
         <div class="panel-body p-2">
-
             <div class="w-100 d-flex">
                 <div class="d-flex flex-column justify-content-center">
                     <i class="fa fa-user fa-3x"></i>
@@ -144,12 +156,13 @@
             <h6 class="card-title d-none">Código:&nbsp;<strong id="detail-code" class="float-right">33301</strong></h6>
             <h6 class="card-title">Contracto:&nbsp;
                 <span class="float-right">
-                    <a class="link"><i class="fa fa-file-word text-info">&nbsp;</i><strong id="detail-contract"></strong></a>
+                    <a class="link"><i class="fa fa-file-word text-info">&nbsp;</i><strong
+                            id="detail-contract"></strong></a>
                 </span>
             </h6>
 
             <hr>
-%{--            <h6 class="card-title">Pagamento</h6>--}%
+            %{--            <h6 class="card-title">Pagamento</h6>--}%
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Valor pedido
@@ -187,16 +200,17 @@
                     <span class="text-danger" id="detail-installment-pend">1</span>
                 </li>
             </ul>
+
             <div id="div-auth" class="d-none">
                 <hr>
                 <small class="text-muted">Registado por</small>
                 <h6 id="detail-createdBy"></h6>
-                <small class="text-muted pt-3 d-block">Registado em</small>
+                <small class="text-muted pt-2 d-block">Registado em</small>
                 <h6 id="detail-dateCreated">20/12/2019 13:09</h6>
 
-                <small class="text-muted pt-4 d-block">Última alteração</small>
+                <small class="text-muted pt-2 d-block">Última alteração</small>
                 <h6 id="detail-lastUpdated">20/12/2019 13:09</h6>
-                <small class="text-muted pt-4 d-block">Alterado por</small>
+                <small class="text-muted pt-2 d-block">Alterado por</small>
                 <h6 id="detail-updatedBy">20/12/2019 13:09</h6>
             </div>
         </div>
@@ -239,17 +253,17 @@
                 $(".right-sidebar").slideDown(50).toggleClass("shw-rside");
             }
             $('#loan-table tbody tr').removeClass('bg-light-info');
-            $('#tr-'+id).addClass('bg-light-info');
+            $('#tr-' + id).addClass('bg-light-info');
         });
         // close details panel
-        $('.ti-close').on('click',function () {
+        $('.ti-close').on('click', function () {
             $('#loan-table tbody tr').removeClass('bg-light-info');
         });
 
         $('#loan-table').footable();
-        $('.filter').on('click',function () {
+        $('.filter').on('click', function () {
             const status = $(this).attr('data-status');
-            $('#loan-title').text(status+'s');
+            $('#loan-title').text(status + 's');
             <g:remoteFunction action="filter" params="{'status':status}" onSuccess="updateTable(data)"/>
         });
     });
@@ -271,7 +285,7 @@
 
         $('#detail-client-name').text(client.fullName);
         $('#detail-code').text(loan.code);
-        $('#detail-contract').text(loan.code+'.docx');
+        $('#detail-contract').text(loan.code + '.docx');
         $('#detail-installment-all').text(data.instAll);
         $('#detail-installment-payed').text(data.instPayed);
         $('#detail-installment-pend').text(data.instPend);
@@ -288,15 +302,6 @@
         $('#detail-updatedBy').text(data.updatedBy);
         $('#detail-dateCreated').text(formatDate(loan.dateCreated));
         $('#detail-lastUpdated').text(formatDate(loan.lastUpdated));
-
-        function formatDate(createdDate) {
-            const date = new Date(createdDate);
-            let month = (date.getMonth()+1);
-            if(month.toString().length === 1){
-                month = '0'+month
-            }
-            return date.getDate()+'/'+month+'/'+date.getFullYear()+'  '+date.getUTCHours()+':'+date.getMinutes();
-        }
     }
 </script>
 </body>

@@ -153,3 +153,12 @@ $.fn.datepicker.dates['pt'] = {
 function formatValue(value) {
 	return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace(/.([^.]*)$/, ',$1')
 }
+
+function formatDate(createdDate) {
+	const date = new Date(createdDate);
+	let month = (date.getMonth()+1);
+	if(month.toString().length === 1){
+		month = '0'+month
+	}
+	return date.getDate()+'/'+month+'/'+date.getFullYear()+'  '+date.getUTCHours()+':'+date.getMinutes();
+}

@@ -34,6 +34,6 @@
 <script>
     $('.tr-all .number-format').each(function () {
         const value = parseFloat($(this).text());
-        $(this).text(formatValue(value))
+        $(this).text(formatValue(value)).addClass('text-right')
     });
 </script>

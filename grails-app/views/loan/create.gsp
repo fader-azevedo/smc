@@ -259,6 +259,13 @@
         </div>
     </div>
 
+    <g:if test="${params.client}">
+        <script>
+            const idd = '${params.client}';
+            $('#client').val(idd).trigger('change');
+        </script>
+    </g:if>
+
     <div id="client-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="client-modalLabel" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
@@ -401,7 +408,6 @@
                 }
 
                 const newDueDate = dueDate.getDate() + '/' + dueDate.getMonth() + '/' + dueDate.getFullYear();
-
                 $('#dueDate').datepicker('update',newDueDate)
             }
         }
@@ -452,7 +458,6 @@
                 title: 'Data de pagamento',
             });
 
-
             payDate.datepicker().on('changeDate',function () {
                 returnDueDate();
             });
@@ -471,7 +476,7 @@
                 weekStart: 1,
                 title: 'Data de assinatura',
             });
-           signatureDate.datepicker('setDate',new Date());
+            signatureDate.datepicker('setDate',new Date());
 
             $("#dynamic-form-guarantee").dynamicForm("#dynamic-form-guarantee", "#plus-guarantee", "#minus-guarantee", {
                 limit: 3,

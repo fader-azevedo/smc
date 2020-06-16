@@ -102,4 +102,21 @@ class ClientController {
     def getClient(){
         render([client:Client.findByFullName(params.name.toString())] as JSON)
     }
+
+    def getDetails(){
+        def client = Client.get(new Long(params.id))
+        def totalPaid = 0
+        def totalBorrowed = 0
+        client.loans.each {
+            totalPaid += LoanController.getValuePaid(Instalment.findAllByLoanAndStatus(it,'Pago'))
+            totalBorrowed+= it.borrowedAmount
+        }
+        render([loans:client.loans.size(), client:client,totalBorrowed:totalBorrowed,totalPaid:totalPaid,
+                createdBy:client.createdBy.fullName, updatedBy: client.updatedBy.fullName
+        ] as JSON)
+    }
+
+    def clients(){
+        render(Client.findAllByEnabled(new Boolean(params.status)).size())
+    }
 }

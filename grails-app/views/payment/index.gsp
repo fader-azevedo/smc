@@ -1,209 +1,246 @@
 <%@ page import="smc.Loan; smc.Payment; smc.Client" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <title>
-            Pagamentos
-        </title>
-    </head>
-    <body>
+<head>
+    <meta name="layout" content="main"/>
+    <title>
+        Pagamentos
+    </title>
+</head>
 
-    <div class="col-12">
-        <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-        </g:if>
+<body>
 
-        <div class="card">
-            <div class="contact-page-aside">
-                <div class="left-aside">
-                    <ul class="list-style-none">
-                        <li class="rounded-label f-s-17">
-                            <a class="f-w-700" href="javascript:void(0)">
-                                Pagamentos
-                                <span>
-                                    <g:include action="loans"/>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="divider mt-3"></li>
-                        <li>
-                            <a class="filter link" data-status="aberto">Todos
-                                <span>${Payment.count}</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="line-title text-center mb-4 mb-md-4">
+<div class="col-12">
+    <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
+
+    <div class="card">
+        <div class="contact-page-aside">
+            <div class="left-aside">
+                <ul class="list-style-none">
+                    <li class="rounded-label f-s-17">
+                        <a class="f-w-700" href="javascript:void(0)">
+                            Pagamentos
+                            <span>${Payment.count}</span>
+                        </a>
+                    </li>
+                    <div class="line-title text-center mt-2 mb-3 mb-md-3">
                         <span class="text">Filtro</span>
                     </div>
-                    <div class="form-group">
-                        <label for="client-select">Estado do Emprestimo</label>
-                        <g:select class="select2" name="status-select"
-                                  from="${Loan.constrainedProperties.status.inList}"
-                                  noSelection="${['':'Todos']}"
-                        />
+                </ul>
+
+                <div class="form-group">
+                    <label for="status-select">Estado do Emprestimo</label>
+                    <select class="select2" name="status-select" id="status-select">
+                        <option value="">Todos</option>
+                        <g:each in="${Loan.constrainedProperties.status.inList}">
+                            <g:if test="${it.toString().equalsIgnoreCase('aberto')}">
+                                <option value="${it}" selected>${it}</option>
+                            </g:if>
+                            <g:else>
+                                <option value="${it}">${it}</option>
+                            </g:else>
+                        </g:each>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="client-select">Cliente</label>
+                    <g:select class="select2" name="client-select"
+                              from="${Client.all.sort { it.fullName.toUpperCase() }}" optionKey="id"
+                              optionValue="fullName"
+                              noSelection="${['': 'Todos']}"/>
+                </div>
+
+                <div class="form-group" id="div-createdDate">
+                    <label for="filter-createdDate">Data</label>
+                    <div class='input-group mb-3'>
+                        <input type='text' class="form-control shawCalRanges f-s-13 pr-0" id="filter-createdDate"/>
+
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <span class="ti-calendar"></span>
+                            </span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="client-select">Cliente</label>
-                        <g:select class="select2" name="client-select"
-                                  from="${Client.all.sort{it.fullName.toUpperCase()}}" optionKey="id" optionValue="fullName"
-                                  noSelection="${['':'Todos']}"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="filter-createdDate">Data</label>
-                        <div class='input-group mb-3'>
-                            <input type='text' class="form-control shawCalRanges f-s-13 pr-0" id="filter-createdDate"/>
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <span class="ti-calendar"></span>
-                                </span>
+                </div>
+            </div>
+
+            <div class="right-aside" style="min-height: 500px">
+                <div class="right-page-header">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="card-title mt-2" id="payment-title">Todos pagamentos</h4>
+                        </div>
+
+                        <div class="col-6 d-flex py-2 justify-content-end">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-light text-danger">
+                                    <i class="fa fa-file-pdf"></i>&nbsp;pdf
+                                </button>
+                                <button type="button" class="btn btn-outline-light text-info">
+                                    <i class="fa fa-file-word"></i>&nbsp;word
+                                </button>
+                                <button type="button" class="btn btn-outline-light text-megna">
+                                    <i class="fa fa-file-excel"></i>&nbsp;excel
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr>
+                <small>Emprestimos: <strong id="text-small-loan">Aberto</strong>&nbsp;|&nbsp;Cliente: <strong
+                        id="text-small-client"></strong></small>
 
-                <div class="right-aside" style="min-height: 500px">
-                    <div class="right-page-header">
-                        <div class="row">
-                            <div class="col-6">
-                                <h4 class="card-title mt-2" id="payment-title">Todos pagamentos</h4>
-                            </div>
+                <div id="div-all-payment" class="table-responsive mt-2">
+                    <table id="payment-table" class="table table-hover table-bordered no-wrap" data-paging="true"
+                           data-paging-size="6">
+                        <thead>
+                        <tr class="border f-w-700">
+                            <th class="border">Total pago</th>
+                            <th class="border">Valor pago</th>
+                            <th class="border px-3">Prestação</th>
+                            <th class="border">F.pagamento</th>
+                            <th class="border">Data</th>
+                            <th class="border">Recibo</th>
+                            <th class="border">Cliente</th>
+                        </tr>
+                        </thead>
+                        <tbody id="payment-table-body">
+                        <g:render template="all"/>
+                        </tbody>
+                    </table>
+                </div>
 
-                            <div class="col-6 dialogFooter d-flex justify-content-end">
-                                <div class="btn-group  w-75" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-outline-light text-danger">
-                                        <i class="fa fa-file-pdf"></i>&nbsp;pdf
-                                    </button>
-                                    <button type="button" class="btn btn-outline-light text-info">
-                                        <i class="fa fa-file-word"></i>&nbsp;word
-                                    </button>
-                                    <button type="button" class="btn btn-outline-light text-megna">
-                                        <i class="fa fa-file-excel"></i>&nbsp;excel
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <small>Emprestimos: <strong id="text-small-loan"></strong>&nbsp;|&nbsp;Cliente: <strong id="text-small-client"></strong></small>
-                    <div id="div-all-payment" class="table-responsive mt-2">
-                        <table id="payment-table" class="table table-hover table-bordered no-wrap" data-paging="true" data-paging-size="6">
-                            <thead>
-                            <tr class="border f-w-700">
-                                <th class="border">Total pago</th>
-                                <th class="border">Valor pago</th>
-                                <th class="border px-3">Prestação</th>
-                                <th class="border">F.pagamento</th>
-                                <th class="border">Data</th>
-                                <th class="border">Recibo</th>
-                                <th class="border">Cliente</th>
-                            </tr>
-                            </thead>
-                            <tbody id="payment-table-body">
-                               <g:render template="all"/>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="div-client-payment" class="d-none mt-2">
-                        <table id="table-client-payment" class="table table-bordered no-wrap">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th>C.inicial</th>
-                                <th>Totl a pagar</th>
-                                <th>Total pago</th>
-                                <th>Estado</th>
-                            </tr>
-                            </thead>
-                            <tbody id="table-body-client-payment">
-                            </tbody>
-                        </table>
-                    </div>
+                <div id="div-client-payment" class="d-none mt-2">
+                    <table id="table-client-payment" class="table table-bordered no-wrap">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>C.inicial</th>
+                            <th>Totl a pagar</th>
+                            <th>Total pago</th>
+                            <th>Estado</th>
+                        </tr>
+                        </thead>
+                        <tbody id="table-body-client-payment">
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        const clientSelect = $('#client-select');
-        const statusSelect = $('#status-select');
-        let whoIsShow;
-        $(function () {
-            $(".select2").select2();
-            $('.select2').addClass('w-100');
+<script>
+    const clientSelect = $('#client-select');
+    const statusSelect = $('#status-select');
+    const createdDateSelect =$('#filter-createdDate');
+    let whoIsShow;
+    let dateOne;
+    let dateTwo;
+    $(function () {
+        $(".select2").select2();
+        $('.select2').addClass('w-100');
 
-            $('#filter-createdDate').daterangepicker({
+        createdDateSelect.daterangepicker(
+            {
                 ranges: {
-                    'Hoje': [moment(), moment()],
-                    'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Últimos 7 dias': [moment().subtract(6, 'days'), moment()],
-                    'Últimos 30 dias': [moment().subtract(29, 'days'), moment()],
+                    'Todos': [moment().subtract(73000, 'days'), moment().add(36500, 'days')],
+                    'Hoje': [moment(), moment().add(1,'days')],
+                    'Ontem': [moment().subtract(1, 'days'), moment()],
+                    'Últimos 7 dias': [moment().subtract(6, 'days'), moment().add(1,'days')],
+                    'Últimos 30 dias': [moment().subtract(29, 'days'), moment().add(1,'days')],
                     'Este Mês': [moment().startOf('month'), moment().endOf('month')],
-                    'Último Mês': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    'Mês Passado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
                 },
+                locale: {
+                    applyLabel: "Aplicaor",
+                    cancelLabel: 'Cancelar',
+                    startLabel: 'Date initiale',
+                    endLabel: 'Date limite',
+                    customRangeLabel: 'Customizar',
+                    daysOfWeek: ['Do', 'Seg', 'Te', 'Qu', 'Qu', 'Se', 'Sa'],
+                    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    firstDay: 1,
+                    format: 'DD/MM/YYYY',
+                },
+                startDate: moment().subtract(73000, 'days'),
+                endDate: moment().add(36500, 'days'),
+                showDropdowns: true,
+
                 // alwaysShowCalendars: true,
-            });
-
-            statusSelect.on('change',function () {
-                if($(this).val()){
-                    $('#text-small-loan').text($(this).val())
-                }else{
-                    $('#text-small-loan').text('Todos')
-                }
+            }, function (start, end) {
+                dateOne = start.format('DD/MM/YYYY').trim();
+                dateTwo = end.format('DD/MM/YYYY').trim();
+                $(this).val('');
                 filter()
-            });
-            statusSelect.val('Aberto').trigger('change');
+            }
+        );
 
-            $('#payment-table tbody td > hr:last-child').remove();
-
-            clientSelect.on('change',function () {
-                const id = $(this).val();
-                const clientName = $('#client-select option:selected').text();
-                $('#text-small-client').text(clientName);
-
-                if(id){
-                    $('#payment-title').html('Pagamentos de <strong>'+clientName+'</strong>');
-                    $("#div-all-payment").fadeOut("fast", function () {
-                        $("#div-client-payment").fadeIn("fast").addClass('month-table').removeClass('d-none');
-                        whoIsShow = 'client';
-                        filter();
-                    });
-                }else{
-                    $('#payment-title').text('Todos pagamentos');
-                    $("#div-client-payment").fadeOut("fast", function () {
-                        $("#div-all-payment").fadeIn("fast");
-                        $('#div-client-payment').removeClass('month-table').addClass('d-none');
-                        whoIsShow = 'all';
-                    });
-                }
-
-            });
-            clientSelect.val('').trigger('change')
+        statusSelect.on('change', function () {
+            filter()
         });
-        function upp() {
-            if($('#table-body-client-payment tr').length === 0){
-                $('#table-body-client-payment').html(
-                    '<tr><td colspan="6" class="text-center">Sem pagamento registado</td></tr>'
-                )
+
+        $('#payment-table tbody td > hr:last-child').remove();
+
+        clientSelect.on('change', function () {
+            const id = $(this).val();
+            const clientName = $('#client-select option:selected').text();
+            $('#text-small-client').text(clientName);
+
+            if (id) {
+                $('#payment-title').html('Pagamentos de <strong>' + clientName + '</strong>');
+                $("#div-all-payment").fadeOut("fast", function () {
+                    $("#div-client-payment").fadeIn("fast").addClass('month-table').removeClass('d-none');
+                    whoIsShow = 'client';
+                    $('#div-createdDate').fadeOut('slow').addClass('d-none');
+                    filter();
+                });
+            } else {
+                $('#payment-title').text('Todos pagamentos');
+                $("#div-client-payment").fadeOut("fast", function () {
+                    $("#div-all-payment").fadeIn("fast");
+                    $('#div-client-payment').removeClass('month-table').addClass('d-none');
+                    whoIsShow = 'all';
+                    $('#div-createdDate').fadeIn('slow').removeClass('d-none');
+                });
             }
+        });
+        // clientSelect.val('').trigger('change')
+    });
+
+    function upp() {
+        if ($('#table-body-client-payment tr').length === 0) {
+            $('#table-body-client-payment').html(
+                '<tr><td colspan="6" class="text-center">Sem pagamento registado</td></tr>'
+            )
+        }
+    }
+
+    function filter() {
+        const status_ = statusSelect.val();
+        const client_ = clientSelect.val();
+
+        if (status_) {
+            $('#text-small-loan').text(status_)
+        } else {
+            $('#text-small-loan').text('Todos')
         }
 
-        function filter() {
-            const status_ = statusSelect.val();
-            const client_ = clientSelect.val();
-            if(whoIsShow === 'client' && client_){
-                <g:remoteFunction action="_byClient" params="{'id':client_,'status':status_}" update="table-body-client-payment" onSuccess="upp(data)"/>
-            }else{
-                <g:remoteFunction action="_filterPaymentByLoanStatus" params="{'status':status_}" update="payment-table-body" onSuccess="updateAll()"/>
-            }
+        if (whoIsShow === 'client' && client_) {
+            <g:remoteFunction action="_byClient" params="{'id':client_,'status':status_}" update="table-body-client-payment" onSuccess="upp(data)"/>
+        } else {
+            <g:remoteFunction action="_filterPaymentByLoanStatus" params="{'status':status_,'dateOne':dateOne,'dateTwo':dateTwo}" update="payment-table-body" onSuccess="updateAll()"/>
         }
-        
-        function updateAll() {
-            $('#payment-table tbody td > hr:last-child').remove();
-            $('table tbody td').addClass('align-middle');
-        }
-    </script>
-    </body>
+    }
+
+    function updateAll() {
+        $('#payment-table tbody td > hr:last-child').remove();
+        $('table tbody td').addClass('align-middle');
+    }
+</script>
+</body>
 </html>

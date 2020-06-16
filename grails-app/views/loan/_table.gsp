@@ -4,9 +4,8 @@
         <td>
             <div class="d-flex justify-content-center">
                 <button class="btn btn-sm btn-secondary btn-details mr-3" data-id="${it.id}">
-                    <i class="fa fa-eye">&nbsp;</i>Info
+                    <i class="fa fa-info">&nbsp;</i>Detalhes
                 </button>
-
 
                 <g:if test="${it.status.equalsIgnoreCase('fechado')}">
                     <g:form controller="payment" action="create">
@@ -27,25 +26,28 @@
             </div>
         </td>
         <td>
-
-            <g:link controller="client" action="show" id="${it.client.id}">
-                <span class="round rounded-circle d-inline-block text-center bg-light-extra" style="border: 3px solid #84dbe2">
-                    ${it.client.fullName[0]}
+            <g:link controller="client" action="show" class="d-flex" id="${it.client.id}">
+                <span class="round rounded-circle d-flex flex-column justify-content-center bg-light-extra" style="border: 3px solid #84dbe2">
+                    <span class="w-100 text-center">
+                        ${it.client.fullName[0]}
+                    </span>
                 </span>
-                ${it.client.fullName}
+                <span class="d-flex flex-column justify-content-center ml-2">
+                    ${it.client.fullName}
+                </span>
             </g:link>
         </td>
         <td class="number-format">${it.borrowedAmount}</td>
-        <td class=""><g:formatNumber number="${it.interestRate}"/></td>
+        <td class="text-right"><g:formatNumber number="${it.interestRate}"/></td>
         <td class="number-format">${it.amountPayable}</td>
-        <td><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
+        <td class="text-center"><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
     </tr>
 </g:each>
 
 <script>
     $('.number-format').each(function () {
         const value = parseFloat($(this).text());
-        $(this).text(formatValue(value))
+        $(this).text(formatValue(value)).addClass('text-right')
     });
 </script>
 

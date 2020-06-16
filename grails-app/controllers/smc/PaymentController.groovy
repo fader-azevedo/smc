@@ -21,6 +21,7 @@ class PaymentController {
             loan{
                 eq('status','aberto')
             }
+            order('dateCreated')
         }
         model:[paymentList: paymentList]
     }
@@ -120,6 +121,17 @@ class PaymentController {
 
     def _filterPaymentByLoanStatus(){
         def status = params.status.toString().trim()
+        def dateOne = params.dateOne
+        def dateTwo = params.dateTwo
+
+        if (dateOne){
+            dateOne = new Date().parse("dd/MM/yyy",dateOne.toString())
+        }
+        if (dateTwo){
+            dateTwo = new Date().parse("dd/MM/yyy",dateTwo.toString())
+        }
+//        println('dateOne: '+dateOne)
+//        println('dateTwo: '+dateTwo)
 
         def paymentList = Payment.createCriteria().list {
             if(status){
@@ -127,7 +139,11 @@ class PaymentController {
                     eq('status',status)
                 }
             }
-        }as List<Payment>
+            if (dateOne && dateTwo) {
+                between("dateCreated", dateOne, dateTwo)
+            }
+            order('dateCreated','asc')
+        } as List<Payment>
         render(template: 'all',model: [paymentList: paymentList])
     }
 

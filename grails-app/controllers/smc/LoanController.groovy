@@ -244,7 +244,7 @@ class LoanController {
         render(valuePaid)
     }
 
-    def getValuePaid(paidInstallment){
+    def static getValuePaid(paidInstallment){
         def amountPaid = 0.0
         paidInstallment.each {installment->
             if(installment.instalments){

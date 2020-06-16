@@ -53,7 +53,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <g:each in="${it.payments}" var="payment">
+                                <g:each in="${it.payments.sort{it.dateCreated}}" var="payment">
                                     <tr class="tr-inside">
                                         <td class="number-format">${payment.totalPaid}</td>
                                         <% def ip = payment.getInstalmentPayments(); def ipSize = ip.size() %>
@@ -105,10 +105,9 @@
         $('#tr-' + id).addClass('bg-light-info');
     }
 
-
     $('.tr-inside .number-format').each(function () {
         const value = parseFloat($(this).text());
-        $(this).text(formatValue(value))
+        $(this).text(formatValue(value)).addClass('text-right')
     });
 
     $('.table-inside tbody td > hr:last-child').remove();
