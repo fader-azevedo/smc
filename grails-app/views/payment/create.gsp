@@ -278,7 +278,6 @@
             });
         }
 
-
         function updateDetails(data) {
             const loan = data.loan;
             const client = data.client;
@@ -319,7 +318,6 @@
             })
         }
     </script>
-
 </g:if>
 <g:else>
     <script>

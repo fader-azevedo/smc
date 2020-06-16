@@ -91,11 +91,11 @@
                 </div>
                 <hr>
                 <small>Emprestimos: <strong id="text-small-loan">Aberto</strong>&nbsp;|&nbsp;Cliente: <strong
-                        id="text-small-client"></strong></small>
+                        id="text-small-client">Todos</strong></small>
 
                 <div id="div-all-payment" class="table-responsive mt-2">
                     <table id="payment-table" class="table table-hover table-bordered no-wrap" data-paging="true"
-                           data-paging-size="6">
+                           data-paging-size="4">
                         <thead>
                         <tr class="border f-w-700">
                             <th class="border">Total pago</th>
@@ -144,6 +144,8 @@
     $(function () {
         $(".select2").select2();
         $('.select2').addClass('w-100');
+        $('#payment-table tbody td > hr:last-child').remove();
+        $('#payment-table').footable();
 
         createdDateSelect.daterangepicker(
             {
@@ -184,15 +186,11 @@
             filter()
         });
 
-        $('#payment-table tbody td > hr:last-child').remove();
-
         clientSelect.on('change', function () {
             const id = $(this).val();
-            const clientName = $('#client-select option:selected').text();
-            $('#text-small-client').text(clientName);
 
             if (id) {
-                $('#payment-title').html('Pagamentos de <strong>' + clientName + '</strong>');
+                $('#payment-title').html('Pagamentos de <strong>' + $('#client-select option:selected').text() + '</strong>');
                 $("#div-all-payment").fadeOut("fast", function () {
                     $("#div-client-payment").fadeIn("fast").addClass('month-table').removeClass('d-none');
                     whoIsShow = 'client';
@@ -223,6 +221,8 @@
     function filter() {
         const status_ = statusSelect.val();
         const client_ = clientSelect.val();
+        const clientName = $('#client-select option:selected').text();
+        $('#text-small-client').text(clientName);
 
         if (status_) {
             $('#text-small-loan').text(status_)
@@ -238,6 +238,8 @@
     }
 
     function updateAll() {
+        $('#payment-table').footable();
+
         $('#payment-table tbody td > hr:last-child').remove();
         $('table tbody td').addClass('align-middle');
     }

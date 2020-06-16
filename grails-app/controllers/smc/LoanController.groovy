@@ -17,7 +17,7 @@ class LoanController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        model:[loanCount: loanService.count(),loanList: Loan.findAllByStatus('aberto')]
+        model:[loanCount: loanService.count(),loanList: Loan.findAllByStatus('aberto').sort{it.dateCreated}.reverse()]
     }
 
     def show(Long id) {
@@ -271,7 +271,7 @@ class LoanController {
     }
 
     def filter(){
-        def loanList = Loan.findAllByStatus(params.status.toString())
+        def loanList = Loan.findAllByStatus(params.status.toString()).sort{it.dateCreated}.reverse()
         render(template: 'table',model: [loanList:loanList])
     }
 }

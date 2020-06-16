@@ -234,6 +234,12 @@
                         </g:link>
                     </li>
                     <li>
+                        <a class="waves-effect waves-dark" href="#" aria-expanded="false">
+                            <i class="mdi mdi-chart-line"></i>
+                            <span class="hide-menu">Estatística</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-table"></i><span class="hide-menu">Relátorios</span></a>
                         <ul aria-expanded="false" class="collapse">

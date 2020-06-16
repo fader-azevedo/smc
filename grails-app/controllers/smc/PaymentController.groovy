@@ -12,6 +12,7 @@ class PaymentController {
 
     PaymentService paymentService
     InstalmentService instalmentService
+    LoanService loanService
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -21,7 +22,7 @@ class PaymentController {
             loan{
                 eq('status','aberto')
             }
-            order('dateCreated')
+            order('dateCreated','desc')
         }
         model:[paymentList: paymentList]
     }
@@ -76,6 +77,12 @@ class PaymentController {
             }
             instalment.addToInstalmentPayments(instalmentPayment)
             instalmentService.save(instalment)
+        }
+
+        if(Instalment.findAllByLoanAndStatus(loan,'Pendente').size() == 0){
+            loan.setStatus('Fechado')
+            loanService.save(loan)
+            println('emprestimo '+loan.code+' closed')
         }
 
         render('saved')
@@ -142,7 +149,7 @@ class PaymentController {
             if (dateOne && dateTwo) {
                 between("dateCreated", dateOne, dateTwo)
             }
-            order('dateCreated','asc')
+            order('dateCreated','desc')
         } as List<Payment>
         render(template: 'all',model: [paymentList: paymentList])
     }

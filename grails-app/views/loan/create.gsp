@@ -41,9 +41,9 @@
             </div>
         </g:hasErrors>
 
-        <div class="card card-outline-success shadow">
-            <div class="card-header pb-0 pb-lg-0">
-                <h5 class="card-title text-white"><i class="fa fa-pencil-alt"></i>&nbsp;Registar Empréstimo</h5>
+        <div class="card shadow">
+            <div class="card-header pb-0 pb-lg-0 bg-light">
+                <h5 class="card-title"><i class="fa fa-pencil-alt"></i>&nbsp;Registar empréstimo</h5>
             </div>
 
             <g:form resource="${this.loan}" method="POST" class="wizard" autocomplete="off">
@@ -370,12 +370,16 @@
 
             if(borrowedAmount && interestRate && instalmentsNumber && paymentMode){
                 const amountPayable = borrowedAmount + borrowedAmount * interestRate;
-                amountPayableINPUT.val(formatValue(amountPayable));
-                amountPayableHidden.val(amountPayable);
+                // amountPayableINPUT.val(formatValue(amountPayable));
+                // amountPayableHidden.val(amountPayable);
 
                 const amountPerInstalment = amountPayable / instalmentsNumber;
                 amountPerInstalmentINPUT.val(formatValue(amountPerInstalment));
                 amountPerInstalmentHidden.val(amountPerInstalment.toFixed(2));
+
+                const newAmountPayable = amountPerInstalment.toFixed(2)*instalmentsNumber;
+                amountPayableINPUT.val(formatValue(newAmountPayable));
+                amountPayableHidden.val(newAmountPayable);
                 returnDueDate()
             }else{
                 amountPayableINPUT.val(0);
@@ -396,9 +400,9 @@
                 if (paymentMode === 'diaria') {
                     dueDate.setDate(dueDate.getDate() + instalmentsNumber - 1);
                 } else if (paymentMode === 'semanal') {
-                    dueDate.setDate(dueDate.getDate() + 7 * instalmentsNumber);
+                    dueDate.setDate(dueDate.getDate() + 7 * (instalmentsNumber-1));
                 } else if (paymentMode === 'quinzenal') {
-                    dueDate.setDate(dueDate.getDate() + 15 * instalmentsNumber);
+                    dueDate.setDate(dueDate.getDate() + 15 * (instalmentsNumber-1));
                 } else if (paymentMode === 'mensal') {
                     dueDate.setMonth(dueDate.getMonth() + instalmentsNumber);
                 }

@@ -18,9 +18,9 @@
                 </g:eachError>
             </div>
         </g:hasErrors>
-        <div class="card card-outline-success">
-            <div class="card-header pb-0 pb-lg-0">
-                <h5 class="card-title text-white"><i class="fa fa-pencil-alt"></i>&nbsp;Registar client</h5>
+        <div class="card">
+            <div class="card-header pb-0 pb-lg-0 bg-light">
+                <h5 class="card-title"><i class="fa fa-pencil-alt"></i>&nbsp;Registar client</h5>
             </div>
             <g:form resource="${this.client}" method="POST">
                 <div class="card-body">

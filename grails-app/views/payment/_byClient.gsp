@@ -53,7 +53,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <g:each in="${it.payments.sort{it.dateCreated}}" var="payment">
+                                <g:each in="${it.payments.sort{it.dateCreated}.reverse()}" var="payment">
                                     <tr class="tr-inside">
                                         <td class="number-format">${payment.totalPaid}</td>
                                         <% def ip = payment.getInstalmentPayments(); def ipSize = ip.size() %>
