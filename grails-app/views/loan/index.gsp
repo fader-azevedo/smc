@@ -114,7 +114,7 @@
                         <tr class="border f-w-700">
                             <th class="border"></th>
                             <th class="border">Cliente</th>
-                            <th class="border">C.Inicial</th>
+                            <th class="border">Capital inicial</th>
                             <th class="border">Juros(%)</th>
                             <th class="border">V. pagar</th>
                             <th class="border">Prazo</th>

@@ -167,8 +167,8 @@
             });
 
             calculateByCheck();
-            calculateInstalments();
-            const amountPayable = parseFloat(${loan.amountPayable});
+            // calculateInstalments();
+            %{--const amountPayable = parseFloat(${loan.amountPayable});--}%
 
             setInputFilter(document.getElementById('input-value-to'), function(value) {
                 // return /^\d*\.?\d*$/.test(value) && (value === "" || parseFloat(value) <= amountPayable);
@@ -199,15 +199,22 @@
             });
             const i = $('.input-check:checked').length; //input checked
             $('.change').remove();
+            const lineParceled = $('#tr-'+i);
+            installParceledID = lineParceled.attr('data-id');
+
             if (change > 0) {
-                const lineParceled = $('#tr-'+i);
-                installParceledID = lineParceled.attr('data-id');
+                // const lineParceled = $('#tr-'+i);
                 lineParceled.before('<tr class="change bg-light f-w-700"><td>Parcela</td><td>--------------</td>' +
-                    '<td><span">'+formatValue(change)+'</span></td><td></td></tr>')
+                    '<td><span>'+formatValue(change)+'</span></td>' +
+                    '<td><label class="f-s-21"><i class="fa fa-check-square"></i></label></td></tr>')
+            }else if(value){
+                change = value; //i use changeValue when save payments
+                lineParceled.before('<tr class="change bg-light f-w-700"><td>Parcela</td><td>--------------</td>' +
+                    '<td><span>'+formatValue(value)+'</span></td>' +
+                    '<td><label class="f-s-21"><i class="fa fa-check-square"></i></label></td></tr>')
             }
         }
 
-        let instalments = [];
 
         function calculateByCheck() {
             $('#check-all').on('change', function () {
@@ -216,16 +223,10 @@
             });
 
             const checks = $('.input-check');
-            // checks.first().removeAttr('disabled');
-            // const checksLength = checks.length;
-
 
             checks.on('change', function () {
                 let total = 0;
                 const checksChecked = $('.input-check:checked');
-                // const enables = checksLength-checksChecked.length;
-
-                // $('.input-check:not(:checked):first').removeAttr('disabled');
 
                 checksChecked.each(function () {
                     const id = $(this).attr('data-id');
@@ -250,10 +251,6 @@
                     $('#check-all').prop('checked', true)
                 }
             });
-        }
-
-        function formatValue(value) {
-            return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.').replace(/.([^.]*)$/, ',$1')
         }
 
         function setInputFilter(textbox, inputFilter) {
@@ -295,6 +292,8 @@
             $('#detail-debit').text(formatValue(data.debit))
         }
 
+        let instalments = [];
+
         function save(){
 
             $('#btn-save').on('click',function () {
@@ -310,7 +309,7 @@
                 });
                 if(change !== 0){
                     const line = {'id': installParceledID, 'value': change,'part':true};
-                    instalments.push(line)
+                    instalments.push(line);
                 }
 
                 instalments = JSON.stringify(instalments);

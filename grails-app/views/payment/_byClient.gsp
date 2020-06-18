@@ -14,7 +14,7 @@
                     <span class="f-w-800">${i + 1}º</span> Empréstimo
                 </a>
             </td>
-            <g:set var="i" value="${new Integer('0') + 1}"/>
+            <g:set var="i" value="${i + 1}"/>
             <td class="number-format">${it.borrowedAmount}</td>
             <td class="number-format">${it.amountPayable}</td>
             <td class="number-format"><g:include controller="loan" action="totalPaid" params="[id: it.id]"/></td>
@@ -36,9 +36,10 @@
             <td colspan="6" class="py-0">
                 <div id="collapse-${it.id}" class="collapse ${show}">
                     <g:set var="show" value=""/>
-                    <div class="col-12 pt-3 px-0">
-                        <strong>Pagamentos</strong> <br>
-                        <hr>
+                    <div class="col-12 pt-1 px-0">
+                        <div class="line-title text-center mb-3 mb-md-3">
+                            <span class="text">Pagamentos do <strong class="f-w-700">${i}º Empréstimo</strong></span>
+                        </div>
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-inside">
@@ -104,11 +105,16 @@
         $('#table-body-client-payment tr').removeClass('bg-light-info');
         $('#tr-' + id).addClass('bg-light-info');
     }
+    // line-table-inside
 
-    $('.tr-inside .number-format').each(function () {
-        const value = parseFloat($(this).text());
-        $(this).text(formatValue(value)).addClass('text-right')
-    });
+    formatN('.line-table-inside');
+    formatN('.tr-inside');
+    function formatN(tr){
+        $(tr+' .number-format').each(function () {
+            const value = parseFloat($(this).text());
+            $(this).text(formatValue(value)).addClass('text-right')
+        });
+    }
 
     $('.table-inside tbody td > hr:last-child').remove();
     $('.table-inside tbody td').addClass('align-middle');

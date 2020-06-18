@@ -98,11 +98,11 @@
                            data-paging-size="4">
                         <thead>
                         <tr class="border f-w-700">
-                            <th class="border">Total pago</th>
-                            <th class="border">Valor pago</th>
+                            <th class="border text-right">Total pago</th>
+                            <th class="border text-right">Valor pago</th>
                             <th class="border px-3">Prestação</th>
                             <th class="border">F.pagamento</th>
-                            <th class="border">Data</th>
+                            <th class="border text-center">Data</th>
                             <th class="border">Recibo</th>
                             <th class="border">Cliente</th>
                         </tr>
@@ -119,9 +119,9 @@
                         <tr>
                             <th></th>
                             <th></th>
-                            <th>C.inicial</th>
-                            <th>Totl a pagar</th>
-                            <th>Total pago</th>
+                            <th class="text-right">Capital inicial</th>
+                            <th class="text-right">Total a pagar</th>
+                            <th class="text-right">Total pago</th>
                             <th>Estado</th>
                         </tr>
                         </thead>
@@ -208,6 +208,7 @@
             }
         });
         // clientSelect.val('').trigger('change')
+        fromLoans()
     });
 
     function upp() {
@@ -242,6 +243,15 @@
 
         $('#payment-table tbody td > hr:last-child').remove();
         $('table tbody td').addClass('align-middle');
+    }
+
+    const sourceClient = '${params.loanID}';
+
+    function fromLoans() {
+        if(sourceClient){
+            clientSelect.val(sourceClient).trigger('change')
+            sourceClient = ''
+        }
     }
 </script>
 </body>

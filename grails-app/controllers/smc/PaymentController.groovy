@@ -57,11 +57,14 @@ class PaymentController {
             instalmentPayment.setAmountPaid( new Double(it.value))
 
             if(!it.part){
-                instalmentPayment.setInstalment(instalment)
+//                instalmentPayment.setInstalment(instalment)
                 instalment.setStatus('Pago')
+                instalment.addToInstalmentPayments(instalmentPayment)
+                instalmentService.save(instalment)
+
             }else{
                 def newInstalment = new Instalment()
-                instalmentPayment.setInstalment(newInstalment)
+//                instalmentPayment.setInstalment(newInstalment)
 
                 newInstalment.setCode(instalment.getCode()+instalment.instalments.size()+1)
                 newInstalment.setLoan(loan)
@@ -73,10 +76,9 @@ class PaymentController {
                 newInstalment.setDueDate(instalment.dueDate)
                 newInstalment.setStatus('Pago')
 
-                instalment.addToInstalments(newInstalment)
+                newInstalment.addToInstalmentPayments(instalmentPayment)
+                instalmentService.save(newInstalment)
             }
-            instalment.addToInstalmentPayments(instalmentPayment)
-            instalmentService.save(instalment)
         }
 
         if(Instalment.findAllByLoanAndStatus(loan,'Pendente').size() == 0){
@@ -121,7 +123,7 @@ class PaymentController {
             if(status){
                 eq('status',status)
             }
-            order('dateCreated')
+            order('dateCreated','desc')
         }as List<Loan>
         model: [loanList:loanList]
     }

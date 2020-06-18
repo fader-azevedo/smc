@@ -247,13 +247,13 @@ class LoanController {
     def static getValuePaid(paidInstallment){
         def amountPaid = 0.0
         paidInstallment.each {installment->
-            if(installment.instalments){
-                installment.instalments.each{
-                    installment.instalmentPayments.each {installmentPay->
-                        amountPaid+=installmentPay.amountPaid
-                    }
-                }
-            }
+//            if(installment.instalments){
+//                installment.instalments.each{
+//                    installment.instalmentPayments.each {installmentPay->
+//                        amountPaid+=installmentPay.amountPaid
+//                    }
+//                }
+//            }
             installment.instalmentPayments.each {installmentPay->
                 amountPaid+=installmentPay.amountPaid
             }
