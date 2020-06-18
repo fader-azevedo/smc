@@ -250,7 +250,6 @@
 
     function fromLoans() {
         if(sourceClient){
-            alert()
             const loanClient = sourceClient.split('_');//[0]=loanId, [1]=clientId, [2]=loanStatus
             clientSelect.val(loanClient[1]).trigger('change');
             statusSelect.val(loanClient[2]).trigger('change');
