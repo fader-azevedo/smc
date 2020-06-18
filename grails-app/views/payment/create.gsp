@@ -7,9 +7,9 @@
 </head>
 
 <body>
+<g:set var="loanID" value="${session.getAttribute('loanID')}"/>
 
-<g:if test="${params.loanID}">
-
+<g:if test="${loanID}">
     <div class="col-12">
         <g:if test="${flash.message}">
             <div class="alert alert-success" role="status">${flash.message}</div>
@@ -23,7 +23,7 @@
             </div>
         </g:hasErrors>
 
-        <% def loan = Loan.get(new Long(params.loanID))
+        <% def loan = Loan.get(new Long(loanID as String))
         def client = loan.client
         def installments = Instalment.findAllByStatusAndLoan('pendente', loan)
         %>
@@ -154,6 +154,7 @@
     </div>
 
     <script>
+
         const loanId = ${loan.id}
 
         $(document).ready(function () {

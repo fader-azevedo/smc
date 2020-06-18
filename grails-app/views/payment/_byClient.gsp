@@ -45,11 +45,11 @@
                             <table class="table table-bordered table-inside">
                                 <thead>
                                 <tr>
-                                    <th class="border">Total pago</th>
-                                    <th class="border">Valor pago</th>
+                                    <th class="border text-right">Total pago</th>
+                                    <th class="border text-right">Valor pago</th>
                                     <th class="border px-3">Prestação</th>
                                     <th class="border">F.pagamento</th>
-                                    <th class="border">Data</th>
+                                    <th class="border text-center">Data</th>
                                     <th class="border">Recibo</th>
                                 </tr>
                                 </thead>

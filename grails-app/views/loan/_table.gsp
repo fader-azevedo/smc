@@ -9,19 +9,25 @@
 
                 <g:if test="${it.status.equalsIgnoreCase('fechado')}">
                     <g:form controller="payment" action="index">
-                        <button name="loanClientStatus" value="${it.id}-${it.client.id}-${it.status}" type="submit"
+                        <button name="loanClientStatus" value="${it.id}-${it.client.id}-Fechado" type="submit"
                                 class="btn btn-sm btn-megna">
                             <i class="fa fa-money-bill-alt">&nbsp;</i>Ver pagamentos
                         </button>
                     </g:form>
                 </g:if>
                 <g:else>
-                    <g:form controller="payment" action="create">
-                        <button name="loanID" value="${it.id}" type="submit"
-                                class="btn btn-sm btn-megna" data-id="${it.id}">
-                            <i class="fa fa-edit">&nbsp;</i>Efectuar pagamento
+                    <g:remoteLink controller="payment" action="newPayment"  params="[loanID:it.id]" after="newPayment()">
+                        <button name="loanID" type="button"
+                                class="btn btn-sm btn-success btn-redirect" title="Efectuar pagamento">
+                            <i class="fa fa-edit">&nbsp;</i>Pagamento
                         </button>
-                    </g:form>
+                    </g:remoteLink>
+                    <g:remoteLink controller="payment" action="list" params="[loanClientStatus:it.id+'_'+it.client.id+'_'+it.status]" after="list()">
+                        <button type="button"
+                                class="btn btn-sm btn-megna ml-3" title="Ver pagamentos">
+                            <i class="fa fa-eye">&nbsp;</i>Pagamentos
+                        </button>
+                    </g:remoteLink>
                 </g:else>
             </div>
         </td>
@@ -49,6 +55,14 @@
         const value = parseFloat($(this).text());
         $(this).text(formatValue(value)).addClass('text-right')
     });
+
+    function newPayment() {
+        window.location = '<g:createLink controller="payment" action="create"/>'
+    }
+
+    function list() {
+        window.location = '<g:createLink controller="payment" action="index"/>'
+    }
 </script>
 
 %{--<td class="d-none">--}%

@@ -17,6 +17,7 @@ class DashboardController {
     def months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
 
     def index() {
+        disableSessions()
         render view: 'index'
     }
 
@@ -57,7 +58,6 @@ class DashboardController {
                     if(loan.status.equalsIgnoreCase('fechado')){
                         c+=1
                     }
-
                 }
             }
             values.put(getBar(month,a,b,c))
@@ -90,5 +90,9 @@ class DashboardController {
 
     def getSidebar(){
         render(Settings.all.first().sidebar)
+    }
+
+    def disableSessions(){
+        session.setAttribute('loanID',null)
     }
 }

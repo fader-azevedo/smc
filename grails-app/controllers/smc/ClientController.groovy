@@ -10,9 +10,11 @@ class ClientController {
 
     ClientService clientService
 
+    def dashboard = new DashboardController()
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
+        dashboard.disableSessions()
         respond clientService.list(params), model:[clientCount: clientService.count()]
     }
 
@@ -21,6 +23,7 @@ class ClientController {
     }
 
     def create() {
+        dashboard.disableSessions()
         respond new Client(params)
     }
 

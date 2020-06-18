@@ -14,10 +14,12 @@ class PaymentController {
     InstalmentService instalmentService
     LoanService loanService
     def springSecurityService
+    def dashboard = new DashboardController()
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
+        dashboard.disableSessions()
         def paymentList = Payment.createCriteria().list {
             loan{
                 eq('status','aberto')
@@ -27,12 +29,24 @@ class PaymentController {
         model:[paymentList: paymentList]
     }
 
+    def list(){
+        session.setAttribute('loanClientStatus',params.loanClientStatus)
+        println('ll: '+session.getAttribute('loanClientStatus'))
+        render('')
+    }
+
     def show(Long id) {
+        dashboard.disableSessions()
         respond paymentService.get(id)
     }
 
     def create() {
         respond new Payment(params)
+    }
+
+    def newPayment(){
+        session.setAttribute('loanID',params.loanID)
+        render('')
     }
 
     def save(Payment payment) {
@@ -57,14 +71,11 @@ class PaymentController {
             instalmentPayment.setAmountPaid( new Double(it.value))
 
             if(!it.part){
-//                instalmentPayment.setInstalment(instalment)
                 instalment.setStatus('Pago')
                 instalment.addToInstalmentPayments(instalmentPayment)
                 instalmentService.save(instalment)
-
             }else{
                 def newInstalment = new Instalment()
-//                instalmentPayment.setInstalment(newInstalment)
 
                 newInstalment.setCode(instalment.getCode()+instalment.instalments.size()+1)
                 newInstalment.setLoan(loan)
@@ -91,29 +102,12 @@ class PaymentController {
     }
 
     def edit(Long id) {
+        dashboard.disableSessions()
         respond paymentService.get(id)
     }
 
     def update(Payment payment) {
-        if (payment == null) {
-            notFound()
-            return
-        }
 
-        try {
-            paymentService.save(payment)
-        } catch (ValidationException e) {
-            respond payment.errors, view:'edit'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'payment.label', default: 'Payment'), payment.id])
-                redirect payment
-            }
-            '*'{ respond payment, [status: OK] }
-        }
     }
 
     def _byClient(){
@@ -139,8 +133,6 @@ class PaymentController {
         if (dateTwo){
             dateTwo = new Date().parse("dd/MM/yyy",dateTwo.toString())
         }
-//        println('dateOne: '+dateOne)
-//        println('dateTwo: '+dateTwo)
 
         def paymentList = Payment.createCriteria().list {
             if(status){
@@ -153,6 +145,7 @@ class PaymentController {
             }
             order('dateCreated','desc')
         } as List<Payment>
+
         render(template: 'all',model: [paymentList: paymentList])
     }
 

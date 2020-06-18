@@ -245,15 +245,20 @@
         $('table tbody td').addClass('align-middle');
     }
 
-    let sourceClient = '${params.loanClientStatus}';
+    let sourceClient = '${session.getAttribute('loanClientStatus')}';
+
 
     function fromLoans() {
         if(sourceClient){
-            const loanClient = sourceClient.split('-');//[0]=loanId, [1]=clientId, [2]=loanStatus
+            alert()
+            const loanClient = sourceClient.split('_');//[0]=loanId, [1]=clientId, [2]=loanStatus
             clientSelect.val(loanClient[1]).trigger('change');
             statusSelect.val(loanClient[2]).trigger('change');
-            sourceClient = ''
         }
+
+        // if ( window.history.replaceState ) {
+        //     window.history.replaceState( null, null, window.location.href );
+        // }
     }
 </script>
 </body>

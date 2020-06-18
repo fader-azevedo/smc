@@ -13,10 +13,12 @@ class LoanController {
 
     LoanService loanService
     def springSecurityService
+    def dashboard = new DashboardController()
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
+        dashboard.disableSessions()
         model:[loanCount: loanService.count(),loanList: Loan.findAllByStatus('aberto').sort{it.dateCreated}.reverse()]
     }
 
@@ -25,6 +27,7 @@ class LoanController {
     }
 
     def create() {
+        dashboard.disableSessions()
         respond new Loan(params)
     }
 
