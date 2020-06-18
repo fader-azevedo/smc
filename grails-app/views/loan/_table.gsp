@@ -9,8 +9,8 @@
 
                 <g:if test="${it.status.equalsIgnoreCase('fechado')}">
                     <g:form controller="payment" action="index">
-                        <button name="loanID" value="${it.client.id}" type="submit"
-                                class="btn btn-sm btn-megna" data-id="${it.id}">
+                        <button name="loanClientStatus" value="${it.id}-${it.client.id}-${it.status}" type="submit"
+                                class="btn btn-sm btn-megna">
                             <i class="fa fa-money-bill-alt">&nbsp;</i>Ver pagamentos
                         </button>
                     </g:form>

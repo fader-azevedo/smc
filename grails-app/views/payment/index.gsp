@@ -245,11 +245,13 @@
         $('table tbody td').addClass('align-middle');
     }
 
-    const sourceClient = '${params.loanID}';
+    let sourceClient = '${params.loanClientStatus}';
 
     function fromLoans() {
         if(sourceClient){
-            clientSelect.val(sourceClient).trigger('change')
+            const loanClient = sourceClient.split('-');//[0]=loanId, [1]=clientId, [2]=loanStatus
+            clientSelect.val(loanClient[1]).trigger('change');
+            statusSelect.val(loanClient[2]).trigger('change');
             sourceClient = ''
         }
     }
