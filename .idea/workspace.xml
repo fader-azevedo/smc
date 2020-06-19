@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="" />
+    <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/avatar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jasper/receipt.jasper" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Gradle___smc___smc_0_1_war__exploded_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Gradle___smc___smc_0_1_war__exploded_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_integrationTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_integrationTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grails-app/controllers/smc/LoanController.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/controllers/smc/LoanController.groovy" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,13 +96,16 @@
     </option>
   </component>
   <component name="ProjectId" id="1bFaZGBddlvfGKZ2u4UY8QrOQzK" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -96,16 +113,16 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="true" />
     <property name="grails.last.selected.app.url" value="file://$PROJECT_DIR$" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/grails-app/assets/stylesheets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\My Bag\Projects\Web\Grails\smc\src\main\webapp" />
+      <recent name="D:\My Bag\Projects\Web\Grails\smc\src\main\webapp\jasper" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\stylesheets" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\images\background" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\images\users" />
-      <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\images" />
-      <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\javascripts" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -182,6 +199,8 @@
       <workItem from="1592023641189" duration="47140000" />
       <workItem from="1592144984625" duration="26785000" />
       <workItem from="1592208202446" duration="74112000" />
+      <workItem from="1592445898899" duration="44910000" />
+      <workItem from="1592563917088" duration="259000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1589225490496</created>
@@ -337,7 +356,35 @@
       <option name="project" value="LOCAL" />
       <updated>1592329727301</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="reajuste de funcoes de pagamentos">
+      <created>1592456987373</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1592456987374</updated>
+    </task>
+    <task id="LOCAL-00024" summary="list loan payments from loan list">
+      <created>1592457580703</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1592457580703</updated>
+    </task>
+    <task id="LOCAL-00025" summary="sessions start">
+      <created>1592468714218</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1592468714218</updated>
+    </task>
+    <task id="LOCAL-00026" summary="sessions...">
+      <created>1592470612303</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1592470612303</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TraitInjectorService">
@@ -592,8 +639,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="first commit" />
-    <MESSAGE value="add dynamic js" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="add dynamic forms&#10;guarantee form and witness form" />
     <MESSAGE value="reedit dynamic-form.js" />
     <MESSAGE value="beginning save guarantees" />
@@ -615,17 +661,21 @@
     <MESSAGE value="payment created date again" />
     <MESSAGE value="client filter" />
     <MESSAGE value="order data by created date (reverse)" />
-    <option name="LAST_COMMIT_MESSAGE" value="order data by created date (reverse)" />
+    <MESSAGE value="reajuste de funcoes de pagamentos" />
+    <MESSAGE value="list loan payments from loan list" />
+    <MESSAGE value="sessions start" />
+    <MESSAGE value="sessions..." />
+    <option name="LAST_COMMIT_MESSAGE" value="sessions..." />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588774503846">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="249" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1588774503846" />
-    <state x="449" y="171" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588657279988">
+    <state x="449" y="171" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592484572540">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="449" y="171" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1588657279988" />
+    <state x="449" y="171" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1592484572540" />
     <state x="488" y="52" key="#com.intellij.ide.util.MemberChooser" timestamp="1588514319780">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -634,38 +684,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="115" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1588252341401" />
-    <state x="304" y="0" key="CommitChangelistDialog2" timestamp="1592329724064">
+    <state x="304" y="0" key="CommitChangelistDialog2" timestamp="1592470609408">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="304" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1592329724064" />
+    <state x="304" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1592470609408" />
     <state x="92" y="92" width="1182" height="554" key="DiffContextDialog" timestamp="1588318164292">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="92" y="92" width="1182" height="554" key="DiffContextDialog/0.0.1366.738@0.0.1366.738" timestamp="1588318164292" />
-    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1591642943076">
+    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1592472346155">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1591642943076" />
-    <state width="1323" height="245" key="GridCell.Tab.0.bottom" timestamp="1592329742076">
+    <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1592472346155" />
+    <state width="1323" height="245" key="GridCell.Tab.0.bottom" timestamp="1592505425601">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="245" key="GridCell.Tab.0.bottom/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591972010891" />
-    <state width="1323" height="245" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1592329742076" />
-    <state width="1323" height="245" key="GridCell.Tab.0.center" timestamp="1592329742074">
+    <state width="1323" height="245" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1592505425601" />
+    <state width="1323" height="245" key="GridCell.Tab.0.center" timestamp="1592505425600">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="245" key="GridCell.Tab.0.center/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591972010891" />
-    <state width="1323" height="245" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1592329742074" />
-    <state width="1323" height="245" key="GridCell.Tab.0.left" timestamp="1592329742073">
+    <state width="1323" height="245" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1592505425600" />
+    <state width="1323" height="245" key="GridCell.Tab.0.left" timestamp="1592505425600">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="245" key="GridCell.Tab.0.left/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591972010891" />
-    <state width="1323" height="245" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1592329742073" />
-    <state width="1323" height="245" key="GridCell.Tab.0.right" timestamp="1592329742075">
+    <state width="1323" height="245" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1592505425600" />
+    <state width="1323" height="245" key="GridCell.Tab.0.right" timestamp="1592505425600">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="245" key="GridCell.Tab.0.right/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591972010891" />
-    <state width="1323" height="245" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1592329742075" />
+    <state width="1323" height="245" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1592505425600" />
     <state width="1323" height="227" key="GridCell.Tab.1.bottom" timestamp="1588325884581">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -699,10 +749,10 @@
     </state>
     <state x="92" y="92" width="1182" height="554" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591977015955" />
     <state x="92" y="92" width="1182" height="554" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.738@0.0.1366.738" timestamp="1592215010763" />
-    <state x="45" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1592208198853">
+    <state x="45" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1592563917075">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="45" y="192" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1592208198853" />
+    <state x="45" y="192" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1592563917075" />
     <state x="324" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588642655208">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -711,14 +761,14 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="314" y="66" width="737" height="606" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1590079814160" />
-    <state x="65" y="93" key="new project wizard" timestamp="1588594877753">
+    <state x="65" y="0" key="new project wizard" timestamp="1592472373346">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="65" y="93" key="new project wizard/0.0.1366.738@0.0.1366.738" timestamp="1588594877753" />
-    <state x="339" y="165" width="672" height="677" key="run.anything.popup" timestamp="1591117888039">
+    <state x="65" y="0" key="new project wizard/0.0.1366.738@0.0.1366.738" timestamp="1592472373346" />
+    <state x="339" y="165" width="672" height="677" key="run.anything.popup" timestamp="1592507647217">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="339" y="165" width="672" height="677" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1591117888039" />
+    <state x="339" y="165" width="672" height="677" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1592507647217" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1592208303570">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

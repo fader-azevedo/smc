@@ -4,6 +4,11 @@ import auth.User
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
+import net.sf.jasperreports.engine.JasperExportManager
+import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+import org.grails.core.io.ResourceLocator
+
 import java.text.DecimalFormat
 
 import static org.springframework.http.HttpStatus.*
@@ -19,6 +24,7 @@ class LoanController {
 
     def index() {
         dashboard.disableSessions()
+        generateReceipt()
         model:[loanCount: loanService.count(),loanList: Loan.findAllByStatus('aberto').sort{it.dateCreated}.reverse()]
     }
 
@@ -33,10 +39,6 @@ class LoanController {
 
     def save(Loan loan) {
 
-        if (loan == null) {
-            notFound()
-            return
-        }
         loan.setCreatedBy((User) springSecurityService.currentUser)
         loan.setUpdatedBy((User) springSecurityService.currentUser)
         loan.setCode(codeGenerator(loan.getPaymentMode().id))
@@ -74,7 +76,7 @@ class LoanController {
     }
 
 
-    def deFr = new DecimalFormat('#.00')
+//    def deFr = new DecimalFormat('#.00')
     def generateInstalments(loan){
         def dateDif = 1
         switch (loan.paymentMode.name.toLowerCase().trim()) {
@@ -149,52 +151,11 @@ class LoanController {
     }
 
     def update(Loan loan) {
-        if (loan == null) {
-            notFound()
-            return
-        }
 
-        try {
-            loanService.save(loan)
-        } catch (ValidationException e) {
-            respond loan.errors, view:'edit'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'loan.label', default: 'Loan'), loan.id])
-                redirect loan
-            }
-            '*'{ respond loan, [status: OK] }
-        }
     }
 
     def delete(Long id) {
-        if (id == null) {
-            notFound()
-            return
-        }
 
-        loanService.delete(id)
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'loan.label', default: 'Loan'), id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'loan.label', default: 'Loan'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
     }
 
     def static codeGenerator(id){
@@ -276,5 +237,107 @@ class LoanController {
     def filter(){
         def loanList = Loan.findAllByStatus(params.status.toString()).sort{it.dateCreated}.reverse()
         render(template: 'table',model: [loanList:loanList])
+    }
+
+    def getFile(){
+//        def file = resource(dir: '',file: '',)
+    }
+
+    @Secured('permitAll')
+    def getBytes(file) {
+
+        def bytes = file.length()
+        if (bytes == 0){
+            return  '0 Bytes'
+        }else{
+            def k = 1024;
+            def sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+            def i = Math.floor(Math.log(bytes) / Math.log(k))
+            return  (round(bytes / Math.pow(k, i), 2)) + ' ' + sizes.get((int) i)
+        }
+    }
+
+    private static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException()
+
+        long factor = (long) Math.pow(10, places)
+        value = value * factor
+        long tmp = Math.round(value)
+        return (double) tmp / factor
+    }
+
+    ResourceLocator grailsResourceLocator // injected during initialization
+
+
+    def getImage() {
+//        def resource = this.class.classLoader.getResource('conf.json')
+        def resource = grailsResourceLocator.findResourceForURI('/Macuvele/batman.jpg')
+        def path = resource.file.path // absolute file path
+        def inputStream = resource.inputStream // input stream for the file
+        println('path: '+path+'  stream: '+inputStream)
+
+        render file: resource.file.bytes, contentType: 'image/jpg'
+    }
+
+    class Receipt{
+        String logo,info,num,client,date,entity
+        String tab_num,tab_method,tab_reference,tab_value
+        String sub_total, iva_percent, iva_value,total
+    }
+
+    def generateReceipt(){
+
+//        def installmentPayment = payment.instalmentPayments
+        def installmentPayment = InstalmentPayment.all
+        def receiptList = new ArrayList<Receipt>()
+        def i = 0
+        installmentPayment.each { it->
+            def receipt = new Receipt()
+            receipt.setTab_num(((InstalmentPayment)it).id.toString())
+            receipt.setTab_method(((InstalmentPayment)it).paymentMothod.name)
+            receipt.setTab_reference('0000'+i)
+            receipt.setTab_value(((InstalmentPayment)it).amountPaid.toString())
+
+            receiptList.add(receipt)
+        }
+
+        println('Size: '+receiptList.size())
+
+        def beanTable = new JRBeanCollectionDataSource(receiptList)
+        def mapTable = new HashMap<String,Object>()
+        mapTable.put('receiptDataSource',beanTable)
+
+//        String info,num,client,date,entity
+
+        def receiptList0 = new ArrayList<Receipt>()
+        def receipt0 = new Receipt()
+        def logo = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file.toString()
+
+        receipt0.setLogo(logo)
+        receipt0.setInfo('<h1>Organization Name<h1><p>Junior Macuvele<p>')
+        receipt0.setNum('00001')
+        receipt0.setClient('Fader Azevedo Macuvele')
+        receipt0.setDate('20-12-2020')
+        receipt0.setEntity('Nome da organization')
+
+//        String sub_total, iva_percent, iva_value,total
+
+        receipt0.setSub_total('18.000,00')
+        receipt0.setIva_percent('12')
+        receipt0.setIva_value('100')
+        receipt0.setTotal('20.000,00')
+        receiptList0.add(receipt0)
+
+        def beanActivity0 = new JRBeanCollectionDataSource(receiptList0)
+
+//        def receiptJasper = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file
+//        def receiptJasper = new File('D:/receipt.jasper').toString()
+        def destiny = 'D:/recibo.pdf'
+//        println('Bytes: '+getBytes(receiptJasper))
+
+//        def jasperPrint = JasperFillManager.fillReport(new File('D:/receipt.jasper').toString(), mapTable, beanActivity0)
+        def jasperPrint = JasperFillManager.fillReport(new File('D:/receipt.jasper').toString(), null, beanTable)
+        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
     }
 }
