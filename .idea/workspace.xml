@@ -1,20 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/jasper/receipt.jasper" afterDir="false" />
+    <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="redefine code generator">
       <change beforePath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Gradle___smc___smc_0_1_war__exploded_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Gradle___smc___smc_0_1_war__exploded_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_integrationTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_integrationTest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/smc_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/smc_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9f162022-769e-4a25-a4ae-576b4a939eb1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9f162022-769e-4a25-a4ae-576b4a939eb1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grails-app/controllers/smc/LoanController.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/controllers/smc/LoanController.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/.asscache" beforeDir="false" afterPath="$PROJECT_DIR$/build/.asscache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/$RoleServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/$RoleServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/$UserRoleServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/$UserRoleServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/$UserServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/$UserServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/RoleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/RoleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/UserRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/UserRole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/UserRoleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/UserRoleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$ClientServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$ClientServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$DistrictServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$DistrictServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$DocumentTypeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$DocumentTypeServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$GuaranteeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$GuaranteeServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$GuaranteeTypeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$GuaranteeTypeServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$GuarantorServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$GuarantorServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentPaymentServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentPaymentServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentTypeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentTypeServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$LoanGuaranteeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$LoanGuaranteeServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$LoanServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$LoanServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$PaymentMethodServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$PaymentMethodServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$PaymentModeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$PaymentModeServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$PaymentServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$PaymentServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$ProvinceServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$ProvinceServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$SettingsServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$SettingsServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1$_closure8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap$_closure2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/BootStrap.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/BootStrap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3$_closure10.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3$_closure10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3$_closure11.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3$_closure11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_getDetails_closure5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_getDetails_closure5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4$_closure12.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4$_closure12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4$_closure13.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4$_closure13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1$_closure6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1$_closure6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1$_closure7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1$_closure7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2$_closure8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2$_closure8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2$_closure9.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2$_closure9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DashboardController$_barChart_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DashboardController$_barChart_closure1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DashboardController$_lineChart_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DashboardController$_lineChart_closure2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/District.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/District.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DistrictController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DistrictController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DocumentType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DocumentType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DocumentTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DocumentTypeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Guarantee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Guarantee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeTypeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Guarantor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Guarantor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/GuarantorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/GuarantorController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Instalment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Instalment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentPayment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentPayment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentPaymentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentPaymentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentTypeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Loan$__clinit__closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Loan$__clinit__closure1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Loan$__clinit__closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Loan$__clinit__closure2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Loan.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Loan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$Receipt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_codeGenerator_closure5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_filter_closure7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_generateGuarantees_closure4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_generateGuarantees_closure4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_generateReceipt_closure8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_getValuePaid_closure6$_closure11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_getValuePaid_closure6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_index_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_index_closure1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_save_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_save_closure2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_save_closure3$_closure10.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_save_closure3$_closure9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_save_closure3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanController$_save_closure3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanGuarantee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanGuarantee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanGuaranteeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanGuaranteeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Payment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Payment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__byClient_closure3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__byClient_closure3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__filterPaymentByLoanStatus_closure4$_closure6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__filterPaymentByLoanStatus_closure4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__filterPaymentByLoanStatus_closure4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_index_closure1$_closure5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_index_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_index_closure1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_save_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_save_closure2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentMethod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentMethodController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentMethodController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentMode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentModeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentModeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Province.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Province.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ProvinceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ProvinceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Settings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/SettingsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/META-INF/grails.build.info" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/META-INF/grails.build.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/stacktrace.log" beforeDir="false" afterPath="$PROJECT_DIR$/build/stacktrace.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/war/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grails-app/assets/stylesheets/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/assets/stylesheets/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grails-app/controllers/smc/PaymentController.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/controllers/smc/PaymentController.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grails-app/views/payment/create.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/views/payment/create.gsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grails-app/views/payment/index.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/views/payment/index.gsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jasper/receipt.jasper" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jasper/receipt.jasper" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,13 +218,13 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="true" />
     <property name="grails.last.selected.app.url" value="file://$PROJECT_DIR$" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/jasper" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\My Bag\Projects\Web\Grails\smc\src\main\webapp" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\src\main\webapp\jasper" />
+      <recent name="D:\My Bag\Projects\Web\Grails\smc\src\main\webapp" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\stylesheets" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\images\background" />
       <recent name="D:\My Bag\Projects\Web\Grails\smc\grails-app\assets\images\users" />
@@ -200,7 +305,8 @@
       <workItem from="1592144984625" duration="26785000" />
       <workItem from="1592208202446" duration="74112000" />
       <workItem from="1592445898899" duration="44910000" />
-      <workItem from="1592563917088" duration="592000" />
+      <workItem from="1592563917088" duration="42542000" />
+      <workItem from="1592674587720" duration="1930000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1589225490496</created>
@@ -384,7 +490,35 @@
       <option name="project" value="LOCAL" />
       <updated>1592470612303</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="setup jasper file">
+      <created>1592653963342</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1592653963342</updated>
+    </task>
+    <task id="LOCAL-00028" summary="jasper to pdf: receipt">
+      <created>1592667477392</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1592667477392</updated>
+    </task>
+    <task id="LOCAL-00029" summary="jasper to pdf: show">
+      <created>1592668273432</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1592668273432</updated>
+    </task>
+    <task id="LOCAL-00030" summary="redefine code generator">
+      <created>1592674910769</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1592674910769</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TraitInjectorService">
@@ -640,10 +774,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add dynamic forms&#10;guarantee form and witness form" />
-    <MESSAGE value="reedit dynamic-form.js" />
-    <MESSAGE value="beginning save guarantees" />
-    <MESSAGE value="graficos" />
     <MESSAGE value="estados dos emprestimos" />
     <MESSAGE value="calcular valor a pagar com prestacoes" />
     <MESSAGE value="redifinicao da tela de pagamento" />
@@ -665,7 +795,11 @@
     <MESSAGE value="list loan payments from loan list" />
     <MESSAGE value="sessions start" />
     <MESSAGE value="sessions..." />
-    <option name="LAST_COMMIT_MESSAGE" value="sessions..." />
+    <MESSAGE value="setup jasper file" />
+    <MESSAGE value="jasper to pdf: receipt" />
+    <MESSAGE value="jasper to pdf: show" />
+    <MESSAGE value="redefine code generator" />
+    <option name="LAST_COMMIT_MESSAGE" value="redefine code generator" />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588774503846">
@@ -684,10 +818,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="115" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1588252341401" />
-    <state x="304" y="0" key="CommitChangelistDialog2" timestamp="1592470609408">
+    <state x="466" y="0" key="CommitChangelistDialog2" timestamp="1592675426690">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="304" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1592470609408" />
+    <state x="466" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1592675426690" />
     <state x="92" y="92" width="1182" height="554" key="DiffContextDialog" timestamp="1588318164292">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -696,26 +830,26 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1592472346155" />
-    <state width="1323" height="245" key="GridCell.Tab.0.bottom" timestamp="1592505425601">
+    <state width="1323" height="245" key="GridCell.Tab.0.bottom" timestamp="1592667661270">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="245" key="GridCell.Tab.0.bottom/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591972010891" />
-    <state width="1323" height="245" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1592505425601" />
-    <state width="1323" height="245" key="GridCell.Tab.0.center" timestamp="1592505425600">
+    <state width="1323" height="245" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1592667661270" />
+    <state width="1323" height="245" key="GridCell.Tab.0.center" timestamp="1592667661270">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="245" key="GridCell.Tab.0.center/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591972010891" />
-    <state width="1323" height="245" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1592505425600" />
-    <state width="1323" height="245" key="GridCell.Tab.0.left" timestamp="1592505425600">
+    <state width="1323" height="245" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1592667661270" />
+    <state width="1323" height="245" key="GridCell.Tab.0.left" timestamp="1592667661270">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="245" key="GridCell.Tab.0.left/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591972010891" />
-    <state width="1323" height="245" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1592505425600" />
-    <state width="1323" height="245" key="GridCell.Tab.0.right" timestamp="1592505425600">
+    <state width="1323" height="245" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1592667661270" />
+    <state width="1323" height="245" key="GridCell.Tab.0.right" timestamp="1592667661270">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="245" key="GridCell.Tab.0.right/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1591972010891" />
-    <state width="1323" height="245" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1592505425600" />
+    <state width="1323" height="245" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1592667661270" />
     <state width="1323" height="227" key="GridCell.Tab.1.bottom" timestamp="1588325884581">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -757,18 +891,18 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="324" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.738@0.0.1366.738" timestamp="1588642655208" />
-    <state x="314" y="66" width="737" height="606" key="find.popup" timestamp="1590079814160">
+    <state x="314" y="66" width="737" height="606" key="find.popup" timestamp="1592656820016">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="314" y="66" width="737" height="606" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1590079814160" />
+    <state x="314" y="66" width="737" height="606" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1592656820016" />
     <state x="65" y="0" key="new project wizard" timestamp="1592472373346">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="65" y="0" key="new project wizard/0.0.1366.738@0.0.1366.738" timestamp="1592472373346" />
-    <state x="339" y="165" width="672" height="677" key="run.anything.popup" timestamp="1592507647217">
+    <state x="339" y="165" width="672" height="677" key="run.anything.popup" timestamp="1592636239095">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="339" y="165" width="672" height="677" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1592507647217" />
+    <state x="339" y="165" width="672" height="677" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1592636239095" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1592208303570">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

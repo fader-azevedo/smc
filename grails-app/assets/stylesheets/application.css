@@ -7,6 +7,7 @@
 * You're free to add application-wide styles to this file and they'll appear at the top of the
 * compiled file, but it's generally better to create a new file per style scope.
 *
+*= require plugins/sweetalert/sweetalert.css
 *= require plugins/select2/dist/css/select2.min.css
 *= require plugins/typeahead.js-master/dist/typehead-min.css
 *= require plugins/datatables.net-bs4/css/dataTables.bootstrap4.css

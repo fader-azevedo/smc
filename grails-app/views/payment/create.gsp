@@ -296,7 +296,6 @@
         let instalments = [];
 
         function save(){
-
             $('#btn-save').on('click',function () {
                 instalments=[];
                 const totalPaid =$('#input-value-to').val();

@@ -12,7 +12,7 @@
 
 <div class="col-12">
     <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
+        <div class="alert alert-info" role="status">${flash.message}</div>
     </g:if>
 
     <div class="card">
@@ -159,10 +159,10 @@
                     'Mês Passado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
                 },
                 locale: {
-                    applyLabel: "Aplicaor",
+                    applyLabel: "Aplicar",
                     cancelLabel: 'Cancelar',
-                    startLabel: 'Date initiale',
-                    endLabel: 'Date limite',
+                    startLabel: 'Data inicio',
+                    endLabel: 'Data fim',
                     customRangeLabel: 'Customizar',
                     daysOfWeek: ['Do', 'Seg', 'Te', 'Qu', 'Qu', 'Se', 'Sa'],
                     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],

@@ -28,5 +28,7 @@
 //= require plugins/datatables.net-bs4/js/dataTables.responsive.min.js
 //= require plugins/raphael/raphael.min.js
 //= require plugins/morrisjs/morris.js
+//= require plugins/sweetalert/sweetalert.min.js
+//= require plugins/sweetalert/jquery.sweet-alert.custom.js
 //= require script.js
 //= require dynamic-form.js

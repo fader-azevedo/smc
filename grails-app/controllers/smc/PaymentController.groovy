@@ -201,8 +201,8 @@ class PaymentController {
 
             def receiptInfoCollection = new JRBeanCollectionDataSource(receiptInfoList)
 
-//        def receiptJasper = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file
-            def receiptJasper = new File('D:/receipt.jasper').toString()
+            def receiptJasper = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file.toString()
+//            def receiptJasper = new File('D:/receipt.jasper').toString()
 
             def jasperPrint = JasperFillManager.fillReport(receiptJasper, mapTable, receiptInfoCollection)
             JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
