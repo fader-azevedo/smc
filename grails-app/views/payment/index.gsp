@@ -266,7 +266,7 @@
     });
 
     function openReceipt(id) {
-        window.open('<g:createLink controller="payment" action="openReceipt" params="{'id':id}"/>', '_blank');
+        window.open('<g:createLink controller="payment" action="receipt" params="{'id':id}"/>', '_blank');
     }
 </script>
 </body>

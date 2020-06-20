@@ -164,7 +164,8 @@
             lineColors: ['#009efb'],
             lineWidth: 1,
             hideHover: 'auto',
-            parseTime:false
+            parseTime:false,
+            yLabelFormat: function(y){return y != Math.round(y)?'':y;}
         });
     }
 
@@ -197,7 +198,8 @@
             barColors:['#1e88e5', '#fc4b6c', '#00897b'],
             hideHover: 'auto',
             gridLineColor: '#eef0f2',
-            resize: true
+            resize: true,
+            yLabelFormat: function(y){return y != Math.round(y)?'':y;},
         });
     }
 </script>
