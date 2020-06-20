@@ -11,12 +11,13 @@ import org.grails.core.io.ResourceLocator
 @Secured('ROLE_ADMIN')
 class PaymentController {
 
-    def grailsResourceLocator
+    ResourceLocator grailsResourceLocator
     PaymentService paymentService
     InstalmentService instalmentService
     LoanService loanService
     def springSecurityService
     def dashboard = new DashboardController()
+    def loanController = new LoanController()
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -28,8 +29,6 @@ class PaymentController {
             }
             order('dateCreated','desc')
         }
-        getReceipt(10)
-
         model:[paymentList: paymentList]
     }
 
@@ -100,7 +99,6 @@ class PaymentController {
             loanService.save(loan)
             println('emprestimo '+loan.code+' closed')
         }
-
         render('saved')
     }
 
@@ -158,52 +156,62 @@ class PaymentController {
         String sub_total, iva,total
     }
 
-    def getReceipt(id){
+    def static saveDestiny
+    def getReceipt(){
+        def payment = Payment.get(new Long(params.id))
+        def destiny = loanController.getLoanDir(payment.loan)+'/'+payment.code.concat('.pdf')
 
-        def payment = Payment.get(id)
         def installmentPayment = payment.instalmentPayments
         def receiptListTable = new ArrayList<Receipt>()
-        def i = 0
-        installmentPayment.each {
-            def receipt = new Receipt()
-            receipt.setTab_num(it.instalment.code)
-            receipt.setTab_type(it.instalment.type.name)
-            receipt.setTab_method(it.paymentMothod.name)
-            receipt.setTab_reference('0000'+i)
-            receipt.setTab_value(it.amountPaid.toString())
 
-            receiptListTable.add(receipt)
-        }
+        if (!new File(destiny).isFile()) {
+            def i = 0
+            installmentPayment.each {
+                def receipt = new Receipt()
+                receipt.setTab_num(it.instalment.code)
+                receipt.setTab_type(it.instalment.type.name)
+                receipt.setTab_method(it.paymentMothod.name)
+                receipt.setTab_reference('0000' + i)
+                receipt.setTab_value(it.amountPaid.toString())
 
-        def mapTable = new HashMap<String,Object>()
-        mapTable.put('receiptDataSource',new JRBeanCollectionDataSource(receiptListTable))
+                receiptListTable.add(receipt)
+            }
 
-        def logo = grailsResourceLocator.findResourceForURI('/avatar.jpg').file.toString()
+            def mapTable = new HashMap<String, Object>()
+            mapTable.put('receiptDataSource', new JRBeanCollectionDataSource(receiptListTable))
 
-        def receiptInfo = new Receipt()
-        receiptInfo.setLogo(logo)
-        receiptInfo.setInfo('<h1>Organization Name<h1><p>Junior Macuvele<p>')
-        receiptInfo.setNum(payment.code)
-        receiptInfo.setClient(payment.loan.client.fullName)
-        receiptInfo.setDate(DashboardController.formatDateTime(new Date()))
-        receiptInfo.setEntity('Nome da organization')
+            def logo = grailsResourceLocator.findResourceForURI('/avatar.jpg').file.toString()
 
-        def percent = 12
-        def iva = payment.totalPaid * percent/100
-        receiptInfo.setSub_total(String.format("%,.2f",payment.totalPaid))
-        receiptInfo.setIva('('+percent+'%):   '+String.format('%,.2f',iva))
-        receiptInfo.setTotal(String.format('%,.2f',payment.totalPaid+iva))
+            def receiptInfo = new Receipt()
+            receiptInfo.setLogo(logo)
+            receiptInfo.setInfo('<h1>Organization Name<h1><p>Junior Macuvele<p>')
+            receiptInfo.setNum(payment.code)
+            receiptInfo.setClient(payment.loan.client.fullName)
+            receiptInfo.setDate(DashboardController.formatDateTime(new Date()))
+            receiptInfo.setEntity('Nome da organization')
 
-        def receiptInfoList = new ArrayList<Receipt>()
-        receiptInfoList.add(receiptInfo)
+            def percent = 12
+            def iva = payment.totalPaid * percent / 100
+            receiptInfo.setSub_total(String.format("%,.2f", payment.totalPaid))
+            receiptInfo.setIva('(' + percent + '%):   ' + String.format('%,.2f', iva))
+            receiptInfo.setTotal(String.format('%,.2f', payment.totalPaid + iva))
 
-        def receiptInfoCollection = new JRBeanCollectionDataSource(receiptInfoList)
+            def receiptInfoList = new ArrayList<Receipt>()
+            receiptInfoList.add(receiptInfo)
+
+            def receiptInfoCollection = new JRBeanCollectionDataSource(receiptInfoList)
 
 //        def receiptJasper = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file
-        def receiptJasper = new File('D:/receipt.jasper').toString()
-        def destiny = 'D:/recibo.pdf'
+            def receiptJasper = new File('D:/receipt.jasper').toString()
 
-        def jasperPrint = JasperFillManager.fillReport(receiptJasper, mapTable, receiptInfoCollection)
-        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
+            def jasperPrint = JasperFillManager.fillReport(receiptJasper, mapTable, receiptInfoCollection)
+            JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
+        }
+        saveDestiny = destiny
+        render (destiny)
+    }
+
+    def receipt(){
+        render(file: saveDestiny, contentType: 'application/pdf')
     }
 }

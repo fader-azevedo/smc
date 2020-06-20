@@ -199,6 +199,7 @@
                 });
             } else {
                 $('#payment-title').text('Todos pagamentos');
+                $('#text-small-client').text('Todos');
                 $("#div-client-payment").fadeOut("fast", function () {
                     $("#div-all-payment").fadeIn("fast");
                     $('#div-client-payment').removeClass('month-table').addClass('d-none');
@@ -247,17 +248,25 @@
 
     let sourceClient = '${session.getAttribute('loanClientStatus')}';
 
-
     function fromLoans() {
         if(sourceClient){
             const loanClient = sourceClient.split('_');//[0]=loanId, [1]=clientId, [2]=loanStatus
-            clientSelect.val(loanClient[1]).trigger('change');
-            statusSelect.val(loanClient[2]).trigger('change');
+            // clientSelect.val(loanClient[1]).trigger('change');
+            // statusSelect.val(loanClient[2]).trigger('change');
         }
 
         // if ( window.history.replaceState ) {
         //     window.history.replaceState( null, null, window.location.href );
         // }
+    }
+
+    $(document).on('click','.open-receipt',function () {
+        const id = $(this).attr('data-id');
+        <g:remoteFunction controller="payment" action="getReceipt" params="{'id':id}" onSuccess="openReceipt(id)"/>
+    });
+
+    function openReceipt(id) {
+        window.open('<g:createLink controller="payment" action="openReceipt" params="{'id':id}"/>', '_blank');
     }
 </script>
 </body>

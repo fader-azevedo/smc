@@ -95,12 +95,13 @@ class DashboardController {
     def sidebar(){
         def settings = Settings.all.first()
         settings.setSidebar(params.sidebar.toString())
-        settingsService.save(settings)
+//        settingsService.save(settings)
         render('updated')
     }
 
     def getSidebar(){
-        render(Settings.all.first().sidebar)
+//        render(Settings.all.first().sidebar)
+        render('')
     }
 
     def disableSessions(){

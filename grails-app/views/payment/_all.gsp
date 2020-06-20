@@ -25,7 +25,7 @@
             <g:formatDate format="dd/MM/yyyy HH:mm" date="${payment.dateCreated}"/>
         </td>
         <td class="">
-            <a class="link"><i class="fa fa-file-pdf text-danger">&nbsp;</i>Recibo-${payment.code.concat('.pdf')}</a>
+            <a class="link open-receipt" data-id="${payment.id}"><i class="fa fa-file-pdf text-danger">&nbsp;</i>Recibo-${payment.code.concat('.pdf')}</a>
         </td>
         <td>${payment.loan.client.fullName}</td>
     </tr>

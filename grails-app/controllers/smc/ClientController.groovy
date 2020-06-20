@@ -37,7 +37,7 @@ class ClientController {
 
         try {
             if (clientService.save(client)){
-                new File(settings.root+'/'+settings.loans+'/'+DashboardController.removeAccents(client.fullName.trim())+'_'+codeGenerator()).mkdirs()
+                new File(settings.root+'/'+settings.loans+'/'+DashboardController.removeAccents(client.fullName.trim())+'_'+client.code).mkdirs()
             }
         } catch (ValidationException e) {
             respond client.errors, view:'create'
@@ -128,7 +128,12 @@ class ClientController {
     }
 
     def getDir(client){
-        return settings.root+'/'+settings.loans+'/'+DashboardController.removeAccents(((Client)client).fullName.trim())+((Client)client).code
+        def dir = settings.root+'/'+settings.loans+'/'+DashboardController.removeAccents(((Client)client).fullName.trim())+'_'+((Client)client).code
+
+        if(!new File(dir).isDirectory()){
+           new File(dir).mkdirs()
+        }
+        return dir
     }
 
 }

@@ -166,7 +166,11 @@ class LoanController {
     }
 
     def getLoanDir(loan){
-        return  settings.root+'/'+settings.loans+'/'+clientController.getDir(loan.client)+'/'.concat(loan.directory)
+        def dir =  clientController.getDir(loan.client)+'/'.concat(loan.directory)
+        if(!new File(dir).isDirectory()){
+            new File(dir).mkdirs()
+        }
+        return dir
     }
 
     def jumpSunday(def date){
