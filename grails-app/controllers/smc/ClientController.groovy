@@ -25,6 +25,8 @@ class ClientController {
 
     def create() {
         dashboard.disableSessions()
+        dashboard.codeGenerator(Client)
+
         respond new Client(params)
     }
 

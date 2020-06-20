@@ -2,6 +2,7 @@ package smc
 
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import grails.test.mixin.gorm.Domain
 import org.grails.web.json.JSONArray
 import org.grails.web.json.JSONObject
 
@@ -23,12 +24,13 @@ class DashboardController {
     }
 
     def codeGenerator(domain){
-        def length = domain.count+1.toString().length()
+        def length = new Integer(domain.findAll().size()+1).toString()
         def code = ''
-        for(def i=length; i<5; i++){
+        for(def i=length.length(); i<=4; i++){
             code += '0'
         }
-        return code.concat(domain.count+1.toString())
+        println('code: '.concat(code))
+        return code.concat(length)
     }
 
     def private static getBar(String month, int a, int b, int c){
