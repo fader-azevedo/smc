@@ -2,14 +2,16 @@ package smc
 
 import auth.User
 import grails.plugin.springsecurity.annotation.Secured
-import grails.validation.ValidationException
 import groovy.json.JsonSlurper
-
-import static org.springframework.http.HttpStatus.*
+import net.sf.jasperreports.engine.JasperExportManager
+import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+import org.grails.core.io.ResourceLocator
 
 @Secured('ROLE_ADMIN')
 class PaymentController {
 
+    def grailsResourceLocator
     PaymentService paymentService
     InstalmentService instalmentService
     LoanService loanService
@@ -26,12 +28,13 @@ class PaymentController {
             }
             order('dateCreated','desc')
         }
+        getReceipt(10)
+
         model:[paymentList: paymentList]
     }
 
     def list(){
         session.setAttribute('loanClientStatus',params.loanClientStatus)
-        println('ll: '+session.getAttribute('loanClientStatus'))
         render('')
     }
 
@@ -53,7 +56,7 @@ class PaymentController {
         def loan = Loan.get(new Long(params.loan))
         payment.setCreatedBy((User) springSecurityService.currentUser)
         payment.setUpdatedBy((User) springSecurityService.currentUser)
-        payment.setCode(codeGenerator(loan.payments.size()+1))
+        payment.setCode(loan.code.concat(loan.payments.size()+1 as String))
         payment.setTotalPaid(new Double(params.totalPaid))
         payment.setLoan(loan)
         paymentService.save(payment)
@@ -67,7 +70,7 @@ class PaymentController {
             instalmentPayment.setPaymentMothod(PaymentMethod.get(1))
             instalmentPayment.setCreatedBy((User) springSecurityService.currentUser)
             instalmentPayment.setUpdatedBy((User) springSecurityService.currentUser)
-            instalmentPayment.setCode(LoanController.codeGenerator(loan.getPaymentMode().id))
+            instalmentPayment.setCode(payment.code)
             instalmentPayment.setAmountPaid( new Double(it.value))
 
             if(!it.part){
@@ -149,13 +152,58 @@ class PaymentController {
         render(template: 'all',model: [paymentList: paymentList])
     }
 
-    private static codeGenerator(size){
+    class Receipt{
+        String logo,info,num,client,date,entity
+        String tab_num,tab_method,tab_reference,tab_value,tab_type
+        String sub_total, iva,total
+    }
 
-        def length = size.toString().length()
-        def code = ''
-        for(def i=length; i<5; i++){
-            code += '0'
+    def getReceipt(id){
+
+        def payment = Payment.get(id)
+        def installmentPayment = payment.instalmentPayments
+        def receiptListTable = new ArrayList<Receipt>()
+        def i = 0
+        installmentPayment.each {
+            def receipt = new Receipt()
+            receipt.setTab_num(it.instalment.code)
+            receipt.setTab_type(it.instalment.type.name)
+            receipt.setTab_method(it.paymentMothod.name)
+            receipt.setTab_reference('0000'+i)
+            receipt.setTab_value(it.amountPaid.toString())
+
+            receiptListTable.add(receipt)
         }
-        return (code).concat(size as String)
+
+        def mapTable = new HashMap<String,Object>()
+        mapTable.put('receiptDataSource',new JRBeanCollectionDataSource(receiptListTable))
+
+        def logo = grailsResourceLocator.findResourceForURI('/avatar.jpg').file.toString()
+
+        def receiptInfo = new Receipt()
+        receiptInfo.setLogo(logo)
+        receiptInfo.setInfo('<h1>Organization Name<h1><p>Junior Macuvele<p>')
+        receiptInfo.setNum(payment.code)
+        receiptInfo.setClient(payment.loan.client.fullName)
+        receiptInfo.setDate(DashboardController.formatDateTime(new Date()))
+        receiptInfo.setEntity('Nome da organization')
+
+        def percent = 12
+        def iva = payment.totalPaid * percent/100
+        receiptInfo.setSub_total(String.format("%,.2f",payment.totalPaid))
+        receiptInfo.setIva('('+percent+'%):   '+String.format('%,.2f',iva))
+        receiptInfo.setTotal(String.format('%,.2f',payment.totalPaid+iva))
+
+        def receiptInfoList = new ArrayList<Receipt>()
+        receiptInfoList.add(receiptInfo)
+
+        def receiptInfoCollection = new JRBeanCollectionDataSource(receiptInfoList)
+
+//        def receiptJasper = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file
+        def receiptJasper = new File('D:/receipt.jasper').toString()
+        def destiny = 'D:/recibo.pdf'
+
+        def jasperPrint = JasperFillManager.fillReport(receiptJasper, mapTable, receiptInfoCollection)
+        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
     }
 }

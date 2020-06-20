@@ -11,6 +11,7 @@ class ClientController {
     ClientService clientService
 
     def dashboard = new DashboardController()
+    def settings = Settings.all.first()
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -32,9 +33,12 @@ class ClientController {
             notFound()
             return
         }
+        client.setCode(dashboard.codeGenerator(Client))
 
         try {
-            clientService.save(client)
+            if (clientService.save(client)){
+                new File(settings.root+'/'+settings.loans+'/'+DashboardController.removeAccents(client.fullName.trim())+'_'+codeGenerator()).mkdirs()
+            }
         } catch (ValidationException e) {
             respond client.errors, view:'create'
             return
@@ -122,4 +126,9 @@ class ClientController {
     def clients(){
         render(Client.findAllByEnabled(new Boolean(params.status)).size())
     }
+
+    def getDir(client){
+        return settings.root+'/'+settings.loans+'/'+DashboardController.removeAccents(((Client)client).fullName.trim())+((Client)client).code
+    }
+
 }

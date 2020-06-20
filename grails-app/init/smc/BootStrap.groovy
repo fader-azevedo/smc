@@ -8,9 +8,10 @@ import groovy.json.JsonSlurper
 class BootStrap {
 
     def init = { servletContext ->
+
         if(Settings.count == 0){
             def root = 'C:/Dropbox/SMC'
-            new Settings(root: root,logo: 'logo,jpg',loans: 'Emprestimos',ano: Calendar.getInstance().get(Calendar.YEAR)).save()
+            new Settings(root: root,logo: 'logo.jpg',loans: 'Emprestimos',ano: Calendar.getInstance().get(Calendar.YEAR)).save()
             new File(root).mkdirs()
         }
 
@@ -59,6 +60,12 @@ class BootStrap {
             }
         }
 
+        if(PaymentMethod.count == 0){
+            ['Depósito','Transferencia Bancária','M-Pesa','E-Mola','MKesh'].each {
+                PaymentMethod.findOrSaveWhere(name: it)
+            }
+        }
+
         if(Province.count == 0) {
             new JsonSlurper().parseText(provinces).each {
                 Province.findOrSaveWhere(id: new Long(it.id), name: it.name)
@@ -93,7 +100,7 @@ class BootStrap {
             '{"name":"Amplificador"}]'
 
     def provinces = '[\n' +
-            '{"id":"1","name":"Cabo Delgado"},\n' +
+            '{"id":"1","name":"Cabo Delgado"},' +
             '{"id":"2","name":"Cidade de Maputo"},\n' +
             '{"id":"3","name":"Gaza"},\n' +
             '{"id":"4","name":"Inhambane"},\n' +

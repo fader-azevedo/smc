@@ -11,6 +11,7 @@ class Loan extends Parameter{
     double amountPayable
     int instalmentsNumber = 1
     String witnesses
+    String directory
 
     static belongsTo = [client:Client,paymentMode:PaymentMode]
     static hasMany = [loanGuarantees:LoanGuarantee, instalments:Instalment, guarantors:Guarantor,payments: Payment]
@@ -20,6 +21,7 @@ class Loan extends Parameter{
         borrowedAmount min:  new Double(0)
         instalmentsNumber min: 1
         witnesses nullable: true
+        directory nullable: true
     }
 
     static mapping = {

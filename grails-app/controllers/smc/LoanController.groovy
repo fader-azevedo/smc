@@ -17,14 +17,17 @@ import static org.springframework.http.HttpStatus.*
 class LoanController {
 
     LoanService loanService
+    def grailsResourceLocator
+
     def springSecurityService
     def dashboard = new DashboardController()
+    def settings = Settings.all.first()
+    def clientController = new ClientController()
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
         dashboard.disableSessions()
-        generateReceipt()
         model:[loanCount: loanService.count(),loanList: Loan.findAllByStatus('aberto').sort{it.dateCreated}.reverse()]
     }
 
@@ -38,17 +41,18 @@ class LoanController {
     }
 
     def save(Loan loan) {
+        def client = loan.getClient()
+        def clientLoan = Loan.findAllByClient(client)?Loan.findAllByClient(client).size()+1:1
 
         loan.setCreatedBy((User) springSecurityService.currentUser)
         loan.setUpdatedBy((User) springSecurityService.currentUser)
-        loan.setCode(codeGenerator(loan.getPaymentMode().id))
+        loan.setCode(dashboard.codeGenerator(Loan))
         def signatureDate = new Date().parse("dd/MM/yyy",params.signatureDate_.toString())
         def payDate = new Date().parse("dd/MM/yyy",params.payDate_.toString())
         def dueDate = new Date().parse("dd/MM/yyy",params.dueDate_.toString())
         loan.setSignatureDate(signatureDate)
         loan.setPayDate(payDate)
         loan.setDueDate(dueDate)
-
 
         loan.setInstalments(generateInstalments(loan) as Set<Instalment>)
 
@@ -60,6 +64,8 @@ class LoanController {
                             updatedBy: loan.updatedBy,createdBy: loan.createdBy
                     ).save()
                 }
+
+                setLoanDir(loan)
             }
         } catch (ValidationException e) {
             respond loan.errors, view:'create'
@@ -76,7 +82,8 @@ class LoanController {
     }
 
 
-//    def deFr = new DecimalFormat('#.00')
+    def deFr = new DecimalFormat('#.00')
+
     def generateInstalments(loan){
         def dateDif = 1
         switch (loan.paymentMode.name.toLowerCase().trim()) {
@@ -146,6 +153,28 @@ class LoanController {
         return new Guarantee(type: guaranteeType,description: description,image: 'image')
     }
 
+    private void setLoanDir(loan){
+        def client = ((Loan)loan).client
+        def clientLoan = client.loans.size()+' Emprestimo'
+
+        def dir = settings.root+'/'+settings.loans+'/'+clientController.getDir(client)+'/'+clientLoan
+        if(!new File(dir).isDirectory()){
+            new File(dir).mkdirs()
+            loan.setDirectory(clientLoan)
+            loanService.save(loan)
+        }
+    }
+
+    def getLoanDir(loan){
+        return  settings.root+'/'+settings.loans+'/'+clientController.getDir(loan.client)+'/'.concat(loan.directory)
+    }
+
+    def jumpSunday(def date){
+        Calendar calendar = Calendar.getInstance()
+        calendar.setTime(date)
+        (calendar.get(Calendar.DAY_OF_WEEK) == 1)?Date.parse("yyyy-MM-dd", (date + 1).format("yyyy-MM-dd")):date
+    }
+
     def edit(Long id) {
         respond loanService.get(id)
     }
@@ -156,33 +185,6 @@ class LoanController {
 
     def delete(Long id) {
 
-    }
-
-    def static codeGenerator(id){
-        def paymentMode = PaymentMode.get(id)
-        def regionString = paymentMode.name[0]
-
-        def loanSaved = Loan.createCriteria().list {
-            eq('paymentMode',paymentMode)
-        } as List<Loan>
-
-        def size = loanSaved.size()+1
-        def length = size.toString().length()
-        def code = ''
-        for(def i=length; i<5; i++){
-            code += '0'
-        }
-        return regionString.concat(code).concat(size as String) //code ex: S00002
-    }
-
-    def codeGenerate(){
-        render(codeGenerator(new Long(params.id)))
-    }
-
-    def jumpSunday(def date){
-        Calendar calendar = Calendar.getInstance()
-        calendar.setTime(date)
-        (calendar.get(Calendar.DAY_OF_WEEK) == 1)?Date.parse("yyyy-MM-dd", (date + 1).format("yyyy-MM-dd")):date
     }
 
     def getDetails(){
@@ -211,13 +213,6 @@ class LoanController {
     def static getValuePaid(paidInstallment){
         def amountPaid = 0.0
         paidInstallment.each {installment->
-//            if(installment.instalments){
-//                installment.instalments.each{
-//                    installment.instalmentPayments.each {installmentPay->
-//                        amountPaid+=installmentPay.amountPaid
-//                    }
-//                }
-//            }
             installment.instalmentPayments.each {installmentPay->
                 amountPaid+=installmentPay.amountPaid
             }
@@ -243,35 +238,7 @@ class LoanController {
 //        def file = resource(dir: '',file: '',)
     }
 
-    @Secured('permitAll')
-    def getBytes(file) {
-
-        def bytes = file.length()
-        if (bytes == 0){
-            return  '0 Bytes'
-        }else{
-            def k = 1024;
-            def sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-
-            def i = Math.floor(Math.log(bytes) / Math.log(k))
-            return  (round(bytes / Math.pow(k, i), 2)) + ' ' + sizes.get((int) i)
-        }
-    }
-
-    private static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException()
-
-        long factor = (long) Math.pow(10, places)
-        value = value * factor
-        long tmp = Math.round(value)
-        return (double) tmp / factor
-    }
-
-    ResourceLocator grailsResourceLocator // injected during initialization
-
-
     def getImage() {
-//        def resource = this.class.classLoader.getResource('conf.json')
         def resource = grailsResourceLocator.findResourceForURI('/Macuvele/batman.jpg')
         def path = resource.file.path // absolute file path
         def inputStream = resource.inputStream // input stream for the file
@@ -280,64 +247,7 @@ class LoanController {
         render file: resource.file.bytes, contentType: 'image/jpg'
     }
 
-    class Receipt{
-        String logo,info,num,client,date,entity
-        String tab_num,tab_method,tab_reference,tab_value
-        String sub_total, iva_percent, iva_value,total
-    }
-
-    def generateReceipt(){
-
-//        def installmentPayment = payment.instalmentPayments
-        def installmentPayment = InstalmentPayment.all
-        def receiptList = new ArrayList<Receipt>()
-        def i = 0
-        installmentPayment.each { it->
-            def receipt = new Receipt()
-            receipt.setTab_num(((InstalmentPayment)it).id.toString())
-            receipt.setTab_method(((InstalmentPayment)it).paymentMothod.name)
-            receipt.setTab_reference('0000'+i)
-            receipt.setTab_value(((InstalmentPayment)it).amountPaid.toString())
-
-            receiptList.add(receipt)
-        }
-
-        println('Size: '+receiptList.size())
-
-        def beanTable = new JRBeanCollectionDataSource(receiptList)
-        def mapTable = new HashMap<String,Object>()
-        mapTable.put('receiptDataSource',beanTable)
-
-//        String info,num,client,date,entity
-
-        def receiptList0 = new ArrayList<Receipt>()
-        def receipt0 = new Receipt()
-        def logo = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file.toString()
-
-        receipt0.setLogo(logo)
-        receipt0.setInfo('<h1>Organization Name<h1><p>Junior Macuvele<p>')
-        receipt0.setNum('00001')
-        receipt0.setClient('Fader Azevedo Macuvele')
-        receipt0.setDate('20-12-2020')
-        receipt0.setEntity('Nome da organization')
-
-//        String sub_total, iva_percent, iva_value,total
-
-        receipt0.setSub_total('18.000,00')
-        receipt0.setIva_percent('12')
-        receipt0.setIva_value('100')
-        receipt0.setTotal('20.000,00')
-        receiptList0.add(receipt0)
-
-        def beanActivity0 = new JRBeanCollectionDataSource(receiptList0)
-
-//        def receiptJasper = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file
-//        def receiptJasper = new File('D:/receipt.jasper').toString()
-        def destiny = 'D:/recibo.pdf'
-//        println('Bytes: '+getBytes(receiptJasper))
-
-//        def jasperPrint = JasperFillManager.fillReport(new File('D:/receipt.jasper').toString(), mapTable, beanActivity0)
-        def jasperPrint = JasperFillManager.fillReport(new File('D:/receipt.jasper').toString(), null, beanTable)
-        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
+    def getContract(loan){
+        def destiny = getLoanDir(loan as Loan)+'/contract.pdf'
     }
 }
