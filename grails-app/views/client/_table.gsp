@@ -20,7 +20,7 @@
             <g:link controller="client" action="show" class="d-flex" id="${it.id}">
                 <span class="round rounded-circle d-flex flex-column justify-content-center bg-light-extra" style="border: 3px solid #84dbe2">
                     <span class="w-100 text-center">
-                        ${it.fullName[0]}
+                        <g:include controller="client" action="getInitialChars" params="[name:it.fullName]"/>
                     </span>
                 </span>
                 <span class="d-flex flex-column justify-content-center ml-2">
