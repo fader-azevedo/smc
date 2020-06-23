@@ -28,31 +28,40 @@
                                 </span>
                             </a>
                         </li>
-                        <div class="line-title text-center mt-2 mb-3 mb-md-3">
-                            <span class="text">Filtro</span>
-                        </div>
-                        <li>
-                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3"
-                               data-status="aberto">
-                                <span>Abertos</span>
-                                <span><g:include action="loans" params="[status: 'aberto']"/></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"
-                               data-status="vencido">
-                                <span>Vencidos</span>
-                                <span><g:include action="loans" params="[status: 'vencido']"/></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"
-                               data-status="fechado">
-                                <span>Fechados</span>
-                                <span><g:include action="loans" params="[status: 'fechado']"/></span>
-                            </a>
-                        </li>
+
+                        %{--                        <li>--}%
+                        %{--                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3"--}%
+                        %{--                               data-status="aberto">--}%
+                        %{--                                <span>Abertos</span>--}%
+                        %{--                                <span><g:include action="loans" params="[status: 'aberto']"/></span>--}%
+                        %{--                            </a>--}%
+                        %{--                        </li>--}%
+                        %{--                        <li>--}%
+                        %{--                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"--}%
+                        %{--                               data-status="vencido">--}%
+                        %{--                                <span>Vencidos</span>--}%
+                        %{--                                <span><g:include action="loans" params="[status: 'vencido']"/></span>--}%
+                        %{--                            </a>--}%
+                        %{--                        </li>--}%
+                        %{--                        <li>--}%
+                        %{--                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"--}%
+                        %{--                               data-status="fechado">--}%
+                        %{--                                <span>Fechados</span>--}%
+                        %{--                                <span><g:include action="loans" params="[status: 'fechado']"/></span>--}%
+                        %{--                            </a>--}%
+                        %{--                        </li>--}%
                     </ul>
+
+                    <div class="line-title text-center mt-2 mb-3 mb-md-3">
+                        <span class="text">Filtro</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status-select">Estado</label>
+                        <g:select class="select2" name="status-select"
+                                  from="${Loan.constrainedProperties.status.inList}"
+                                  noSelection="${['': 'Todos']}"/>
+                    </div>
 
                     <div class="d-flex flex-column justify-content-between">
                         <div class="form-group">
@@ -219,6 +228,7 @@
 
 <script>
 
+    const statusSelect = $('#status-select');
 
     $(document).ready(function () {
         $('#li-loan').addClass('active');
@@ -263,10 +273,24 @@
         $('#loan-table').footable();
         $('.filter').on('click', function () {
             const status = $(this).attr('data-status');
-            $('#loan-title').text(status + 's');
-            <g:remoteFunction action="filter" params="{'status':status}" onSuccess="updateTable(data)"/>
+
         });
+        statusSelect.on('change', function () {
+            filter()
+        });
+        statusSelect.val('Aberto').trigger('change');
     });
+
+    function filter() {
+        const status = statusSelect.val();
+        if(status){
+            $('#loan-title').text(status + 's');
+        }else{
+            $('#loan-title').text('Todos');
+        }
+
+        <g:remoteFunction action="filter" params="{'status':status}" onSuccess="updateTable(data)"/>
+    }
 
     function updateTable(data) {
         $("#loan-table tbody").fadeOut("fast", function () {

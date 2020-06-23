@@ -234,12 +234,14 @@ class LoanController {
     }
 
     def filter(){
-        def loanList = Loan.findAllByStatus(params.status.toString()).sort{it.dateCreated}.reverse()
+        def status = params.status
+        def loanList = Loan.createCriteria().list {
+            if(status){
+                eq('status',status)
+            }
+            order('dateCreated','desc')
+        } as List<Loan>
         render(template: 'table',model: [loanList:loanList])
-    }
-
-    def getFile(){
-//        def file = resource(dir: '',file: '',)
     }
 
     def getImage() {

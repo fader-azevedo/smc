@@ -3,7 +3,7 @@
     <tr id="tr-${it.id}">
         <td>
             <div class="d-flex justify-content-center">
-                <button class="btn btn-sm btn-secondary btn-details mr-3" data-id="${it.id}">
+                <button class="btn btn-sm btn-secondary btn-details mr-3" data-id="${it.id}" title="Ver detalhes">
                     <i class="fa fa-info">&nbsp;</i>Detalhes
                 </button>
 
