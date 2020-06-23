@@ -16,31 +16,26 @@
             <div class="contact-page-aside">
                 <div class="left-aside d-flex flex-column justify-content-between h-100">
                     <div>
-                        <ul class="list-style-none mb-3">
+                        <ul class="list-style-none mb-1">
                             <li class="rounded-label f-s-17">
                                 <a class="f-w-700" href="javascript:void(0)">
                                     Clientes
                                     <span>${Client.count}</span>
                                 </a>
                             </li>
-                            <div class="line-title text-center mt-2 mb-3 mb-md-3">
-                                <span class="text">Filtro</span>
-                            </div>
-                            <li>
-                                <a class="filter link btn btn btn-light d-flex justify-content-between px-3"
-                                   data-status="aberto">
-                                    <span>Activos</span>
-                                    <span><g:include action="clients" params="[status: 'true']"/></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"
-                                   data-status="aberto">
-                                    <span>Inactivos</span>
-                                    <span><g:include action="clients" params="[status: 'false']"/></span>
-                                </a>
-                            </li>
                         </ul>
+                        <div class="line-title text-center mb-3 mb-md-3">
+                            <span class="text">Filtro</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status-select">Estado</label>
+                            <select name="" id="status-select" class="select2">
+                                <option value="">Todos</option>
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                        </div>
 
                         <div class="d-flex flex-column justify-content-between">
                             <div class="form-group">
@@ -91,7 +86,7 @@
                             <tr class="text-nowrap">
                                 <th class="border"></th>
                                 <th class="border">Nome</th>
-                                <th class="border">Estado cívil</th>
+                                <th class="border">Estado civil</th>
                                 <th class="border">Contacto</th>
                                 <th class="border">Email</th>
                             </tr>
@@ -186,8 +181,7 @@
                 $('#client-table tbody tr').removeClass('bg-light-info');
                 $('#tr-'+id).addClass('bg-light-info');
             });
-        })
-
+        });
 
         function updateDetails(data) {
             const client = data.client;

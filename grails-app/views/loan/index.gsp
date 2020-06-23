@@ -274,7 +274,6 @@
     function updateTable(data) {
         // alert(data)
         $("#loan-table tbody").fadeOut("fast", function () {
-            $('.ti-close').trigger('click');
 
             $('#loan-table tbody').html(data);
             $('#loan-table').footable();
@@ -282,6 +281,10 @@
             $("#loan-table tbody").fadeIn("slow");
             $('table tbody td').addClass('align-middle');
         });
+
+        if ($('.shw-rside').length === 1) {
+            $('.ti-close').trigger('click');
+        }
     }
 
     function updateDetails(data) {

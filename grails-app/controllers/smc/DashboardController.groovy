@@ -36,7 +36,6 @@ class DashboardController {
         for (def i = length.length(); i <= 4; i++) {
             code += '0'
         }
-        println('code: '.concat(code))
         return code.concat(length)
     }
 

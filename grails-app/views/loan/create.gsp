@@ -345,7 +345,6 @@
                                 <input type="text" class="form-control form-control-sm typeahead" id="profession" name="profession">
                             </div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light"

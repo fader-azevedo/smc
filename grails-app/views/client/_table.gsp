@@ -4,6 +4,9 @@
 %{--        <td>${it.code}</td>--}%
         <td>
             <div class="d-flex justify-content-center">
+                <g:link class="btn btn-sm btn-light-info mr-3" action="show" id="${it.id}">
+                    <i class="fa fa-eye">&nbsp;</i>
+                </g:link>
                 <button class="btn btn-sm btn-secondary btn-details mr-3" data-id="${it.id}">
                     <i class="fa fa-info">&nbsp;</i>Detalhes
                 </button>
