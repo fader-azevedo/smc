@@ -1,6 +1,7 @@
 package smc
 
 import auth.User
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import groovy.json.JsonSlurper
 import net.sf.jasperreports.engine.JasperExportManager
@@ -51,7 +52,12 @@ class PaymentController {
         render('')
     }
 
+    def beforeSave(){
+        render([status: true] as JSON)
+    }
+
     def save(Payment payment) {
+        println('test-save')
         def loan = Loan.get(new Long(params.loan))
         payment.setCreatedBy((User) springSecurityService.currentUser)
         payment.setUpdatedBy((User) springSecurityService.currentUser)
@@ -69,7 +75,7 @@ class PaymentController {
             instalmentPayment.setPaymentMothod(PaymentMethod.get(1))
             instalmentPayment.setCreatedBy((User) springSecurityService.currentUser)
             instalmentPayment.setUpdatedBy((User) springSecurityService.currentUser)
-            instalmentPayment.setCode(payment.code)
+            instalmentPayment.setCode(dashboard.codeGenerator(InstalmentPayment))
             instalmentPayment.setAmountPaid( new Double(it.value))
 
             if(!it.part){
@@ -99,7 +105,7 @@ class PaymentController {
             loanService.save(loan)
             println('emprestimo '+loan.code+' closed')
         }
-        render('saved')
+        render([payment:payment.id,saved:true] as JSON)
     }
 
     def edit(Long id) {
@@ -146,7 +152,6 @@ class PaymentController {
             }
             order('dateCreated','desc')
         } as List<Payment>
-
         render(template: 'all',model: [paymentList: paymentList])
     }
 
@@ -157,16 +162,16 @@ class PaymentController {
     }
 
     def static saveDestiny
-    def getReceipt(){
-        def payment = Payment.get(new Long(params.id))
-        def destiny = loanController.getLoanDir(payment.loan)+'/'+payment.code.concat('.pdf')
 
-        def installmentPayment = payment.instalmentPayments
-        def receiptListTable = new ArrayList<Receipt>()
+    def generateReceipt(id){
+        def payment = Payment.get(id)
+        def destiny = loanController.getLoanDir(payment.loan)+'/'+payment.code.concat('.pdf')
 
         if (!new File(destiny).isFile()) {
             def i = 0
-            installmentPayment.each {
+            def receiptListTable = new ArrayList<Receipt>()
+
+            payment.getInstalmentPayments().each {
                 def receipt = new Receipt()
                 receipt.setTab_num(it.instalment.code)
                 receipt.setTab_type(it.instalment.type.name)
@@ -178,7 +183,8 @@ class PaymentController {
             }
 
             def mapTable = new HashMap<String, Object>()
-            mapTable.put('receiptDataSource', new JRBeanCollectionDataSource(receiptListTable))
+            def receiptDataSource= new JRBeanCollectionDataSource(receiptListTable)
+            mapTable.put('receiptDataSource', receiptDataSource)
 
             def logo = grailsResourceLocator.findResourceForURI('/avatar.jpg').file.toString()
 
@@ -208,10 +214,25 @@ class PaymentController {
             JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
         }
         saveDestiny = destiny
-        render (destiny)
+        render ([destiny:destiny,status: true] as JSON)
+    }
+
+    def getReceipt(){
+        println('text-receipt')
+        generateReceipt(params.id)
+    }
+
+    def test(){
+        println('text-then')
+        render('')
     }
 
     def receipt(){
         render(file: saveDestiny, contentType: 'application/pdf')
+    }
+
+    def testSweet(){
+        println('params: '.concat(params.name.toString()))
+        render([name:'Macuvele',age:10] as JSON)
     }
 }

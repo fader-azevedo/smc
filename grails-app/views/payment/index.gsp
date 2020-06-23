@@ -251,8 +251,9 @@
     function fromLoans() {
         if(sourceClient){
             const loanClient = sourceClient.split('_');//[0]=loanId, [1]=clientId, [2]=loanStatus
-            // clientSelect.val(loanClient[1]).trigger('change');
-            // statusSelect.val(loanClient[2]).trigger('change');
+            clientSelect.val(loanClient[1]).trigger('change');
+            statusSelect.val(loanClient[2]).trigger('change');
+            ${session.setAttribute('loanClientStatus',null)}
         }
 
         // if ( window.history.replaceState ) {

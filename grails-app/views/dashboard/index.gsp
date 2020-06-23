@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Fader Macuvele
-  Date: 5/5/2020
-  Time: 7:24 AM
---%>
-
 <%@ page import="smc.Loan; smc.Client" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -143,13 +136,16 @@
 </div>
 
 <script>
-    initCharts(2020);
+
+    $(document).ready(function () {
+        initCharts(2020);
+        <g:remoteFunction controller="dashboard" action="initPDF" onSuccess="console.log('init pdf initialed')"/>
+    });
 
     function initCharts(ano){
         <g:remoteFunction action="lineChart" params="{'ano':ano}" onSuccess="lineChart(data)"/>
         <g:remoteFunction action="barChart" params="{'ano':ano}" onSuccess="barChart(data)"/>
     }
-
 
     // LINE CHART
     function lineChart(data){

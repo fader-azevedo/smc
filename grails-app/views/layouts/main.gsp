@@ -212,7 +212,7 @@
                     <li id="li-loan">
                         <a class="has-arrow waves-effect waves-dark">
                             <i class="mdi mdi-bank"></i>
-                            <span class="hide-menu">Emprestimos</span>
+                            <span class="hide-menu">Empréstimos</span>
                         </a>
                         <ul aria-expanded="false" class="collapse pl-3">
                             <li><g:link controller="loan" action="index" class="index"><i
@@ -252,8 +252,9 @@
         </div>
 
         <div class="sidebar-footer">
-            <a href="#" class="link" data-toggle="tooltip" title="Settings"><i
-                    class="ti-settings"></i></a>
+            <g:link controller="settings" action="index" class="link" data-toggle="tooltip" title="Settings"><i
+                    class="ti-settings"></i>
+            </g:link>
             <a href="#" class="link" data-toggle="tooltip" title="Email"><i
                     class="mdi mdi-gmail"></i></a>
             <g:link controller="logout" class="link" data-toggle="tooltip" title="Logout">

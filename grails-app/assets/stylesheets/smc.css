@@ -7,11 +7,11 @@ table.dataTable>tbody>tr.child ul.dtr-details{
     width: 100%;
 }
 
-
 table.dataTable>tbody>tr.child ul.dtr-details>li{
     display: flex;
     justify-content: space-between !important;
 }
+
 .line-table-inside{
     cursor: pointer;
 }
@@ -149,7 +149,9 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
 .line{
     border-top: 1px solid #d7d7d7;
 }
-
+.br{
+    border-radius:5px;
+}
 .br-r{
     /*border-radius: 0 4px 4px 0;*/
     /*border: 3px red;*/
@@ -617,4 +619,75 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
 
 .theme-color .theme-item .theme-link[data-logobg=skin6], .theme-color .theme-item .theme-link[data-navbarbg=skin6], .theme-color .theme-item .theme-link[data-sidebarbg=skin6] {
     background: #e9ecef
+}
+
+.search-result .search-result-list, .setting-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+}
+
+
+.setting-list > li, .widget-card, a.widget-card {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: #fff
+}
+
+@media (max-width: 991.98px) {
+    .setting-list > li {
+        display: block
+    }
+}
+
+.setting-list > li + li {
+    border-top: 1px solid #d9d9d9
+}
+
+.setting-list > li.setting-title {
+    background: #f2f2f2;
+    color: #000;
+    padding: .5rem .9375rem;
+    font-weight: 700;
+    font-size: .75rem;
+    position: relative
+}
+
+.setting-list > li .action, .setting-list > li .field, .setting-list > li .value {
+    padding: .9375rem;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+.setting-list > li .action + div, .setting-list > li .field + div, .setting-list > li .value + div {
+    border-left: 1px solid #d9d9d9
+}
+
+@media (max-width: 991.98px) {
+    .setting-list > li .action + div, .setting-list > li .field + div, .setting-list > li .value + div {
+        border-left: none;
+        padding-top: 0
+    }
+}
+
+.setting-list > li .value {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600
+}
+
+.setting-list > li .field {
+    width: 12.5rem;
+    font-size: 14px
+}
+
+@media (max-width: 991.98px) {
+    .setting-list > li .field {
+        width: auto;
+        text-decoration: underline
+    }
 }
