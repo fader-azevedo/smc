@@ -4,13 +4,13 @@
 <head>
     <meta name="layout" content="main"/>
     <title>
-        Lista de settingss
+        Definições
     </title>
 </head>
 
 <body>
 <% def settings = Settings.all.first() %>
-<div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+<div class="col-10">
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>

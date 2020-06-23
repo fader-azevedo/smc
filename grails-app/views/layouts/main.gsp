@@ -177,10 +177,12 @@
     <aside style="overflow: visible;" class="left-sidebar">
         <div class="scroll-sidebar">
             %{--            <div class="user-profile" style="background: url(${resource(dir: 'images',file: 'background/user-info.jpg')}) no-repeat;">--}%
-            <div class="user-profile bg-light">
-                <div class="profile-img"><asset:image src="avatar.png" alt="user"/></div>
+            <div class="user-profile bg-white">
+                <div class="profile-img d-flex justify-content-center">
+                    <img style="width: 180px;" src="${createLink(controller: 'settings',action: 'getLogo')}" alt="user"/>
+                </div>
 
-                <div class="profile-text">
+                <div class="profile-text pt-0">
                     <sec:ifLoggedIn>
                         <a class="dropdown-toggle u-dropdown text-capitalize" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="true">
@@ -202,7 +204,7 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
-                    <li class="nav-small-cap">Menu</li>
+%{--                    <li class="nav-small-cap">Menu</li>--}%
                     <li class="" id="li-dashboard">
                         <g:link controller="dashboard" class="waves-effect waves-dark">
                             <i class="mdi mdi-view-dashboard"></i>

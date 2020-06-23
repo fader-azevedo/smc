@@ -17258,24 +17258,30 @@ use profile section
     background-size: cover;
 }
 
+/*.user-profile .profile-img {*/
+/*    width: 50px;*/
+/*    margin-left: 30px;*/
+/*    padding: 35px 0;*/
+/*    border-radius: 100%;*/
+/*}*/
 .user-profile .profile-img {
-    width: 50px;
-    margin-left: 30px;
-    padding: 35px 0;
-    border-radius: 100%;
+    width: 100%;
+    /*margin-left: 30px;*/
+    /*padding: 35px 0;*/
+    /*border-radius: 100%;*/
 }
 
 .user-profile .profile-img::before {
-    -webkit-animation: 2.5s blow 0s linear infinite;
-    animation: 2.5s blow 0s linear infinite;
-    position: absolute;
-    content: '';
-    width: 50px;
-    height: 50px;
-    top: 35px;
-    margin: 0 auto;
-    border-radius: 50%;
-    z-index: 0;
+    /*-webkit-animation: 2.5s blow 0s linear infinite;*/
+    /*animation: 2.5s blow 0s linear infinite;*/
+    /*position: absolute;*/
+    /*content: '';*/
+    /*width: 50px;*/
+    /*height: 50px;*/
+    /*top: 35px;*/
+    /*margin: 0 auto;*/
+    /*border-radius: 50%;*/
+    /*z-index: 0;*/
 }
 
 @-webkit-keyframes blow {
@@ -17322,7 +17328,7 @@ use profile section
 
 .user-profile .profile-img img {
     width: 100%;
-    border-radius: 100%;
+    /*border-radius: 100%;*/
 }
 
 .user-profile .profile-text {
