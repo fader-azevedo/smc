@@ -108,10 +108,10 @@
                         <tr class="border f-w-700">
                             <th class="border"></th>
                             <th class="border">Cliente</th>
-                            <th class="border">Capital inicial</th>
-                            <th class="border">Juros(%)</th>
-                            <th class="border">V. pagar</th>
-                            <th class="border">Prazo</th>
+                            <th class="border text-right">Capital inicial</th>
+                            <th class="border text-right">Juros(%)</th>
+                            <th class="border text-right">V. pagar</th>
+                            <th class="border text-center">Prazo</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -274,9 +274,10 @@
     function updateTable(data) {
         // alert(data)
         $("#loan-table tbody").fadeOut("fast", function () {
+            $('.ti-close').trigger('click');
+
             $('#loan-table tbody').html(data);
             $('#loan-table').footable();
-
 
             $("#loan-table tbody").fadeIn("slow");
             $('table tbody td').addClass('align-middle');

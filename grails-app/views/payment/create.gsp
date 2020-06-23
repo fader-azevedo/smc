@@ -70,6 +70,9 @@
 
                             <h6 class="card-title">Prestações</h6>
                             <ul class="list-group">
+                                <li class="list-group-item list-group-item-light-megna">
+                                    Prestação <strong id="detail-installment-type">diaria</strong>
+                                </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Todas
                                     <span class="" id="detail-installment-all"></span>
@@ -292,6 +295,7 @@
             $('#detail-installment-payed').text(data.instPayed);
             $('#detail-installment-pend').text(data.instPend);
             // payment
+            $('#detail-installment-type').text(data.instalmentType);
             $('#detail-borrowedAmount').text(formatValue(loan.borrowedAmount));
             $('#detail-amountPayable').text(formatValue(loan.amountPayable));
             $('#detail-amountPaid').text(formatValue(data.valuePaid));
