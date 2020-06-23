@@ -19,7 +19,7 @@
         <div class="contact-page-aside">
             <div class="left-aside d-flex flex-column justify-content-between h-100">
                 <div>
-                    <ul class="list-style-none mb-3">
+                    <ul class="list-style-none mb-1">
                         <li class="rounded-label f-s-17">
                             <a class="f-w-700" href="javascript:void(0)">
                                 Empréstimos
@@ -28,39 +28,25 @@
                                 </span>
                             </a>
                         </li>
-
-                        %{--                        <li>--}%
-                        %{--                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3"--}%
-                        %{--                               data-status="aberto">--}%
-                        %{--                                <span>Abertos</span>--}%
-                        %{--                                <span><g:include action="loans" params="[status: 'aberto']"/></span>--}%
-                        %{--                            </a>--}%
-                        %{--                        </li>--}%
-                        %{--                        <li>--}%
-                        %{--                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"--}%
-                        %{--                               data-status="vencido">--}%
-                        %{--                                <span>Vencidos</span>--}%
-                        %{--                                <span><g:include action="loans" params="[status: 'vencido']"/></span>--}%
-                        %{--                            </a>--}%
-                        %{--                        </li>--}%
-                        %{--                        <li>--}%
-                        %{--                            <a class="filter link btn btn btn-light d-flex justify-content-between px-3 mt-2"--}%
-                        %{--                               data-status="fechado">--}%
-                        %{--                                <span>Fechados</span>--}%
-                        %{--                                <span><g:include action="loans" params="[status: 'fechado']"/></span>--}%
-                        %{--                            </a>--}%
-                        %{--                        </li>--}%
                     </ul>
 
-                    <div class="line-title text-center mt-2 mb-3 mb-md-3">
+                    <div class="line-title text-center mb-3 mb-md-3">
                         <span class="text">Filtro</span>
                     </div>
 
                     <div class="form-group">
                         <label for="status-select">Estado</label>
-                        <g:select class="select2" name="status-select"
-                                  from="${Loan.constrainedProperties.status.inList}"
-                                  noSelection="${['': 'Todos']}"/>
+                        <select name="" id="status-select" class="select2">
+                            <option value="">Todos</option>
+                            <g:each in="${Loan.constrainedProperties.status.inList}">
+                                <g:if test="${it.toString().equalsIgnoreCase('Aberto')}">
+                                    <option selected value="${it}">${it}</option>
+                                </g:if>
+                                <g:else>
+                                    <option value="${it}">${it}</option>
+                                </g:else>
+                            </g:each>
+                        </select>
                     </div>
 
                     <div class="d-flex flex-column justify-content-between">
@@ -95,8 +81,7 @@
                 <div class="right-page-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="card-title mt-2">Empréstimos <span id="loan-title" class="f-w-600">abertos</span>
-                            </h4>
+                            <h4 class="card-title mt-2" id="loan-title">Empréstimos <span class="f-w-600">abertos</span></h4>
                         </div>
 
                         <div class="col-6 d-flex py-2 justify-content-end">
@@ -270,29 +255,24 @@
             $('#loan-table tbody tr').removeClass('bg-light-info');
         });
 
-        $('#loan-table').footable();
-        $('.filter').on('click', function () {
-            const status = $(this).attr('data-status');
-
-        });
         statusSelect.on('change', function () {
             filter()
         });
-        statusSelect.val('Aberto').trigger('change');
     });
 
     function filter() {
         const status = statusSelect.val();
         if(status){
-            $('#loan-title').text(status + 's');
+            $('#loan-title').html('Empréstimos <span class="f-w-600">' +status.toString().toLowerCase()+'s');
         }else{
-            $('#loan-title').text('Todos');
+            $('#loan-title').text('Todos Empréstimos');
         }
 
         <g:remoteFunction action="filter" params="{'status':status}" onSuccess="updateTable(data)"/>
     }
 
     function updateTable(data) {
+        // alert(data)
         $("#loan-table tbody").fadeOut("fast", function () {
             $('#loan-table tbody').html(data);
             $('#loan-table').footable();

@@ -235,9 +235,13 @@ class LoanController {
 
     def filter(){
         def status = params.status
+        def client = params.client
         def loanList = Loan.createCriteria().list {
             if(status){
                 eq('status',status)
+            }
+            if(client) {
+                eq('client', Client.get(new Long(client)))
             }
             order('dateCreated','desc')
         } as List<Loan>

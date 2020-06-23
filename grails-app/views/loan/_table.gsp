@@ -1,31 +1,30 @@
 <%@ page import="smc.Loan" %>
 <g:each in="${(List<Loan>) loanList}">
     <tr id="tr-${it.id}">
-        <td>
-            <div class="d-flex justify-content-center">
+        <td class="w-25">
+            <div class="d-flex justify-content-start">
                 <button class="btn btn-sm btn-secondary btn-details mr-3" data-id="${it.id}" title="Ver detalhes">
                     <i class="fa fa-info">&nbsp;</i>Detalhes
                 </button>
-
                 <g:if test="${it.status.equalsIgnoreCase('fechado')}">
                     <g:form controller="payment" action="index">
-                        <button name="loanClientStatus" value="${it.id}-${it.client.id}-Fechado" type="submit"
+                        <button name="loanClientStatus" value="${it.id}_${it.client.id}_Fechado" type="submit"
                                 class="btn btn-sm btn-megna">
-                            <i class="fa fa-money-bill-alt">&nbsp;</i>Ver pagamentos
+                            <i class="fa fa-money-bill-alt">&nbsp;</i>Pagamentos
                         </button>
                     </g:form>
                 </g:if>
                 <g:else>
+                    <g:remoteLink controller="payment" action="list" params="[loanClientStatus:it.id+'_'+it.client.id+'_'+it.status]" after="list()">
+                        <button type="button"
+                                class="btn btn-sm btn-megna mr-3" title="Ver pagamentos">
+                            <i class="fa fa-money-bill-alt">&nbsp;</i>Pagamentos
+                        </button>
+                    </g:remoteLink>
                     <g:remoteLink controller="payment" action="newPayment"  params="[loanID:it.id]" after="newPayment()">
                         <button name="loanID" type="button"
                                 class="btn btn-sm btn-success btn-redirect" title="Efectuar pagamento">
                             <i class="fa fa-edit">&nbsp;</i>Pagamento
-                        </button>
-                    </g:remoteLink>
-                    <g:remoteLink controller="payment" action="list" params="[loanClientStatus:it.id+'_'+it.client.id+'_'+it.status]" after="list()">
-                        <button type="button"
-                                class="btn btn-sm btn-megna ml-3" title="Ver pagamentos">
-                            <i class="fa fa-eye">&nbsp;</i>Pagamentos
                         </button>
                     </g:remoteLink>
                 </g:else>
