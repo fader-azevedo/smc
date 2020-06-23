@@ -152,6 +152,10 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
 .br{
     border-radius:5px;
 }
+.br-b{
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 .br-r{
     /*border-radius: 0 4px 4px 0;*/
     /*border: 3px red;*/

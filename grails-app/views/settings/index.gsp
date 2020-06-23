@@ -15,11 +15,11 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <div class="card card-outline-success">
-        <div class="card-body p-0 shadow">
+        <div class="card-body p-0 shadow br">
             <div class="table-responsive d-none">
                 <f:table collection="${settingsList}"/>
             </div>
-            <ul class="setting-list">
+            <ul class="setting-list br">
                 <li class="setting-title">Dados gerais</li>
                 <li>
                     <div class="field">Logo</div>
@@ -102,7 +102,7 @@
                     </div>
                 </li>
                 <li class="setting-title">Idioma do sistema</li>
-                <li>
+                <li class="br-b">
                     <div class="field">Idioma</div>
 
                     <div class="value">

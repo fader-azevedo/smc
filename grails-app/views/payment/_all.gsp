@@ -1,6 +1,7 @@
 <%@ page import="smc.Payment" %>
 <g:each in="${(List<Payment>)paymentList}" var="payment">
     <tr class="tr-all">
+        <td>${payment.loan.client.fullName}</td>
         <td class="number-format">${payment.totalPaid}</td>
         <% def ip = payment.getInstalmentPayments(); def ipSize = ip.size()%>
         <td class="px-0">
@@ -27,7 +28,6 @@
         <td class="">
             <a class="link open-receipt" data-id="${payment.id}"><i class="fa fa-file-pdf text-danger">&nbsp;</i>Recibo-${payment.code.concat('.pdf')}</a>
         </td>
-        <td>${payment.loan.client.fullName}</td>
     </tr>
 </g:each>
 

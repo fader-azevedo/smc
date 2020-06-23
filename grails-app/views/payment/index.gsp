@@ -98,13 +98,13 @@
                            data-paging-size="4">
                         <thead>
                         <tr class="border f-w-700">
+                            <th class="border">Cliente</th>
                             <th class="border text-right">Total pago</th>
                             <th class="border text-right">Valor pago</th>
                             <th class="border px-3">Prestação</th>
                             <th class="border">F.pagamento</th>
                             <th class="border text-center">Data</th>
                             <th class="border">Recibo</th>
-                            <th class="border">Cliente</th>
                         </tr>
                         </thead>
                         <tbody id="payment-table-body">
