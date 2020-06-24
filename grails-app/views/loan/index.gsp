@@ -110,7 +110,7 @@
                             <th class="border">Cliente</th>
                             <th class="border text-right">Capital inicial</th>
                             <th class="border text-right">Juros(%)</th>
-                            <th class="border text-right">V. pagar</th>
+                            <th class="border text-right">Valor a pagar</th>
                             <th class="border text-center">Prazo</th>
                         </tr>
                         </thead>

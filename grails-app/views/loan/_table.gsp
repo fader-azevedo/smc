@@ -15,18 +15,18 @@
                     </g:form>
                 </g:if>
                 <g:else>
-                    <g:remoteLink controller="payment" action="list" params="[loanClientStatus:it.id+'_'+it.client.id+'_'+it.status]" after="list()">
-                        <button type="button"
-                                class="btn btn-sm btn-megna mr-3" title="Ver pagamentos">
+                    <g:form controller="payment" action="index">
+                        <button name="loanClientStatus" value="${it.id}_${it.client.id}_${it.status}" type="submit"
+                                class="btn btn-sm btn-megna mr-3">
                             <i class="fa fa-money-bill-alt">&nbsp;</i>Pagamentos
                         </button>
-                    </g:remoteLink>
-                    <g:remoteLink controller="payment" action="newPayment"  params="[loanID:it.id]" after="newPayment()">
-                        <button name="loanID" type="button"
-                                class="btn btn-sm btn-success btn-redirect" title="Efectuar pagamento">
+                    </g:form>
+                    <g:form controller="payment" action="create">
+                        <button name="loanID" value="${it.id}" type="submit"
+                                class="btn btn-sm btn-success btn-redirect"  title="Efectuar pagamento">
                             <i class="fa fa-edit">&nbsp;</i>Pagamento
                         </button>
-                    </g:remoteLink>
+                    </g:form>
                 </g:else>
             </div>
         </td>

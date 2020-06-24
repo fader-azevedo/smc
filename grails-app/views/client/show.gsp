@@ -1,8 +1,9 @@
+<%@ page import="smc.Loan" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Ver client</title>
+    <title>Cliente</title>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 
                         <p>${client.code}</p>
                         <p class="text-right">
-                            <a href="#" class="btn btn-sm btn-success width-100">Editar</a>
+                            <g:link action="edit" id="${client.id}" class="btn btn-sm btn-success width-100"><i class="fa fa-edit">&nbsp;</i>Editar</g:link>
                         </p>
                     </div>
                 </div>
@@ -37,10 +38,10 @@
             <div class="profile-container">
                 <div class="tab-content p-0">
                     <div class="tab-pane fade show active" id="profile-about">
-                        <table class="">
+                        <table>
                             <tbody>
                             <tr>
-                                <td class="field">Data de nasciemnto</td>
+                                <td class="field"><i class="fa fa-">&nbsp;</i>Data de nasciemnto</td>
                                 <td class="value">
                                     <g:formatDate format="dd-MM-yyyy" date="${client.birthDate}"/>
                                 </td>
@@ -81,11 +82,57 @@
                                     <f:display bean="client" property="address"/>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="field">Distrito | Provincia</td>
+                                <td class="value">
+                                    <f:display bean="client" property="district.name"/> |
+                                    <f:display bean="client" property="district.province.name"/>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade" id="profile-photos">
-                        <div class="m-b-10"><b>Photos (30)</b></div>
+                    <div class="tab-pane fade p-0" id="profile-photos">
+                        <div class="">
+                            <table class="table mb-1 no-wrap" id="table-loans" data-paging="true" data-paging-size="5">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="text-right">Valor pedido</th>
+                                    <th class="text-right">Juros(%)</th>
+                                    <th class="text-right">Valor pago</th>
+                                    <th>Estado</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <g:each in="${client.loans}" var="it" status="i">
+                                    <tr>
+                                        <td class="w-auto">
+                                            <div class="d-flex justify-content-center">
+                                                <g:link class="btn btn-sm btn-outline-secondary mr-3" controller="loan" action="show" id="${it.id}">
+                                                    <i class="fa fa-eye">&nbsp;</i>Ver empréstimo
+                                                </g:link>
+                                            </div>
+                                        </td>
+                                        <td class="number-format">${it.borrowedAmount}</td>
+                                        <td class="text-right"><g:formatNumber number="${it.interestRate}"/></td>
+                                        <td class="number-format">${it.amountPayable}</td>
+                                        <td>
+                                            <g:if test="${it.status.equalsIgnoreCase('aberto')}">
+                                                <span class="badge badge-info w-100">Aberto</span>
+                                            </g:if>
+                                            <g:if test="${it.status.equalsIgnoreCase('vencido')}">
+                                                <span class="badge badge-warning w-100">Vencido</span>
+                                            </g:if>
+                                            <g:if test="${it.status.equalsIgnoreCase('fechado')}">
+                                                <span class="badge badge-megna w-100">Fechado</span>
+                                            </g:if>
+                                        </td>
+                                    </tr>
+                                </g:each>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,5 +147,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#li-clients').addClass('active');
+        $('#table-loans').footable({
+            empty: 'Sem empréstimos'
+        });
+
+        $('.value').addClass('f-w-600');
+        $('.number-format').each(function () {
+            const value = parseFloat($(this).text());
+            $(this).text(formatValue(value)).addClass('text-right')
+        });
+    })
+</script>
 </body>
 </html>

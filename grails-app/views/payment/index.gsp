@@ -246,19 +246,18 @@
         $('table tbody td').addClass('align-middle');
     }
 
-    let sourceClient = '${session.getAttribute('loanClientStatus')}';
+    let sourceClient = '${params.loanClientStatus}';
 
     function fromLoans() {
         if(sourceClient){
             const loanClient = sourceClient.split('_');//[0]=loanId, [1]=clientId, [2]=loanStatus
             clientSelect.val(loanClient[1]).trigger('change');
             statusSelect.val(loanClient[2]).trigger('change');
-            ${session.setAttribute('loanClientStatus',null)}
         }
 
-        // if ( window.history.replaceState ) {
-        //     window.history.replaceState( null, null, window.location.href );
-        // }
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
     }
 
     $(document).on('click','.open-receipt',function () {

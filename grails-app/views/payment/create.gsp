@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<g:set var="loanID" value="${session.getAttribute('loanID')}"/>
+<g:set var="loanID" value="${params.loanID}"/>
 
 <g:if test="${loanID && !Loan.get(loanID as Serializable).status.equalsIgnoreCase('fechado')}">
     <div class="col-12">

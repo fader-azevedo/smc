@@ -1,4 +1,4 @@
-<%@ page import="smc.District; smc.Province; smc.DocumentType; smc.Client" %>
+<%@ page import="org.springframework.validation.FieldError; smc.District; smc.Province; smc.DocumentType; smc.Client" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +14,7 @@
         <g:hasErrors bean="${this.client}">
             <div class="alert alert-danger" role="alert">
                 <g:eachError bean="${this.client}" var="error">
-                    <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                    <li <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                 </g:eachError>
             </div>
         </g:hasErrors>
@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="birthDate">Data de Nascimento</label>
+                                <label for="birthDate">Data de Nascimento&nbsp;<span class="text-danger">*</span></label>
                                 <input type='text' class="form-control  date" name="birthDate_" id="birthDate" required/>
                             </div>
 
@@ -105,8 +105,11 @@
             </g:form>
         </div>
     </div>
-
     <script>
+
+        $(document).ready(function () {
+            $('#li-clients').addClass('active');
+        });
         %{--const input = $('#fullName');--}%
 
         %{--input.typeahead({--}%
@@ -155,7 +158,7 @@
             language:'pt',
             autoclose: true,
             weekStart: 1,
-            title: 'Data de assinatura',
+            title: 'Data de nascimento',
         });
         birthDate.datepicker('setDate',new Date());
     </script>
