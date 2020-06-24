@@ -13,6 +13,8 @@
 *= require plugins/datatables.net-bs4/css/dataTables.bootstrap4.css
 *= require plugins/datatables.net-bs4/css/responsive.dataTables.min.css
 *= require plugins/footable/css/footable.bootstrap.min.css
+*= require plugins/summernote/summernote.css
+*= require plugins/summernote/summernote-bs4.css
 *= require style.css
 *= require plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css
 *= require colors/blue.css

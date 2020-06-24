@@ -30,5 +30,7 @@
 //= require plugins/morrisjs/morris.js
 //= require plugins/sweetalert/sweetalert.min.js
 //= require plugins/sweetalert/jquery.sweet-alert.custom.js
+//= require plugins/summernote/summernote.min.js
+//= require plugins/summernote/summernote-bs4.min.js
 //= require script.js
 //= require dynamic-form.js

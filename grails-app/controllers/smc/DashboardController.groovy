@@ -160,7 +160,7 @@ class DashboardController {
     }
 
     def initPDF() {
-        if(!generateInitPDF) {
+        if (!generateInitPDF) {
             def init = new InitPDF()
             init.setInfo('info')
 
@@ -178,6 +178,25 @@ class DashboardController {
 
             generateInitPDF = true
         }
+        render('')
+    }
+
+    def contract() {
+        def init = new InitPDF()
+        def info = params.value
+        init.setInfo(info)
+
+        def initList = new ArrayList<InitPDF>()
+        initList.add(init)
+
+        def infoCollection = new JRBeanCollectionDataSource(initList)
+
+        def initJasper = grailsResourceLocator.findResourceForURI('/jasper/contract.jasper').file.toString()
+        def destiny = settings.root.concat('/contract.pdf')
+
+        def jasperPrint = JasperFillManager.fillReport(initJasper, null, infoCollection)
+        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
+
         render('')
     }
 }
