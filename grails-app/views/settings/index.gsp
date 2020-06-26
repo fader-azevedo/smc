@@ -10,7 +10,7 @@
 
 <body>
 <% def settings = Settings.all.first() %>
-<div class="col-10">
+<div class="col-12">
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -157,6 +157,30 @@
 %{--                        <li class="setting-title">Cabecalho do documento</li>--}%
                         <li class="setting-title">Corpo do documento</li>
                         <li>
+                            <div class="field w-25">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-megna">
+                                        <p class="text-nowrap m-0">
+                                            Valores extenos (dinamicos)
+                                        </p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Responsavel (Mutuante)
+                                    </li>
+                                    <li class="list-group-item">
+                                        Cliente
+                                    </li>
+                                    <li class="list-group-item">
+                                        valorPedido
+                                    </li>
+                                    <li class="list-group-item">
+                                        valorApagar
+                                    </li>
+                                    <li class="list-group-item">
+                                        garantias
+                                    </li>
+                                </ul>
+                            </div>
                             <div class="value p-0 f-w-100">
                                 <div id="summer-note" class="overflow-auto px-3 pt-3" style="height: 500px"></div>
                                 <div class="border-top p-2 d-flex justify-content-between">
@@ -224,7 +248,7 @@
 
         //contract card
         const contract = $('#div-contract-hidden').text();
-        $('#summer-note').html(contract)
+        $('#summer-note').html(contract);
         $('.card-header').after('<hr class="mt-0 pt-0">');
 
         $('#save').on('click',function () {
