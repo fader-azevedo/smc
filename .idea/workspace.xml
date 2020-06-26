@@ -2,114 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a18a4a4d-7fed-4658-b2c9-d9ddc20ceb5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/null" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/fileSnapshots.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/.asscache" beforeDir="false" afterPath="$PROJECT_DIR$/build/.asscache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/$RoleServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/$RoleServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/$UserRoleServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/$UserRoleServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/$UserServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/$UserServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/RoleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/RoleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/UserRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/UserRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/auth/UserRoleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/auth/UserRoleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$ClientServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$ClientServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$DistrictServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$DistrictServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$DocumentTypeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$DocumentTypeServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$GuaranteeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$GuaranteeServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$GuaranteeTypeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$GuaranteeTypeServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$GuarantorServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$GuarantorServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentPaymentServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentPaymentServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentTypeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$InstalmentTypeServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$LoanGuaranteeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$LoanGuaranteeServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$LoanServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$LoanServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$PaymentMethodServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$PaymentMethodServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$PaymentModeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$PaymentModeServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$PaymentServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$PaymentServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$ProvinceServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$ProvinceServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/$SettingsServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/$SettingsServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Client$__clinit__closure1$_closure3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Client$__clinit__closure1$_closure3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Client$__clinit__closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Client$__clinit__closure1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Client$__clinit__closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Client$__clinit__closure2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3$_closure10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3$_closure11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_delete_closure3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_getDetails_closure5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4$_closure12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4$_closure13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_notFound_closure4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1$_closure6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1$_closure7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_save_closure1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2$_closure8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2$_closure9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController$_update_closure2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ClientController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DashboardController$_barChart_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DashboardController$_barChart_closure1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DashboardController$_lineChart_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DashboardController$_lineChart_closure2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/District.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/District.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DistrictController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DistrictController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DocumentType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DocumentType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/DocumentTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/DocumentTypeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Guarantee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Guarantee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/GuaranteeTypeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Guarantor$__clinit__closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Guarantor$__clinit__closure2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Guarantor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Guarantor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/GuarantorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/GuarantorController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Instalment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Instalment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentPayment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentPayment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentPaymentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentPaymentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/InstalmentTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/InstalmentTypeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Loan.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Loan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanGuarantee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanGuarantee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/LoanGuaranteeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/LoanGuaranteeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Payment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Payment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__byClient_closure3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__byClient_closure3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__filterPaymentByLoanStatus_closure4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$__filterPaymentByLoanStatus_closure4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_index_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_index_closure1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_save_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController$_save_closure2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentMethodController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentMethodController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentMode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/PaymentModeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/PaymentModeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Province.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Province.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/ProvinceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/ProvinceController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Settings$__clinit__closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Settings$__clinit__closure1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Settings$__clinit__closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Settings$__clinit__closure2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_delete_closure3$_closure10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_delete_closure3$_closure9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_delete_closure3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_notFound_closure4$_closure11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_notFound_closure4$_closure12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_notFound_closure4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_save_closure1$_closure5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_save_closure1$_closure6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_save_closure1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_update_closure2$_closure7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_update_closure2$_closure8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController$_update_closure2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/main/smc/SettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/main/smc/SettingsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/stacktrace.log" beforeDir="false" afterPath="$PROJECT_DIR$/build/stacktrace.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grails-app/views/client/index.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/views/client/index.gsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grails-app/views/loan/index.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/views/loan/index.gsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grails-app/views/payment/index.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/grails-app/views/payment/index.gsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,7 +220,7 @@
       <workItem from="1592905671405" duration="35164000" />
       <workItem from="1592977752281" duration="17998000" />
       <workItem from="1593055860445" duration="46418000" />
-      <workItem from="1593182048715" duration="6810000" />
+      <workItem from="1593182048715" duration="7182000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1589225490496</created>
@@ -636,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593185855287</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="contract.jasper variables">
+      <created>1593191073490</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1593191073490</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TraitInjectorService">
@@ -936,10 +837,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="115" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1588252341401" />
-    <state x="466" y="0" key="CommitChangelistDialog2" timestamp="1593185853652">
+    <state x="466" y="0" key="CommitChangelistDialog2" timestamp="1593191068087">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="466" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1593185853652" />
+    <state x="466" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1593191068087" />
     <state x="92" y="92" width="1182" height="554" key="DiffContextDialog" timestamp="1593077923779">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

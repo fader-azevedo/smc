@@ -163,38 +163,38 @@
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Valor pedido
-                    <span class="badge badge-pill f-w-600" id="detail-borrowedAmount">14</span>
+                    <span class="badge badge-pill f-w-600" id="detail-borrowedAmount">0</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Valor a pagar
-                    <span class="badge badge-pill f-w-600" id="detail-amountPayable">14</span>
+                    <span class="badge badge-pill f-w-600" id="detail-amountPayable">0</span>
                 </li>
                 <li class="list-group-item list-group-item-megna d-flex justify-content-between align-items-center">
                     Valor pago
-                    <span class="badge badge-pill f-w-600" id="detail-amountPaid">2</span>
+                    <span class="badge badge-pill f-w-600" id="detail-amountPaid">0</span>
                 </li>
                 <li class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center">
                     Dívida
-                    <span class="badge badge-pill f-w-600" id="detail-debit">1</span>
+                    <span class="badge badge-pill f-w-600" id="detail-debit">0</span>
                 </li>
             </ul>
             <hr>
             <h6 class="card-title">Prestações</h6>
             <ul class="list-group">
                 <li class="list-group-item list-group-item-light-megna">
-                    Prestação <strong id="detail-installment-type">diaria</strong>
+                    Prestação <strong id="detail-installment-type"></strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Todas
-                    <span class="" id="detail-installment-all">14</span>
+                    <span class="" id="detail-installment-all">0</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Pagas
-                    <span class="text-megna" id="detail-installment-payed">2</span>
+                    <span class="text-megna" id="detail-installment-payed">0</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Pendentes
-                    <span class="text-danger" id="detail-installment-pend">1</span>
+                    <span class="text-danger" id="detail-installment-pend">0</span>
                 </li>
             </ul>
 
