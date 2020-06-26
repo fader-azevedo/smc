@@ -23,7 +23,7 @@
                         <li class="rounded-label f-s-17">
                             <a class="f-w-700" href="javascript:void(0)">
                                 Empréstimos
-                                <span>
+                                <span class="d-none">
                                     <g:include action="loans"/>
                                 </span>
                             </a>
@@ -36,7 +36,7 @@
 
                     <div class="form-group">
                         <label for="status-select">Estado</label>
-                        <select name="" id="status-select" class="select2">
+                        <select name="" id="status-select" class="select2 filter">
                             <option value="">Todos</option>
                             <g:each in="${Loan.constrainedProperties.status.inList}">
                                 <g:if test="${it.toString().equalsIgnoreCase('Aberto')}">
@@ -51,8 +51,8 @@
 
                     <div class="d-flex flex-column justify-content-between">
                         <div class="form-group">
-                            <label for="filter-client">Cliente</label>
-                            <g:select class="select2" name="filter-client"
+                            <label for="client-select">Cliente</label>
+                            <g:select class="select2 filter" name="client-select"
                                       from="${Client.all.sort { it.fullName.toUpperCase() }}" optionKey="id"
                                       optionValue="fullName"
                                       noSelection="${['': 'Todos']}"/>
@@ -81,7 +81,8 @@
                 <div class="right-page-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="card-title mt-2" id="loan-title">Empréstimos <span class="f-w-600">abertos</span></h4>
+                            <h4 class="card-title mt-2" id="loan-title">Empréstimos <span class="f-w-600">abertos</span>
+                            </h4>
                         </div>
 
                         <div class="col-6 d-flex py-2 justify-content-end">
@@ -100,8 +101,10 @@
                     </div>
                 </div>
                 <hr>
+                <small>Emprestimos: <strong id="text-small-loan">Aberto</strong>&nbsp;|&nbsp;Cliente: <strong
+                        id="text-small-client">Todos</strong></small>
 
-                <div class="table-responsive">
+                <div class="table-responsive mt-2">
                     <table id="loan-table" class="table table-hover table-bordered no-wrap" data-paging="true"
                            data-paging-size="6">
                         <thead>
@@ -214,6 +217,7 @@
 <script>
 
     const statusSelect = $('#status-select');
+    const clientSelect = $('#client-select');
 
     $(document).ready(function () {
         $('#li-loan').addClass('active');
@@ -255,20 +259,32 @@
             $('#loan-table tbody tr').removeClass('bg-light-info');
         });
 
-        statusSelect.on('change', function () {
+        $('.filter').on('change', function () {
             filter()
         });
     });
 
     function filter() {
         const status = statusSelect.val();
-        if(status){
-            $('#loan-title').html('Empréstimos <span class="f-w-600">' +status.toString().toLowerCase()+'s');
-        }else{
+        const client = clientSelect.val();
+        if (status) {
+            $('#loan-title').html('Empréstimos <span class="f-w-600">' + status.toString().toLowerCase() + 's');
+            $('#text-small-loan').text(status + 's')
+        } else {
             $('#loan-title').text('Todos Empréstimos');
+            $('#text-small-loan').text('Todos');
         }
 
-        <g:remoteFunction action="filter" params="{'status':status}" onSuccess="updateTable(data)"/>
+        if (client) {
+            $('#text-small-client').text($('#client-select option:selected').text())
+        } else {
+            $('#text-small-client').text('Todos')
+        }
+
+        if(status && client){
+            $('#loan-title').html('Empréstimos de <span class="f-w-600"> '+$('#client-select option:selected').text());
+        }
+        <g:remoteFunction action="filter" params="{'status':status,'client':client}" onSuccess="updateTable(data)"/>
     }
 
     function updateTable(data) {

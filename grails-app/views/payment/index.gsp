@@ -22,7 +22,7 @@
                     <li class="rounded-label f-s-17">
                         <a class="f-w-700" href="javascript:void(0)">
                             Pagamentos
-                            <span>${Payment.count}</span>
+                            <span class="d-none">${Payment.count}</span>
                         </a>
                     </li>
                     <div class="line-title text-center mt-2 mb-3 mb-md-3">

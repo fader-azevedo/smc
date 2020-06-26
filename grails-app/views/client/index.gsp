@@ -20,7 +20,7 @@
                             <li class="rounded-label f-s-17">
                                 <a class="f-w-700" href="javascript:void(0)">
                                     Clientes
-                                    <span>${Client.count}</span>
+                                    <span class="d-none">${Client.count}</span>
                                 </a>
                             </li>
                         </ul>
@@ -137,7 +137,7 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         Dívida
-                        <span class="badge badge-pill f-w-600" id="detail-loans-not-paid">2</span>
+                        <span class="badge badge-pill f-w-600" id="detail-loans-not-paid">0</span>
                     </li>
                 </ul>
 
@@ -193,14 +193,13 @@
             $('#detail-loans').text(data.loans);
             $('#detail-loans-total').text(formatValue(data.totalBorrowed));
             $('#detail-loans-paid').text(formatValue(data.totalPaid));
+            // $('#detail-loans-not-paid').text(formatValue(data.totalBorrowed-data.totalPaid));
 
             $('#detail-createdBy').text(data.createdBy);
             $('#detail-updatedBy').text(data.updatedBy);
             $('#detail-dateCreated').text(formatDate(client.dateCreated));
             $('#detail-lastUpdated').text(formatDate(client.lastUpdated));
-
         }
-
     </script>
     </body>
 </html>
