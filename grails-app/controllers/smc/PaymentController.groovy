@@ -186,7 +186,7 @@ class PaymentController {
             def receiptDataSource= new JRBeanCollectionDataSource(receiptListTable)
             mapTable.put('receiptDataSource', receiptDataSource)
 
-            def logo = grailsResourceLocator.findResourceForURI('/avatar.jpg').file.toString()
+            def logo = grailsResourceLocator.findResourceForURI('/logo.jpg').file.toString()
 
             def receiptInfo = new Receipt()
             receiptInfo.setLogo(logo)

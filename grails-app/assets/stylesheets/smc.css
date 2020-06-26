@@ -2,6 +2,20 @@
 	input icon
 \*----------------------------*/
 
+#tab-pane-contract .note-editor.note-frame {
+    border: none;
+    margin-bottom: 0;
+}
+#tab-pane-contract .card-header {
+    background: rgba(163, 163, 163, 0.5);
+}
+
+
+
+.bg-back-light{
+    background-color: #67757c;
+}
+
 table.dataTable>tbody>tr.child ul.dtr-details{
     background-color: red;
     width: 100%;

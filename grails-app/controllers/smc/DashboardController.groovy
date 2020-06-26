@@ -3,9 +3,25 @@ package smc
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.test.mixin.gorm.Domain
+import net.sf.jasperreports.engine.JRBand
+import net.sf.jasperreports.engine.JRTextElement
+import net.sf.jasperreports.engine.JRTextField
+import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperExportManager
 import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.JasperPrint
+import net.sf.jasperreports.engine.JasperReport
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+import net.sf.jasperreports.engine.design.JRDesignBand
+import net.sf.jasperreports.engine.design.JRDesignStaticText
+import net.sf.jasperreports.engine.design.JRDesignTextField
+import net.sf.jasperreports.engine.design.JasperDesign
+import net.sf.jasperreports.engine.export.JRPdfExporter
+import net.sf.jasperreports.engine.type.HorizontalAlignEnum
+import net.sf.jasperreports.engine.xml.JRTextFieldFactory
+import net.sf.jasperreports.engine.xml.JRXmlLoader
+import net.sf.jasperreports.export.SimpleExporterInput
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput
 import org.grails.web.json.JSONArray
 import org.grails.web.json.JSONObject
 
@@ -21,7 +37,7 @@ class DashboardController {
     def sdfMes = new SimpleDateFormat('MM')
     def sdfAno = new SimpleDateFormat('YYYY')
     def monthsInt = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-    def months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    def static months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
     def static generateInitPDF = false
 
@@ -127,6 +143,12 @@ class DashboardController {
                 calendar.get(Calendar.HOUR_OF_DAY) + ':' + calendar.get(Calendar.MINUTE)
     }
 
+    def static formatDateWithMonthName(def data){
+        Calendar calendar = Calendar.getInstance()
+        data?calendar.setTime(data):calendar.setTime(new Date())
+        return calendar.get(Calendar.DAY_OF_MONTH) + ' de ' + months.get(calendar.get(Calendar.MONTH)) + ' de ' + calendar.get(Calendar.YEAR)
+    }
+
     def static removeAccents(String s) {
         return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
     }
@@ -183,7 +205,7 @@ class DashboardController {
 
     def contract() {
         def init = new InitPDF()
-        def info = params.value
+        def info = params.value.toString()
         init.setInfo(info)
 
         def initList = new ArrayList<InitPDF>()
@@ -198,5 +220,41 @@ class DashboardController {
         JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
 
         render('')
+
+
+//
+//        def init = new InitPDF()
+//        def info = params.value.toString()
+//        init.setInfo(info)
+//
+//        def initList = new ArrayList<InitPDF>()
+//        initList.add(init)
+//
+//        def infoCollection = new JRBeanCollectionDataSource(initList)
+//        def stream = grailsResourceLocator.findResourceForURI('/jasper/contract.jrxml').inputStream
+//
+//        def jasperDesign = JRXmlLoader.load(stream)
+//
+//        def detailBand = (JRDesignBand) jasperDesign.detailSection.bands.first()
+//
+//        def label = new JRDesignStaticText()
+//        label.setText('O sistema de informaç')
+//        label.setX(0)
+//        label.setY(0)
+//        label.setHeight(detailBand.height-20)
+//        label.setWidth(555)
+//        label.setHorizontalAlignment(HorizontalAlignEnum.CENTER)
+//        label.setMarkup('html')
+//
+//        detailBand.addElement(label)
+//
+//        def jasperReport = JasperCompileManager.compileReport(jasperDesign)
+//        def jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(), infoCollection)
+//        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File('D:/doc.pdf')))
+//        render('')
+    }
+
+    def generateContract(){
+
     }
 }
