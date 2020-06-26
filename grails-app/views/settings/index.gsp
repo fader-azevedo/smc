@@ -16,7 +16,6 @@
     </g:if>
     <div class="card">
         <div class="card-body p-0 shadow br">
-
             <ul class="nav nav-tabs customtab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#tab-pane-settings" role="tab">
@@ -31,7 +30,6 @@
                     </a>
                 </li>
             </ul>
-            <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" id="tab-pane-settings" role="tabpanel">
                     <ul class="setting-list br">
@@ -83,17 +81,17 @@
                                 <button class="btn btn-default btn-edit" data-title="Endereço" data-attr="address" data-value="${settings.address ? settings.address : 'Não definido'}">Editar</button>
                             </div>
                         </li>
-%{--                        <li>--}%
-%{--                            <div class="field">Nuit</div>--}%
+                        <li>
+                            <div class="field">Nuit</div>
 
-%{--                            <div class="value">--}%
-%{--                                ${settings.nuit ? settings.nuit : 'Não definido'}--}%
-%{--                            </div>--}%
+                            <div class="value">
+                                ${settings.nuit ? settings.nuit : 'Não definido'}
+                            </div>
 
-%{--                            <div class="action">--}%
-%{--                                <button class="btn btn-default btn-edit" data-title="Nuit" data-attr="nuit" data-value="${settings.nuit ? settings.nuit : 'Não definido'}">Editar</button>--}%
-%{--                            </div>--}%
-%{--                        </li>--}%
+                            <div class="action">
+                                <button class="btn btn-default btn-edit" data-title="Nuit" data-attr="nuit" data-value="${settings.nuit ? settings.nuit : 'Não definido'}">Editar</button>
+                            </div>
+                        </li>
                         <li>
                             <div class="field">Contacto</div>
 
@@ -154,12 +152,21 @@
                 </div>
                 <div class="tab-pane" id="tab-pane-contract" role="tabpanel">
                     <div id="div-contract-hidden" class="d-none">${settings.contract}</div>
-                    <div id="summer-note" class="overflow-auto px-3 pt-3" style="height: 500px"></div>
-                    <div class="border-top p-3">
-                        <button id="edit" class="btn btn-default bg-light mr-2" type="button"><i class="fa fa-edit">&nbsp;</i>Editar</button>
-%{--                        <button id="pdf" class="btn btn-dribbble float-right" type="button"><i class="fa fa-file-pdf">&nbsp;</i>Pdf</button>--}%
-                        <button id="save" class="btn btn-megna" type="button"><i class="fa fa-save">&nbsp;</i>Salvar</button>
-                    </div>
+
+                    <ul class="setting-list br ">
+%{--                        <li class="setting-title">Cabecalho do documento</li>--}%
+                        <li class="setting-title">Corpo do documento</li>
+                        <li>
+                            <div class="value p-0 f-w-100">
+                                <div id="summer-note" class="overflow-auto px-3 pt-3" style="height: 500px"></div>
+                                <div class="border-top p-2 d-flex justify-content-between">
+                                    <button id="edit" class="btn btn-default bg-light mr-2" type="button"><i class="fa fa-edit">&nbsp;</i>Editar</button>
+                                    <button id="pdf" class="btn btn-success" type="button"><i class="fa fa-file-pdf">&nbsp;</i>Visualizar</button>
+                                    <button id="save" class="btn btn-megna" type="button"><i class="fa fa-save">&nbsp;</i>Salvar</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
