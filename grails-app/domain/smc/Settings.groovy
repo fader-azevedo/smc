@@ -7,6 +7,7 @@ class Settings {
     String logo
     String loans
     String contract
+    String contractHeader
     //institution info
     String lender
     String name
@@ -35,5 +36,6 @@ class Settings {
     static mapping = {
         version false
         contract type: 'text'
+        contractHeader type: 'text'
     }
 }

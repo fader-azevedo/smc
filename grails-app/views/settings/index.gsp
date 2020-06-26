@@ -151,10 +151,31 @@
                     </ul>
                 </div>
                 <div class="tab-pane" id="tab-pane-contract" role="tabpanel">
-                    <div id="div-contract-hidden" class="d-none">${settings.contract}</div>
 
                     <ul class="setting-list br ">
-%{--                        <li class="setting-title">Cabecalho do documento</li>--}%
+                        <div id="contract-header-hidden" class="d-none">${settings.contractHeader}</div>
+                        <li class="setting-title">Cabecalho do documento</li>
+                        <li>
+                            <div class="field w-25">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-megna">
+                                        <p class="text-nowrap m-0">
+                                            Valores extenos (dinamicos)
+                                        </p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Responsavel (Mutuante)
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="value p-0 f-w-100">
+                                <div id="summer-note-header" class="overflow-auto px-3 pt-3" style="height: 200px"></div>
+                                <div class="border-top p-2 d-flex justify-content-between">
+                                    <button id="edit-header" class="btn btn-default bg-light mr-2" type="button"><i class="fa fa-edit">&nbsp;</i>Editar</button>
+                                    <button id="save-header" class="btn btn-megna" type="button"><i class="fa fa-save">&nbsp;</i>Salvar</button>
+                                </div>
+                            </div>
+                        </li>
                         <li class="setting-title">Corpo do documento</li>
                         <li>
                             <div class="field w-25">
@@ -182,7 +203,8 @@
                                 </ul>
                             </div>
                             <div class="value p-0 f-w-100">
-                                <div id="summer-note" class="overflow-auto px-3 pt-3" style="height: 500px"></div>
+                                <div id="contract-body-hidden" class="d-none">${settings.contract}</div>
+                                <div id="summer-note-body" class="overflow-auto px-3 pt-3" style="height: 500px"></div>
                                 <div class="border-top p-2 d-flex justify-content-between">
                                     <button id="edit" class="btn btn-default bg-light mr-2" type="button"><i class="fa fa-edit">&nbsp;</i>Editar</button>
                                     <button id="pdf" class="btn btn-success" type="button"><i class="fa fa-file-pdf">&nbsp;</i>Visualizar</button>
@@ -245,26 +267,40 @@
            <g:remoteFunction action="updateItem" params="{'attr':attr,'value':value}" onSuccess="successEdit(data)"/>
         });
 
-
-        //contract card
-        const contract = $('#div-contract-hidden').text();
-        $('#summer-note').html(contract);
         $('.card-header').after('<hr class="mt-0 pt-0">');
+
+        //contract header card
+        $('#summer-note-header').html($('#contract-header-hidden').text());
+
+        $('#edit-header').on('click',function () {
+            $("#summer-note-header").summernote(optionsHeader);
+            $('.note-resizebar').remove()
+        });
+
+        $('#save-header').on('click',function () {
+            title = 'Contrato';
+            $("#summer-note-header").summernote('destroy');
+            const value = ($('#summer-note-header').html());
+            <g:remoteFunction action="updateItem" params="{'attr':'contractHeader','value':value}" onSuccess="successEdit(data)"/>
+        });
+
+        //contract body card
+        $('#summer-note-body').html($('#contract-body-hidden').text());
 
         $('#save').on('click',function () {
             title = 'Contrato';
-            $("#summer-note").summernote('destroy');
-            const value = ($('#summer-note').html());
+            $("#summer-note-body").summernote('destroy');
+            const value = ($('#summer-note-body').html());
             <g:remoteFunction action="updateItem" params="{'attr':'contract','value':value}" onSuccess="successEdit(data)"/>
         });
 
         $('#edit').on('click',function () {
-            $("#summer-note").summernote(options);
+            $("#summer-note-body").summernote(options);
             $('.note-resizebar').remove()
         });
 
         %{--$('#pdf').on('click',function () {--}%
-        %{--    const value = ($('#summer-note').html());--}%
+        %{--    const value = ($('#summer-note-body').html());--}%
         %{--    <g:remoteFunction controller="dashboard" action="contract" params="{'value':value}" onSuccess="console.log('saved')"/>--}%
         %{--})--}%
     });
@@ -273,8 +309,10 @@
         if(data.status.toString()==='ok'){
             swal('',title+' actualizado com sucesso','success').then(function () {
                 if(title.toString() === 'Contrato'){
-                    const value = ($('#summer-note').html());
-                    <g:remoteFunction controller="settings" action="generateContract" params="{'details':value}" onSuccess="window.location.reload()"/>
+                    const header = $('#summer-note-header').html();
+                    const details = $('#summer-note-body').html();
+                    <g:remoteFunction controller="settings" action="generateContract"
+                    params="{'details':details,'header':header,'client':1}" onSuccess="window.location.reload()"/>
                 }else{
                     window.location.reload();
                 }
@@ -283,6 +321,10 @@
             swal('','Erro ao actualizar '+title,'error')
         }
     }
+    const optionsHeader = {
+        height: 200, // set editor height
+        focus: false, // set focus to editable area after initializing summernote
+    };
     const options = {
         height: 500, // set editor height
         focus: false, // set focus to editable area after initializing summernote

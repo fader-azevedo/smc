@@ -62,16 +62,18 @@ class SettingsController {
 
     def generateContract() {
         def contract = new Contract()
+        def header = params.header.toString()
         def details = params.details.toString()
+        def client = Client.get(new Long(params.client))
         def logo = grailsResourceLocator.findResourceForURI('/logo.jpg').file.toString()
 
-        contract.setInfo('brevemente')
+        contract.setInfo(header)
         contract.setLogo(logo)
         contract.setDetails(details)
         contract.setDate(DashboardController.formatDateTime(new Date()))
         contract.setUser(((User)springSecurityService.currentUser).fullName)
         contract.setLender(settings.lender)
-        contract.setClient("Fader Azevedo Macuvele")
+        contract.setClient(client.fullName)
         contract.setSignatureDate(DashboardController.formatDateWithMonthName(new Date()))
 
         def contractList = new ArrayList<Contract>()
