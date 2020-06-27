@@ -1,4 +1,4 @@
-<%@ page import="smc.Client; smc.Loan" %>
+<%@ page import="smc.Settings; smc.Client; smc.Loan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,7 +153,7 @@
             <h6 class="card-title d-none">Código:&nbsp;<strong id="detail-code" class="float-right">33301</strong></h6>
             <h6 class="card-title">Contracto:&nbsp;
                 <span class="float-right">
-                    <a class="link"><i class="fa fa-file-word text-info">&nbsp;</i><strong
+                    <a class="link" id="contract-link" data-id=""><i class="fa fa-file-pdf text-danger">&nbsp;</i><strong
                             id="detail-contract"></strong></a>
                 </span>
             </h6>
@@ -213,11 +213,16 @@
         </div>
     </div>
 </div>
+<% def settings = Settings.all.first() %>
+
+<div id="contract-body-hidden" class="d-none">${settings.contract}</div>
+<div id="contract-body-hidden-reset" class="d-none">${settings.contract}</div>
 
 <script>
 
     const statusSelect = $('#status-select');
     const clientSelect = $('#client-select');
+    const contract = $('#contract-body-hidden');
 
     $(document).ready(function () {
         $('#li-loan').addClass('active');
@@ -239,7 +244,6 @@
             // alwaysShowCalendars: true,
         });
 
-
         $(document).on('click', '.btn-details', function () {
             const id = $(this).attr('data-id');
             <g:remoteFunction controller="loan" action="getDetails" params="{'id':id}" onSuccess="updateDetails(data)"/>
@@ -253,6 +257,8 @@
             }
             $('#loan-table tbody tr').removeClass('bg-light-info');
             $('#tr-' + id).addClass('bg-light-info');
+
+            $('#contract-link').attr('data-id',id) // set loan id in link to view pdf contract
         });
         // close details panel
         $('.ti-close').on('click', function () {
@@ -262,6 +268,7 @@
         $('.filter').on('change', function () {
             filter()
         });
+        contract.html(contract.text());
     });
 
     function filter() {
@@ -326,6 +333,35 @@
         $('#detail-updatedBy').text(data.updatedBy);
         $('#detail-dateCreated').text(formatDate(loan.dateCreated));
         $('#detail-lastUpdated').text(formatDate(loan.lastUpdated));
+    }
+
+    $('#contract-link').on('click',function () {
+        const loanId = $(this).attr('data-id');
+        if(loanId){
+            <g:remoteFunction action="getLoanValuesToPdf" params="{'id':loanId}" onSuccess="generateContract(data)"/>
+        }
+    });
+
+    function generateContract(variables) {
+        if (variables.status.toString() === 'ok') {
+            console.log('saved');
+
+            $('#contract-body-hidden u').each(function () {
+                const value = $(this).text().toString();
+                $(this).replaceWith(variables[value]); //
+            });
+            const value = contract.html();
+            const loan = variables.loan;
+            // console.log(value)
+            <g:remoteFunction controller="loan" action="generateContract" params="{'details':value,'loan':loan}" onSuccess="openContract(data)"/>
+        }
+    }
+
+    function openContract(data) {
+        if(data.status.toString() === 'ok'){
+            contract.html($('#contract-body-hidden-reset').text());
+            window.open('<g:createLink controller="loan" action="contract"/>', '_blank');
+        }
     }
 </script>
 </body>

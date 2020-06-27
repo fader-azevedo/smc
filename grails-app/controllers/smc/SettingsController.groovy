@@ -16,13 +16,12 @@ class SettingsController {
     def settings = Settings.all.first()
     def springSecurityService
 
-
-
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         respond settingsService.list(params), model:[settingsCount: settingsService.count()]
     }
+
     def create() {
         respond new Settings(params)
     }
@@ -61,19 +60,18 @@ class SettingsController {
     }
 
     def generateContract() {
-        def contract = new Contract()
         def header = params.header.toString()
         def details = params.details.toString()
-        def client = Client.get(new Long(params.client))
         def logo = grailsResourceLocator.findResourceForURI('/logo.jpg').file.toString()
 
+        def contract = new Contract()
         contract.setInfo(header)
         contract.setLogo(logo)
         contract.setDetails(details)
         contract.setDate(DashboardController.formatDateTime(new Date()))
         contract.setUser(((User)springSecurityService.currentUser).fullName)
         contract.setLender(settings.lender)
-        contract.setClient(client.fullName)
+        contract.setClient('Nome do cliente')
         contract.setSignatureDate(DashboardController.formatDateWithMonthName(new Date()))
 
         def contractList = new ArrayList<Contract>()
@@ -89,5 +87,6 @@ class SettingsController {
 
         render('')
     }
+
 
 }

@@ -1,27 +1,11 @@
 package smc
 
+import smc.extenso.CurrencyWriter
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
-import grails.test.mixin.gorm.Domain
-import net.sf.jasperreports.engine.JRBand
-import net.sf.jasperreports.engine.JRTextElement
-import net.sf.jasperreports.engine.JRTextField
-import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperExportManager
 import net.sf.jasperreports.engine.JasperFillManager
-import net.sf.jasperreports.engine.JasperPrint
-import net.sf.jasperreports.engine.JasperReport
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import net.sf.jasperreports.engine.design.JRDesignBand
-import net.sf.jasperreports.engine.design.JRDesignStaticText
-import net.sf.jasperreports.engine.design.JRDesignTextField
-import net.sf.jasperreports.engine.design.JasperDesign
-import net.sf.jasperreports.engine.export.JRPdfExporter
-import net.sf.jasperreports.engine.type.HorizontalAlignEnum
-import net.sf.jasperreports.engine.xml.JRTextFieldFactory
-import net.sf.jasperreports.engine.xml.JRXmlLoader
-import net.sf.jasperreports.export.SimpleExporterInput
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput
 import org.grails.web.json.JSONArray
 import org.grails.web.json.JSONObject
 
@@ -203,24 +187,30 @@ class DashboardController {
         render('')
     }
 
+    def numberToInFull(number){
+        def inFull = CurrencyWriter.getInstance().write(new BigDecimal(number.toString()))
+        def quebra = inFull.split(' ')
+        if (quebra[1].equalsIgnoreCase('mil') && quebra[0].equalsIgnoreCase('um')) {
+            inFull = inFull.split(' ', 2)[1].trim()
+        }
+
+        def split = inFull.split(' ')
+        inFull = ''
+        split.each {
+            inFull += this.capitalize(it) + ' '
+        }
+        return inFull.trim()
+    }
+
+    def capitalize(String input){
+        if(input.length() <= 1){
+            return input
+        }else{
+            return input.substring(0, 1).toUpperCase() + input.substring(1)
+        }
+    }
+
     def contract() {
-        def init = new InitPDF()
-        def info = params.value.toString()
-        init.setInfo(info)
-
-        def initList = new ArrayList<InitPDF>()
-        initList.add(init)
-
-        def infoCollection = new JRBeanCollectionDataSource(initList)
-
-        def initJasper = grailsResourceLocator.findResourceForURI('/jasper/contract.jasper').file.toString()
-        def destiny = settings.root.concat('/contract.pdf')
-
-        def jasperPrint = JasperFillManager.fillReport(initJasper, null, infoCollection)
-        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
-
-        render('')
-
 
 //
 //        def init = new InitPDF()
@@ -252,9 +242,5 @@ class DashboardController {
 //        def jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(), infoCollection)
 //        JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File('D:/doc.pdf')))
 //        render('')
-    }
-
-    def generateContract(){
-
     }
 }

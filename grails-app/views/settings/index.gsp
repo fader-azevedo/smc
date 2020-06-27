@@ -290,7 +290,7 @@
         $('#save').on('click',function () {
             title = 'Contrato';
             $("#summer-note-body").summernote('destroy');
-            const value = ($('#summer-note-body').html());
+            const value = $('#summer-note-body').html();
             <g:remoteFunction action="updateItem" params="{'attr':'contract','value':value}" onSuccess="successEdit(data)"/>
         });
 
@@ -303,6 +303,8 @@
         %{--    const value = ($('#summer-note-body').html());--}%
         %{--    <g:remoteFunction controller="dashboard" action="contract" params="{'value':value}" onSuccess="console.log('saved')"/>--}%
         %{--})--}%
+        x()
+
     });
 
     function successEdit(data) {
@@ -329,6 +331,17 @@
         height: 500, // set editor height
         focus: false, // set focus to editable area after initializing summernote
     };
+
+
+    function x() {
+        $('#summer-note-body u').each(function () {
+            const value = $(this).text();
+            $(this).replaceWith(value);
+            console.log(value);
+        });
+        $('#summer-note-body').html($('#contract-body-hidden').text());
+
+    }
 </script>
 
 </body>

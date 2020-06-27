@@ -39,70 +39,10 @@
         %{--                </div>--}%
         %{--            </g:form>--}%
 
-
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12">
-                    <p align="center" style="text-align: center">Macuvele</p>
-                </div>
-            </div>
-
-            <div id="summer-note"></div>
-            <button id="edit" class="btn btn-info btn-rounded" onclick="edit()" type="button">Edit</button>
-            <button id="save" class="btn btn-success btn-rounded" onclick="save()" type="button">Save</button>
-        </div>
     </div>
 </div>
 <script>
-    const options = {
-        height: 350, // set editor height
-        // minHeight: null, // set minimum height of editor
-        // maxHeight: null, // set maximum height of editor
-        // focus: true, // set focus to editable area after initializing summernote
-        // toolbar: [
-        //     // [groupName, [list of button]]
-        //
-        //     ['style', ['style']],
-        //     ['font', ['bold', 'underline', 'clear']],
-        //     ['fontname', ['fontname']],
-        //
-        //     // ['style', ['bold', 'italic', 'underline', 'clear']],
-        //
-        //     ['fontsize', ['fontsize']],
-        //     ['color', ['color']],
-        //     ['para', ['ul', 'ol', 'paragraph']],
-        //     ['height', ['height']],
-        //     ['view', ['fullscreen', 'codeview', 'help']],
-        // ]
-    };
 
-    const summer = function () {
-        $('#summer-note').summernote(options);
-    };
-
-    $(document).ready(function () {
-        summer()
-    });
-
-    window.edit = function () {
-        $("#summer-note").summernote(options)
-    };
-
-    window.save = function () {
-        $("#summer-note").summernote('destroy');
-        getValues()
-    };
-
-    function getValues() {
-        // $('#summer-note u').each(function () {
-        //     const value = $(this).text();
-        //     $(this).replaceWith(value);
-        //     console.log(value);
-        // });
-        const value = ($('#summer-note').html());
-        <g:remoteFunction controller="dashboard" action="contract" params="{'value':value}" onSuccess="console.log('saved')"/>
-        console.log(value)
-    }
 </script>
 </body>
 </html>
