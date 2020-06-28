@@ -9,6 +9,8 @@ import net.sf.jasperreports.engine.JasperFillManager
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
 import org.grails.core.io.ResourceLocator
 
+import java.text.DecimalFormat
+
 @Secured('ROLE_ADMIN')
 class PaymentController {
 
@@ -19,6 +21,8 @@ class PaymentController {
     def springSecurityService
     def dashboard = new DashboardController()
     def loanController = new LoanController()
+    def settings = Settings.all.first()
+    def amountFormat = new DecimalFormat('#.00')
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -31,11 +35,6 @@ class PaymentController {
             order('dateCreated','desc')
         }
         model:[paymentList: paymentList]
-    }
-
-    def list(){
-        session.setAttribute('loanClientStatus',params.loanClientStatus)
-        render('')
     }
 
     def show(Long id) {
@@ -57,7 +56,7 @@ class PaymentController {
     }
 
     def save(Payment payment) {
-        println('test-save')
+
         def loan = Loan.get(new Long(params.loan))
         payment.setCreatedBy((User) springSecurityService.currentUser)
         payment.setUpdatedBy((User) springSecurityService.currentUser)
@@ -99,7 +98,7 @@ class PaymentController {
                 instalmentService.save(newInstalment)
             }
         }
-
+        println('payment save')
         if(Instalment.findAllByLoanAndStatus(loan,'Pendente').size() == 0){
             loan.setStatus('Fechado')
             loanService.save(loan)
@@ -111,10 +110,6 @@ class PaymentController {
     def edit(Long id) {
         dashboard.disableSessions()
         respond paymentService.get(id)
-    }
-
-    def update(Payment payment) {
-
     }
 
     def _byClient(){
@@ -156,7 +151,7 @@ class PaymentController {
     }
 
     class Receipt{
-        String logo,info,num,client,date,entity
+        String logo,info,num,client,date,entity,user
         String tab_num,tab_method,tab_reference,tab_value,tab_type
         String sub_total, iva,total
     }
@@ -171,30 +166,31 @@ class PaymentController {
             def i = 0
             def receiptListTable = new ArrayList<Receipt>()
 
-            payment.getInstalmentPayments().each {
+            payment.getInstalmentPayments().sort{it.id}.each {
                 def receipt = new Receipt()
                 receipt.setTab_num(it.instalment.code)
                 receipt.setTab_type(it.instalment.type.name)
                 receipt.setTab_method(it.paymentMothod.name)
                 receipt.setTab_reference('0000' + i)
-                receipt.setTab_value(it.amountPaid.toString())
+                receipt.setTab_value(String.format('%,.2f', it.amountPaid))
 
                 receiptListTable.add(receipt)
             }
 
             def mapTable = new HashMap<String, Object>()
-            def receiptDataSource= new JRBeanCollectionDataSource(receiptListTable)
+            def receiptDataSource = new JRBeanCollectionDataSource(receiptListTable)
             mapTable.put('receiptDataSource', receiptDataSource)
 
             def logo = grailsResourceLocator.findResourceForURI('/logo.jpg').file.toString()
 
             def receiptInfo = new Receipt()
             receiptInfo.setLogo(logo)
-            receiptInfo.setInfo('<h1>Organization Name<h1><p>Junior Macuvele<p>')
+            receiptInfo.setInfo(settings.contractHeader)
             receiptInfo.setNum(payment.code)
             receiptInfo.setClient(payment.loan.client.fullName)
             receiptInfo.setDate(DashboardController.formatDateTime(new Date()))
-            receiptInfo.setEntity('Nome da organization')
+            receiptInfo.setEntity(settings.name)
+            receiptInfo.setUser(((User)springSecurityService.currentUser).fullName)
 
             def percent = 12
             def iva = payment.totalPaid * percent / 100
@@ -208,7 +204,6 @@ class PaymentController {
             def receiptInfoCollection = new JRBeanCollectionDataSource(receiptInfoList)
 
             def receiptJasper = grailsResourceLocator.findResourceForURI('/jasper/receipt.jasper').file.toString()
-//            def receiptJasper = new File('D:/receipt.jasper').toString()
 
             def jasperPrint = JasperFillManager.fillReport(receiptJasper, mapTable, receiptInfoCollection)
             JasperExportManager.exportReportToPdfStream(jasperPrint, new FileOutputStream(new File(destiny)))
@@ -218,21 +213,14 @@ class PaymentController {
     }
 
     def getReceipt(){
-        println('text-receipt')
         generateReceipt(params.id)
     }
 
     def test(){
-        println('text-then')
         render('')
     }
 
     def receipt(){
         render(file: saveDestiny, contentType: 'application/pdf')
-    }
-
-    def testSweet(){
-        println('params: '.concat(params.name.toString()))
-        render([name:'Macuvele',age:10] as JSON)
     }
 }

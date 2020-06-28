@@ -352,7 +352,6 @@
             });
             const value = contract.html();
             const loan = variables.loan;
-            // console.log(value)
             <g:remoteFunction controller="loan" action="generateContract" params="{'details':value,'loan':loan}" onSuccess="openContract(data)"/>
         }
     }

@@ -193,13 +193,7 @@
                     <div class="accordion mb-3" id="accordion">
                         <div class="card mb-2">
                             <div class="card-header bg-white" id="headingGuarantee">
-                                <button data-toggle="collapse" data-target="#collapseGuarantee" type="button"
-                                        class="btn btn-link text-muted bg-light">
-                                    <i class="mdi mdi-television-guide text-red"></i>
-                                    <strong>Garantias</strong>
-                                </button>
-
-                                <div class="float-right mt-2 p-0">
+                                <div class="mt-2 p-0">
                                     <input type="checkbox" id="guarantee-check" name="guarantee_check"
                                            class="filled-in m-0" checked/>
                                     <label for="guarantee-check" class="m-0">Registar garantias</label>
@@ -256,23 +250,18 @@
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="accordion mb-3" id="accordion-witness">
                         <div class="card">
                             <div class="card-header bg-white" id="headingWitness">
-                                <button data-toggle="collapse" data-target="#collapseWitness" type="button"
-                                        class="btn btn-link text-muted bg-light">
-                                    <i class="mdi mdi-account-multiple text-red"></i>
-                                    <strong>Testemunhas</strong>
-                                </button>
-
-                                <div class="float-right mt-2 p-0">
-                                    <input type="checkbox" id="witness-check" class="filled-in m-0" checked/>
+                                <div class="mt-2 p-0">
+                                    <input type="checkbox" id="witness-check" class="filled-in m-0"/>
                                     <label for="witness-check" class="m-0">Registar testemunhas</label>
                                 </div>
                             </div>
 
                             <div id="collapseWitness" class="collapse" aria-labelledby="headingWitness"
-                                 data-parent="#accordion">
+                                 data-parent="#accordion-witness">
                                 <div class="card-body px-0 pt-0" id="div-form-witness">
                                     <div class="row line py-2 px-3" id="dynamic-form-witness">
                                         <div class="col-12 col-sm-4 pr-lg-0 form-group-sm">
@@ -292,10 +281,10 @@
 
                                         <div class="col-sm-2 form-group-sm d-flex justify-content-between">
                                             <a href="javascript:void(0)"
-                                               class="btn btn-primary btn-sm waves-effect waves-purple"
+                                               class="btn btn-primary btn-sm waves-effect waves-purple btn-plus-witness"
                                                id="plus-witness"><i class="fa fa-plus"></i></a>
                                             <a href="javascript:void(0)"
-                                               class="btn btn-danger btn-sm waves-effect waves-red"
+                                               class="btn btn-danger btn-sm waves-effect waves-red btn-minus-witness"
                                                id="minus-witness"><i class="fa fa-minus"></i></a>
                                         </div>
                                     </div>
@@ -307,7 +296,7 @@
                     <button type="button" class="btn btn-sm btn-outline-secondary btn-previous">
                         <i class="mdi mdi-arrow-left"></i>&nbsp;Anterior
                     </button>
-                    <button type="submit" class="btn btn-sm btn-outline-success float-right waves-effect waves-light">
+                    <button type="submit" class="btn btn-sm btn-megna float-right waves-effect waves-light">
                         <i class="fa fa-save"></i>&nbsp;Salvar
                     </button>
                 </fieldset>
@@ -605,7 +594,7 @@
         signatureDate.datepicker('setDate', new Date());
 
         $("#dynamic-form-guarantee").dynamicForm("#dynamic-form-guarantee", "#plus-guarantee", "#minus-guarantee", {
-            limit: 3,
+            limit: 4,
             formPrefix: "dynamic-form-guarantee",
             normalizeFullForm: false
         });
@@ -622,6 +611,7 @@
         guaranteeCheck.on('change', function () {
             $(this).val($(this).prop("checked"));
             if ($(this).prop("checked")) {
+                $('#collapseGuarantee').addClass('show');
                 $('input[name="guaranteeType"]').each(function () {
                     $(this).attr('required', true).prop('readonly', false).val('');
                 });
@@ -630,6 +620,8 @@
                 });
                 $('.btn-plus-guarantee').removeClass('disabled')
             } else {
+                $('#collapseGuarantee').removeClass('show');
+
                 $('input[name="guaranteeType"]').each(function () {
                     $(this).attr('required', false).prop('readonly', true).val('');
                 });
@@ -641,6 +633,29 @@
             }
         });
         guaranteeCheck.trigger('change');
+
+        const witnessCheck = $('#witness-check');
+        witnessCheck.on('change', function () {
+            $(this).val($(this).prop("checked"));
+            if ($(this).prop("checked")) {
+                $('#collapseWitness').addClass('show');
+                $('#collapseWitness input').each(function () {
+                    $(this).attr('required', true).prop('readonly', false).val('');
+                });
+
+                $('.btn-plus-witness').removeClass('disabled')
+            } else {
+                $('#collapseWitness').removeClass('show');
+                $('#collapseWitness input').each(function () {
+                    $(this).attr('required', false).prop('readonly', true).val('');
+                });
+
+                $('.btn-plus-witness').addClass('disabled');
+                $('.btn-minus-witness').trigger('click') //remove all(except first) guarantee cards
+            }
+        });
+        witnessCheck.trigger('change');
+
         contract.html(contract.text());
         saveLoan()
     });
