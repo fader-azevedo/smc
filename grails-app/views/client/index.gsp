@@ -86,8 +86,8 @@
                             <tr class="text-nowrap">
                                 <th class="border"></th>
                                 <th class="border">Nome</th>
-                                <th class="border">Estado civil</th>
                                 <th class="border">Contacto</th>
+                                <th class="border">Outro contacto</th>
                                 <th class="border">Email</th>
                             </tr>
                             </thead>

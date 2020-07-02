@@ -48,8 +48,8 @@
                 <div class="form-group">
                     <label for="client-select">Cliente</label>
                     <g:select class="select2" name="client-select"
-                              from="${Client.all.sort { it.fullName.toUpperCase() }}" optionKey="id"
-                              optionValue="fullName"
+                              from="${Client.all.sort { it.user.fullName.toUpperCase() }}" optionKey="id"
+                              optionValue="user"
                               noSelection="${['': 'Todos']}"/>
                 </div>
 

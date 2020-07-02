@@ -131,7 +131,7 @@
                                         <tbody>
                                         <g:each in="${installments}" var="it" status="i">
                                             <tr id="tr-${i}" class="tr text-nowrap" data-id="${it.id}">
-                                                <td>${it.type.name}</td>
+                                                <td>${it.type}</td>
                                                 <td><g:formatDate format="dd/MM/yyyy" date="${it.dueDate}"/></td>
                                                 <% def installmentDebit = new DecimalFormat('#.00').format(include(controller: 'loan', action: 'getInstallDebit', params: [id: it.id]) as double) %>
 
@@ -139,7 +139,6 @@
                                                 <input type="hidden" class="current" data-id="${it.id}"
                                                        id="line-value-${it.id}"
                                                        value="${installmentDebit}">
-                                                %{--                                                       value="<g:formatNumber number="${installmentDebit}" format="#,##0.00"/>">--}%
                                                 <td>
                                                     <input type="checkbox" id="check-${it.id}"
                                                            class="filled-in input-check"

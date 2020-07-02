@@ -1,4 +1,4 @@
-<%@ page import="smc.Settings; smc.GuaranteeType; org.springframework.validation.FieldError; smc.PaymentMode; smc.District; smc.Province; smc.Client; smc.DocumentType" %>
+<%@ page import="smc.Loan; smc.Settings; smc.GuaranteeType; org.springframework.validation.FieldError; smc.District; smc.Province; smc.Client; smc.DocumentType" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +50,7 @@
         </div>
     </g:hasErrors>
 
-    <div class="card shadow">
+    <div class="card shadow-lg">
         <div class="card-header pb-0 pb-lg-0 bg-light">
             <h5 class="card-title"><i class="fa fa-pencil-alt"></i>&nbsp;Registar empréstimo</h5>
         </div>
@@ -85,12 +85,13 @@
                         <div class="col-12 col-sm-12 col-lg-12">
                             <div class="form-group ">
                                 <label for="client">Cliente</label>
-
                                 <div class="d-flex">
-                                    <g:select class="select2" name="client"
-                                              from="${Client.all.sort { it.fullName.toUpperCase() }}" optionKey="id"
-                                              optionValue="fullName"
-                                              noSelection="${['': 'Selecione']}"/>
+                                    <select name="client" id="client" class="select2">
+                                    <option value="">Selecione</option>
+                                    <g:each in="${clients}">
+                                        <option value="${it.id}">${it.user.fullName}</option>
+                                    </g:each>
+                                </select>
                                     <button class="btn btn-light btn-appended waves-effect waves-button-input text-nowrap"
                                             type="button" data-target="#client-modal" data-toggle="modal">&nbsp;Novo
                                     </button>
@@ -119,8 +120,8 @@
                                     <label for="paymentMode">Modo de pagamento</label>
                                     <select name="paymentMode" id="paymentMode" class="form-control">
                                         <option value="">Selecione</option>
-                                        <g:each in="${PaymentMode.all.sort { it.id }}">
-                                            <option value="${it.id}">${it.name}</option>
+                                        <g:each in="${Loan.constrainedProperties.paymentMode.inList}">
+                                            <option value="${it}">${it}</option>
                                         </g:each>
                                     </select>
                                 </div>
@@ -265,18 +266,18 @@
                                 <div class="card-body px-0 pt-0" id="div-form-witness">
                                     <div class="row line py-2 px-3" id="dynamic-form-witness">
                                         <div class="col-12 col-sm-4 pr-lg-0 form-group-sm">
-                                            <input type="text" class="form-control form-control-sm" name="witnessName"
+                                            <input type="text" class="form-control form-control-sm" name="witnessName[]"
                                                    placeholder="Nome">
                                         </div>
 
                                         <div class="col-12 col-sm-3 pr-lg-0 form-group-sm">
                                             <input type="text" class="form-control form-control-sm"
-                                                   name="witnessAddress" placeholder="Endereço">
+                                                   name="witnessAddress[]" placeholder="Endereço">
                                         </div>
 
                                         <div class="col-12 col-sm-3 pr-lg-0 form-group-sm">
                                             <input type="text" class="form-control form-control-sm"
-                                                   name="witnessContact" placeholder="Contacto">
+                                                   name="witnessContact[]" placeholder="Contacto">
                                         </div>
 
                                         <div class="col-sm-2 form-group-sm d-flex justify-content-between">
@@ -338,13 +339,6 @@
                                        id="birthDate"/>
                             </div>
 
-                            <div class="form-group-sm">
-                                <label for="maritalStatus">Estado Cívil&nbsp;<span class="text-danger">*</span>
-                                </label>
-                                <g:select name="maritalStatus"
-                                          from="${Client.constrainedProperties.maritalStatus.inList}"
-                                          class="form-control form-control-sm"/>
-                            </div>
 
                             <div class="form-group-sm">
                                 <label for="documentNumber">Nº do documento&nbsp;<span class="text-danger">*</span>

@@ -9,64 +9,55 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        if(Settings.count == 0){
+        if (Settings.count == 0) {
             def root = 'C:/Dropbox/SMC'
-            new Settings(root: root,logo: 'logo.jpg',loans: 'Emprestimos',ano: Calendar.getInstance().get(Calendar.YEAR)).save()
+            new Settings(
+                    name: 'organization name',
+                    lender: 'Nome do responsavel',
+                    contractHeader: '<p>header</p>',
+                    contract: '<p>header</p>',
+                    root: root,
+                    logo: 'logo.jpg',
+                    loans: 'Emprestimos',
+                    cellPhone: '123456789',
+                    address: 'endereco',
+                    ano: Calendar.getInstance().get(Calendar.YEAR)
+            ).save()
             new File(root).mkdirs()
         }
 
         def adminRole = Role.findOrSaveWhere(authority: 'ROLE_ADMIN')
-        def userRole = Role.findOrSaveWhere(authority: 'ROLE_USER')
-        def clientRole = Role.findOrSaveWhere(authority: 'ROLE_CLIENT')
+        Role.findOrSaveWhere(authority: 'ROLE_USER')
+        Role.findOrSaveWhere(authority: 'ROLE_CLIENT')
 
-        if(User.count == 0) {
+        if (User.count == 0) {
             def admin = User.findByUsername('admin')
             if (!admin) {
-                admin = new User(username: 'admin', password: 'admin', fullName: 'ADMIN', cellphone: '123456789'
-                        , address: 'Admin Address', email: 'admin@gmai.com'
-                ).save()
-            }
-
-            def user = User.findByUsername('user')
-            if (!user) {
-                user = new User(username: 'user', password: 'user', fullName: 'User', cellphone: '987654321'
-                        , address: 'User Address', email: 'user@gmai.com'
+                admin = new User(
+                        username: 'admin',
+                        password: 'admin',
+                        fullName: 'Admin'
                 ).save()
             }
 
             if (!UserRole.findByUserAndRole(admin, adminRole)) {
                 new UserRole(user: admin, role: adminRole).save()
             }
-            if (!UserRole.findByUserAndRole(user, userRole)) {
-                new UserRole(user: user, role: userRole).save()
-            }
         }
 
-        if(InstalmentType.count == 0){
-            ['Renda Normal', 'Parcela', 'Taxa de Concessão', 'Multa'].each {
-                InstalmentType.findOrSaveWhere(name: it)
-            }
-        }
-
-        if(DocumentType.count == 0) {
+        if (DocumentType.count == 0) {
             ['BI', 'Passaporte', 'Carta de Condução', 'Talão de BI', 'DIRE'].each {
                 DocumentType.findOrSaveWhere(name: it)
             }
         }
 
-        if(PaymentMode.count == 0){
-            ['Diaria','Semanal','Quinzenal','Mensal'].each {
-                PaymentMode.findOrSaveWhere(name: it)
-            }
-        }
-
-        if(PaymentMethod.count == 0){
-            ['Depósito','Transferencia Bancária','M-Pesa','E-Mola','MKesh'].each {
+        if (PaymentMethod.count == 0) {
+            ['Depósito', 'Transferencia Bancária', 'M-Pesa', 'E-Mola', 'MKesh'].each {
                 PaymentMethod.findOrSaveWhere(name: it)
             }
         }
 
-        if(Province.count == 0) {
+        if (Province.count == 0) {
             new JsonSlurper().parseText(provinces).each {
                 Province.findOrSaveWhere(id: new Long(it.id), name: it.name)
             }
@@ -76,13 +67,13 @@ class BootStrap {
             }
         }
 
-        if(GuaranteeType.count == 0){
+        if (GuaranteeType.count == 0) {
             new JsonSlurper().parseText(guaranteeTypeJSON).each {
                 GuaranteeType.findOrSaveWhere(name: it.name)
             }
         }
     }
-    
+
     def guaranteeTypeJSON = '[\n' +
             '{"name":"Carro"},\n' +
             '{"name":"Congelador"},\n' +

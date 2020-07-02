@@ -34,11 +34,11 @@
             <g:link controller="client" action="show" class="d-flex" id="${it.client.id}">
                 <span class="round rounded-circle d-flex flex-column justify-content-center bg-light-extra" style="border: 3px solid #84dbe2">
                     <span class="w-100 text-center">
-                        <g:include controller="client" action="getInitialChars" params="[name:it.client.fullName]"/>
+                        <g:include controller="client" action="getInitialChars" params="[name:it.client.user.fullName]"/>
                     </span>
                 </span>
                 <span class="d-flex flex-column justify-content-center ml-2">
-                    ${it.client.fullName}
+                    ${it.client.user.fullName}
                 </span>
             </g:link>
         </td>

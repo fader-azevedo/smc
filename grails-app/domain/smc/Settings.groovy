@@ -31,6 +31,7 @@ class Settings {
         email nullable: true
         language nullable: true
         contract nullable: true
+        nuit nullable: true
     }
 
     static mapping = {

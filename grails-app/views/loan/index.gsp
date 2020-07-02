@@ -53,8 +53,8 @@
                         <div class="form-group">
                             <label for="client-select">Cliente</label>
                             <g:select class="select2 filter" name="client-select"
-                                      from="${Client.all.sort { it.fullName.toUpperCase() }}" optionKey="id"
-                                      optionValue="fullName"
+                                      from="${Client.all.sort { it.user.fullName.toUpperCase() }}" optionKey="id"
+                                      optionValue="user"
                                       noSelection="${['': 'Todos']}"/>
                         </div>
 
@@ -312,9 +312,8 @@
 
     function updateDetails(data) {
         const loan = data.loan;
-        const client = data.client;
 
-        $('#detail-client-name').text(client.fullName);
+        $('#detail-client-name').text(data.client);
         $('#detail-code').text(loan.code);
         $('#detail-contract').text(loan.code + '.docx');
         $('#detail-installment-all').text(data.instAll);

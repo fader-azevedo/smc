@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="profile-header-info">
-                        <h4>${client.fullName}</h4>
+                        <h4>${client.user.fullName}</h4>
 
                         <p>${client.code}</p>
                         <p class="text-right">
@@ -41,12 +41,6 @@
                         <table>
                             <tbody>
                             <tr>
-                                <td class="field"><i class="fa fa-">&nbsp;</i>Data de nasciemnto</td>
-                                <td class="value">
-                                    <g:formatDate format="dd-MM-yyyy" date="${client.birthDate}"/>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td class="field">Tipo de docuemnto</td>
                                 <td class="value">
                                     <f:display bean="client" property="documentType.name"/>
@@ -55,13 +49,7 @@
                             <tr>
                                 <td class="field">Número do docuemnto</td>
                                 <td class="value">
-                                    <f:display bean="client" property="documentNumber"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="field">Estado civil</td>
-                                <td class="value">
-                                    <f:display bean="client" property="maritalStatus"/>
+                                    <f:display bean="client" property="docNumber"/>
                                 </td>
                             </tr>
                             <tr>

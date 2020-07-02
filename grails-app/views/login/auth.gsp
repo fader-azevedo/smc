@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Iniciar Sessão</title>
+    <title>Iniciar sessão</title>
     <asset:stylesheet src="style.css"/>
 </head>
 

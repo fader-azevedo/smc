@@ -87,7 +87,7 @@ class PaymentController {
                 newInstalment.setCode(instalment.getCode()+instalment.instalments.size()+1)
                 newInstalment.setLoan(loan)
                 newInstalment.setOwner(instalment)
-                newInstalment.setType(InstalmentType.findByName('Parcela'))
+                newInstalment.setType('Parcela')
                 newInstalment.setAmountPayable(new Double(it.value))
                 newInstalment.setCreatedBy((User) springSecurityService.currentUser)
                 newInstalment.setUpdatedBy((User) springSecurityService.currentUser)
@@ -168,13 +168,14 @@ class PaymentController {
 
             payment.getInstalmentPayments().sort{it.id}.each {
                 def receipt = new Receipt()
-                receipt.setTab_num(it.instalment.code)
-                receipt.setTab_type(it.instalment.type.name)
+                receipt.setTab_num((i+1).toString())
+                receipt.setTab_type(it.instalment.type)
                 receipt.setTab_method(it.paymentMothod.name)
                 receipt.setTab_reference('0000' + i)
                 receipt.setTab_value(String.format('%,.2f', it.amountPaid))
 
                 receiptListTable.add(receipt)
+                i++
             }
 
             def mapTable = new HashMap<String, Object>()
@@ -187,10 +188,10 @@ class PaymentController {
             receiptInfo.setLogo(logo)
             receiptInfo.setInfo(settings.contractHeader)
             receiptInfo.setNum(payment.code)
-            receiptInfo.setClient(payment.loan.client.fullName)
-            receiptInfo.setDate(DashboardController.formatDateTime(new Date()))
+            receiptInfo.setClient('<p><b>Cliente: </b>'+payment.loan.client.user.fullName+'</p>')
             receiptInfo.setEntity(settings.name)
-            receiptInfo.setUser(((User)springSecurityService.currentUser).fullName)
+            receiptInfo.setDate('Data e Hora: '+DashboardController.formatDateTime(new Date()))
+            receiptInfo.setUser('Utilizador: '+((User)springSecurityService.currentUser).fullName)
 
             def percent = 12
             def iva = payment.totalPaid * percent / 100

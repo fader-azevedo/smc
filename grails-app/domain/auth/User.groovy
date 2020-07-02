@@ -3,6 +3,7 @@ package auth
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
+import smc.Client
 
 @GrailsCompileStatic
 @EqualsAndHashCode(includes='username')
@@ -12,8 +13,6 @@ class User implements Serializable {
     private static final long serialVersionUID = 1
 
     String fullName
-    String cellphone
-    String address
     String username
     String password
     boolean enabled = true
@@ -25,12 +24,20 @@ class User implements Serializable {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
     }
 
+    static hasOne = [client: Client]
+
     static constraints = {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
+        client nullable: true
     }
 
     static mapping = {
 	    password column: '`password`'
+    }
+
+    @Override
+    String toString() {
+        return fullName
     }
 }

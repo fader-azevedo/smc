@@ -34,7 +34,22 @@ class LoanController {
     }
 
     def create() {
-        dashboard.disableSessions()
+        def clientDebitID = new ArrayList<Long>()
+
+        Loan.findAllByStatusInList(['Aberto','Vencido']).each {
+            if(!clientDebitID.contains(it.client.id)){
+                clientDebitID.add(it.client.id)
+            }
+        }
+
+        def clientsNoDebit = Client.all.sort { it.user.fullName.toUpperCase() }
+        if(!clientDebitID.isEmpty()){
+            clientsNoDebit = Client.findAllByIdNotInList(clientDebitID).sort { it.user.fullName.toUpperCase() }
+        }
+        respond new Loan(params), model: [clients: clientsNoDebit]
+    }
+
+    def create2(){
         respond new Loan(params)
     }
 
@@ -116,7 +131,7 @@ class LoanController {
 
     def generateInstalments(loan) {
         def dateDif = 1
-        switch (loan.paymentMode.name.toLowerCase().trim()) {
+        switch (loan.paymentMode.toLowerCase().trim()) {
             case 'semanal': dateDif = 7
                 break
             case 'quinzenal': dateDif = 15
@@ -133,7 +148,7 @@ class LoanController {
         for (def i = 1; i <= loan.getInstalmentsNumber(); i++) {
             def installment = new Instalment()
             installment.setLoan(loan)
-            installment.setType(InstalmentType.findByName('Renda Normal'))
+            installment.setType('Renda Normal')
             installment.setAmountPayable(new Double(params.amountPerInstalment))
             installment.setCreatedBy((User) springSecurityService.currentUser)
             installment.setUpdatedBy((User) springSecurityService.currentUser)
@@ -196,9 +211,9 @@ class LoanController {
 
         def debit = loan.amountPayable - valuePaid
         render([
-                loan     : loan, client: loan.client, instPayed: instPayed,
+                loan     : loan, client: loan.client.user.fullName, instPayed: instPayed,
                 instPend : instPend, instAll: instAll, valuePaid: valuePaid, debit: debit, createdBy: loan.createdBy.fullName,
-                updatedBy: loan.updatedBy.fullName, instalmentType: loan.paymentMode.name
+                updatedBy: loan.updatedBy.fullName, instalmentType: loan.paymentMode.trim()
         ] as JSON)
     }
 
@@ -265,7 +280,7 @@ class LoanController {
             contract.setDetails(details)
             contract.setUser(((User) springSecurityService.currentUser).fullName)
             contract.setLender(settings.lender)
-            contract.setClient(client.fullName)
+            contract.setClient(client.user.fullName)
             contract.setSignatureDate(DashboardController.formatDateWithMonthName(loan.signatureDate))
             contract.setDate(DashboardController.formatDateTime(new Date()))
 

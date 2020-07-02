@@ -66,7 +66,7 @@
                                         </td>
                                         <td class="px-0">
                                             <g:each in="${ip}" var="inp">
-                                                <p class="my-0  px-3">${inp.instalment.type.name}</p>
+                                                <p class="my-0  px-3">${inp.instalment.type}</p>
                                                 <hr>
                                             </g:each>
                                         </td>

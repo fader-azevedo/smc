@@ -16,25 +16,8 @@ class SettingsController {
     def settings = Settings.all.first()
     def springSecurityService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer max) {
         respond settingsService.list(params), model:[settingsCount: settingsService.count()]
-    }
-
-    def create() {
-        respond new Settings(params)
-    }
-
-    def save(Settings settings) {
-        try {
-            settingsService.save(settings)
-        } catch (ValidationException e) {
-            respond settings.errors, view:'create'
-            return
-        }
-
-        redirect(create())
     }
 
     def getLogo() {
@@ -87,6 +70,4 @@ class SettingsController {
 
         render('')
     }
-
-
 }

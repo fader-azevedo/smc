@@ -1,6 +1,8 @@
 package smc
 
+import auth.Role
 import auth.User
+import auth.UserRole
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
@@ -34,24 +36,23 @@ class ClientController {
     }
 
     def create() {
-        dashboard.disableSessions()
-        dashboard.codeGenerator(Client)
-
         respond new Client(params)
     }
 
     def save(Client client) {
+        def code = dashboard.codeGenerator(Client)
+        def user = new User(fullName: params.fullName,username: params.fullName.toString().trim().replace(' ',''),password: code)
         client.setCreatedBy((User) springSecurityService.currentUser)
         client.setUpdatedBy((User) springSecurityService.currentUser)
-        client.setCode(dashboard.codeGenerator(Loan))
-        def birthDate = new Date().parse("dd/MM/yyy",params.birthDate_.toString())
-        client.setBirthDate(birthDate)
-
-        client.setCode(dashboard.codeGenerator(Client))
-
+        client.setCode(code)
+        client.setUser(user)
         try {
             if (clientService.save(client)) {
-                new File(settings.root + '/' + settings.loans + '/' + DashboardController.removeAccents(client.fullName.trim()) + '_' + client.code).mkdirs()
+                println('client and user related (saved)')
+                if(new UserRole(user: user, role: Role.findByAuthority('ROLE_CLIENT')).save()){
+                    println('user granted role client')
+                }
+                new File(settings.root + '/' + settings.loans + '/' + DashboardController.removeAccents(client.user.fullName.trim()) + '-' + client.code).mkdirs()
             }
         } catch (ValidationException ignored) {
             respond client.errors, view: 'create'
@@ -66,7 +67,6 @@ class ClientController {
 
     def update(Client client) {
         if (client == null) {
-            notFound()
             return
         }
 
@@ -81,10 +81,6 @@ class ClientController {
 
     def delete(Long id) {
 
-    }
-
-    def getClient() {
-        render([client: Client.findByFullName(params.name.toString())] as JSON)
     }
 
     def getDetails() {
@@ -105,12 +101,11 @@ class ClientController {
     }
 
     def getDir(client) {
-        def dir = settings.root + '/' + settings.loans + '/' + DashboardController.removeAccents(((Client) client).fullName.trim()) + '_' + ((Client) client).code
+        def dir = settings.root + '/' + settings.loans + '/' + DashboardController.removeAccents(((Client) client).user.fullName.trim()) + '-' + ((Client) client).code
 
         if (!new File(dir).isDirectory()) {
             new File(dir).mkdirs()
         }
         return dir
     }
-
 }

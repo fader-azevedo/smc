@@ -1,7 +1,7 @@
 <%@ page import="smc.Payment" %>
 <g:each in="${(List<Payment>)paymentList}" var="payment">
     <tr class="tr-all">
-        <td>${payment.loan.client.fullName}</td>
+        <td>${payment.loan.client.user.fullName}</td>
         <td class="number-format">${payment.totalPaid}</td>
         <% def ip = payment.getInstalmentPayments(); def ipSize = ip.size()%>
         <td class="px-0">
@@ -12,7 +12,7 @@
         </td>
         <td class="px-0">
             <g:each in="${ip}" var="inp">
-                <p class="my-0  px-3">${inp.instalment.type.name}</p>
+                <p class="my-0  px-3">${inp.instalment.type}</p>
                 <hr>
             </g:each>
         </td>

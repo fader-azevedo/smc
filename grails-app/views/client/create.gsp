@@ -24,74 +24,75 @@
             </div>
             <g:form resource="${this.client}" method="POST">
                 <div class="card-body">
-%{--                    <f:all bean="client"/>--}%
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="fullName">Nome completo&nbsp;<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control  typeahead" id="fullName" name="fullName" required>
-                            </div>
+                    <input type="text" class="form-control  typeahead" id="fullName" name="fullName" required>
+                    <f:all bean="client"/>
+%{--                    <div class="row">--}%
+%{--                        <div class="col-md-6">--}%
+%{--                            <div class="form-group">--}%
+%{--                                <label for="fullName">Nome completo&nbsp;<span class="text-danger">*</span></label>--}%
+%{--                                <input type="text" class="form-control  typeahead" id="fullName" name="fullName" required>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label for="birthDate">Data de Nascimento&nbsp;<span class="text-danger">*</span></label>
-                                <input type='text' class="form-control  date" name="birthDate_" id="birthDate" required/>
-                            </div>
+%{--                            <div class="form-group">--}%
+%{--                                <label for="birthDate">Data de Nascimento&nbsp;<span class="text-danger">*</span></label>--}%
+%{--                                <input type='text' class="form-control  date" name="birthDate_" id="birthDate" required/>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label for="maritalStatus">Estado Cívil&nbsp;<span class="text-danger">*</span>
-                                </label>
-                                <g:select name="maritalStatus"
-                                          from="${Client.constrainedProperties.maritalStatus.inList}"
-                                          class="form-control "/>
-                            </div>
+%{--                            <div class="form-group">--}%
+%{--                                <label for="maritalStatus">Estado Cívil&nbsp;<span class="text-danger">*</span>--}%
+%{--                                </label>--}%
+%{--                                <g:select name="maritalStatus"--}%
+%{--                                          from="${Client.constrainedProperties.maritalStatus.inList}"--}%
+%{--                                          class="form-control "/>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label for="documentNumber">Nº do documento&nbsp;<span class="text-danger">*</span>
-                                </label>
-                                <input type="text" class="form-control " name="documentNumber" id="documentNumber" required>
-                            </div>
+%{--                            <div class="form-group">--}%
+%{--                                <label for="documentNumber">Nº do documento&nbsp;<span class="text-danger">*</span>--}%
+%{--                                </label>--}%
+%{--                                <input type="text" class="form-control " name="documentNumber" id="documentNumber" required>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label for="documentType">Documento&nbsp;<span class="text-danger">*</span></label>
-                                <g:select name="documentType" from="${DocumentType.all.sort { it.name }}"
-                                          optionValue="name" optionKey="id" class="form-control "/>
-                            </div>
-                        </div>
+%{--                            <div class="form-group">--}%
+%{--                                <label for="documentType">Documento&nbsp;<span class="text-danger">*</span></label>--}%
+%{--                                <g:select name="documentType" from="${DocumentType.all.sort { it.name }}"--}%
+%{--                                          optionValue="name" optionKey="id" class="form-control "/>--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="province">Província&nbsp;<span class="text-danger">*</span></label>
-                                <g:select name="province" from="${Province.all.sort { it.name }}"
-                                          optionValue="name" optionKey="id" class="form-control "/>
-                            </div>
+%{--                        <div class="col-md-6">--}%
+%{--                            <div class="form-group">--}%
+%{--                                <label for="province">Província&nbsp;<span class="text-danger">*</span></label>--}%
+%{--                                <g:select name="province" from="${Province.all.sort { it.name }}"--}%
+%{--                                          optionValue="name" optionKey="id" class="form-control "/>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label for="district">Distrito&nbsp;<span class="text-danger">*</span></label>
-                                <g:select name="district" from="${District.all.sort { it.name }}"
-                                          optionValue="name" optionKey="id" class="form-control "/>
-                            </div>
+%{--                            <div class="form-group">--}%
+%{--                                <label for="district">Distrito&nbsp;<span class="text-danger">*</span></label>--}%
+%{--                                <g:select name="district" from="${District.all.sort { it.name }}"--}%
+%{--                                          optionValue="name" optionKey="id" class="form-control "/>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label for="address">Endereço&nbsp;<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control " id="address" name="address" required>
-                            </div>
+%{--                            <div class="form-group">--}%
+%{--                                <label for="address">Endereço&nbsp;<span class="text-danger">*</span></label>--}%
+%{--                                <input type="text" class="form-control " id="address" name="address" required>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label for="contact">Contacto&nbsp;<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control " id="contact" name="contact" required>
-                            </div>
+%{--                            <div class="form-group">--}%
+%{--                                <label for="contact">Contacto&nbsp;<span class="text-danger">*</span></label>--}%
+%{--                                <input type="text" class="form-control " id="contact" name="contact" required>--}%
+%{--                            </div>--}%
 
-                            <div class="form-group">
-                                <label for="email">Email&nbsp;</label>
-                                <input type="text" class="form-control " id="email" name="email">
-                            </div>
-                        </div>
+%{--                            <div class="form-group">--}%
+%{--                                <label for="email">Email&nbsp;</label>--}%
+%{--                                <input type="text" class="form-control " id="email" name="email">--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
 
-                        <div class="form-group col-12 d-none">
-                            <label for="profession">Profissão&nbsp;<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control  typeahead" id="profession" name="profession">
-                        </div>
-                    </div>
+%{--                        <div class="form-group col-12 d-none">--}%
+%{--                            <label for="profession">Profissão&nbsp;<span class="text-danger">*</span></label>--}%
+%{--                            <input type="text" class="form-control  typeahead" id="profession" name="profession">--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
                 </div>
 
                 <div class="card-footer">

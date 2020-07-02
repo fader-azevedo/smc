@@ -1,39 +1,32 @@
 package smc
 
+import auth.User
+
 class Client extends Parameter{
 
     String image
-    String fullName
-    String gender
-    String maritalStatus
-    String address
     String contact
+    String contact2
     String email
-    Date birthDate
-    String documentNumber
+    String address
 
+    String docNumber
+    Date docEmissionDate
+    Date docDueDate
 
-    static belongsTo = [documentType:DocumentType,district:District]
-    static hasMany = [loans:Loan, guarantors:Guarantor]
+    static belongsTo = [user:User,documentType:DocumentType,district:District]
+    static hasMany = [loans:Loan, loanguarantors:Loan]
 
     static constraints = {
-        image nullable: true
+        contact maxSize: 15
+        contact2 nullable: true, maxSize: 15
         email nullable: true
-        maritalStatus inList: ['Solteiro(a)','Casado(a)','Divorciado(a)','Viúvo(a)','Separado(a)']
-        gender inList: ['Feminino','Masculino']
-        birthDate validator: {
-            if(it.after(new Date())){
-                return false
-            }
-        }
-    }
-
-    static mapping = {
-
+        image nullable: true
+        user nullable: false, blank: false, unique: true
     }
 
     @Override
     String toString() {
-        return fullName
+        return user?.fullName
     }
 }
